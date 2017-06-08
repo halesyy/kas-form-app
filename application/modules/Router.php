@@ -1,9 +1,9 @@
 <?php
   class Router {
-    /*
-    | Static class built to parse the SLUG-based URL and
-    | return segments of it which are dictated.
-    */
+      /*
+      | Static class built to parse the SLUG-based URL and
+      | return segments of it which are dictated.
+      */
 
     // ******************************************************
 
@@ -21,6 +21,8 @@
         self::$segments = explode('/', self::$url);
       }
 
+
+
       /*
       | @param Int:SegmentOfUrl
       | Uses integer to reference the internal URL variable
@@ -31,13 +33,15 @@
         return self::$segments[$segment];
       }
 
+
+
       /*
       | @param None
       | Shorthand methods for getting URL segments and main
       | -taining them.
       */
       public static function First() {
-        return self::URLParser(1);
+        return (empty(self::URLParser(1)))? '/': self::URLParser(1);
       }
       public static function Second() {
         return self::URLParser(2);
@@ -50,5 +54,21 @@
       }
       public static function Segment($segment) {
         return self::URLParser($segment);
+      }
+
+
+
+      /*
+      | @param String:Capture, Callable:Handshake
+      | Used as a reference to the URI supplied in the Router.
+      | Supply a first segment of URI as your "capture", if
+      | successfully "captured", will run the callabke allowing
+      | you to do database requests, managing, etc... You
+      | may even call other classes segmented as Controllers.
+      */
+      public static function Get($capture, callable $handshake) {
+        if (self::First() == $capture) {
+          $handshake();
+        } else return false;
       }
   }

@@ -7,6 +7,7 @@
   | 2. Filter _*.php and other into seperate assoc array.
   | 3. Load _*.php prefixes. (labelled LoadFirst)
   | 4. Load other .php prefixes.
+  | 5. Load router to serve files.
   */
 
   $modules = glob('application/modules/*.php');
@@ -30,4 +31,5 @@
 
 
   App::Initialize();
-  
+
+  require_once "application/router.php";
