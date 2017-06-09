@@ -10,7 +10,8 @@
 
     //*******************************************************
 
-      protected static $console_messages = [];
+      protected static $consoleMessages = [];
+      protected static $configDirectory = 'application/config/';
 
     //*******************************************************
 
@@ -26,16 +27,22 @@
         return true;
       }
 
+      public static function Config($configName) {
+        $dir = self::$configDirectory;
+        $dir .= $configName.'.php';
+        return $dir;
+      }
+
       /*add a string message to console to report later on.
       also shorthand for printing if no param 0 given.*/
       public static function Console($message = false) {
         if (!$message) self::PrintConsole();
-        else array_push(self::$console_messages, $message);
+        else array_push(self::$consoleMessages, $message);
       }
 
       /*prints entirety of console array to optstream.*/
       public static function PrintConsole() {
-        self::Display(self::$console_messages);
+        self::Display(self::$consoleMessages);
       }
 
       /*displays an array using preformmatted tags.*/

@@ -65,10 +65,23 @@
       | successfully "captured", will run the callabke allowing
       | you to do database requests, managing, etc... You
       | may even call other classes segmented as Controllers.
+      | -------------------------------------------------------
+      | Handshake (since async) should return a numerative array.
+      | Array will contain first the file which is to be rendered
+      | (since we never want NO data being served) as well as
+      | the data to be given along to the file for rendering.
       */
       public static function Get($capture, callable $handshake) {
         if (self::First() == $capture) {
-          $handshake();
+
+          require App::Config('database'); #Loads in the $config['database'] variable segment.
+          $psm = new PSM("{$config['database']['hostname']} {$config['database']['database']} {$config['database']['username']} {$config['database']['password']}");
+          $r   = $handshake();
+
+          if (count($r) != 2) die('Counting of GET callback not 2');
+          $sunrise = new Sunrise; #Page rendering engine.
+          $sunrise->Render( $r[0], $r[1] ); #Supplying callback data to rendering engine.
+
         } else return false;
       }
   }

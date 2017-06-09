@@ -1,4 +1,6 @@
 <?php
   Router::get('/', function(){
-    echo 'Yay!';
+    return ['Form.serve', [
+      'name' => 'jack hales'
+    ]];
   });
