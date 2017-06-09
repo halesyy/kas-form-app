@@ -1,3 +1,53 @@
 body {
-  font-family: 'Roboto';
+  font-family: 'Open Sans';
+  font-size: 17px;
+  // background-image: url('https://s-media-cache-ak0.pinimg.com/originals/6e/07/ad/6e07ade0cfe8ec9f84fd2d4b3fa7fe60.jpg');
+  background-position: cover;
+  background: #003f80;
+  background-size: center;
+}
+a, a:focus, a:hover {
+  color: black;
+}
+h2, h3, h4 {
+  color: #D3A22B;
+  margin-top: 0;
+}
+
+#header {
+  background-color: white;
+  .container {
+    padding: 0;
+  }
+  #header-left > img, #header-right img {
+    height: 180px;
+  }
+  #header-right > img {
+    float: right;
+  }
+  #header-left, #header-right {
+    padding: 0;
+  }
+}
+.container {
+  background-color: white;
+  #left > div, #right > div {
+    padding: 20px;
+  }
+  #left {
+    border-right: dashed black 1px;
+    div {
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        ul[class="second"] {
+          padding-left: 20px;
+        }
+      }
+    }
+  }
+  #right {
+
+  }
 }

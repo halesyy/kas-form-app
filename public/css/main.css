@@ -1,4 +1,39 @@
 body {
-  font-family: 'Roboto'; }
+  font-family: 'Open Sans';
+  font-size: 17px;
+  background-position: cover;
+  background: #003f80;
+  background-size: center; }
+
+a, a:focus, a:hover {
+  color: black; }
+
+h2, h3, h4 {
+  color: #D3A22B;
+  margin-top: 0; }
+
+#header {
+  background-color: white; }
+  #header .container {
+    padding: 0; }
+  #header #header-left > img, #header #header-right img {
+    height: 180px; }
+  #header #header-right > img {
+    float: right; }
+  #header #header-left, #header #header-right {
+    padding: 0; }
+
+.container {
+  background-color: white; }
+  .container #left > div, .container #right > div {
+    padding: 20px; }
+  .container #left {
+    border-right: dashed black 1px; }
+    .container #left div ul {
+      list-style: none;
+      padding: 0;
+      margin: 0; }
+      .container #left div ul ul[class="second"] {
+        padding-left: 20px; }
 
 /*# sourceMappingURL=main.css.map */
