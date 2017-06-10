@@ -24,6 +24,16 @@
 
 
       /*
+      | @param None
+      | Reports a test back to the developer.
+      */
+      public static function Test() {
+        echo 'Test recieved from router, here\'s the URI: '.self::$url;
+      }
+
+
+
+      /*
       | @param Int:SegmentOfUrl
       | Uses integer to reference the internal URL variable
       | and retrieve the part of the URL(URI) that relates to

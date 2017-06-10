@@ -2,9 +2,9 @@ body {
   font-family: 'Open Sans';
   font-size: 17px;
   // background-image: url('https://s-media-cache-ak0.pinimg.com/originals/6e/07/ad/6e07ade0cfe8ec9f84fd2d4b3fa7fe60.jpg');
-  background-position: cover;
+  background-position: center;
+  background-size: cover;
   background: #003f80;
-  background-size: center;
 }
 a, a:focus, a:hover {
   color: black;
@@ -14,8 +14,10 @@ h2, h3, h4 {
   margin-top: 0;
 }
 
+/*
+| Header CSS.
+*/
 #header {
-  background-color: white;
   .container {
     padding: 0;
   }
@@ -29,25 +31,44 @@ h2, h3, h4 {
     padding: 0;
   }
 }
+
+/*
+| Container for page data.
+*/
+#content-container {
+  background-color: whitesmoke;
+}
 .container {
-  background-color: white;
+  padding: 0;
+  margin-top:    0 !important;
+  margin-bottom: 0 !important;
   #left > div, #right > div {
-    padding: 20px;
+    padding: 10px;
   }
   #left {
-    border-right: dashed black 1px;
+    // position: fixed;
+    // top: 180px;
+    background-color: whitesmoke;
     div {
       ul {
         list-style: none;
         padding: 0;
         margin: 0;
-        ul[class="second"] {
-          padding-left: 20px;
+        ol[class="second"] {
+          padding-left: 40px;
         }
       }
     }
   }
   #right {
-
+    background-color: #e8e8e8;
+    text-align: justify;
+    // overflow-y: scroll;
+    h2, h3, h4 {
+      text-align: left;
+    }
+    div {
+      margin-bottom: 50px;
+    }
   }
 }
