@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Registration Form</title>
+    <title>Registration | Kempsey Adventist School</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
     <meta charset="UTF-8" />
     <style>body {background-color: #003f80;} .container {margin-top:20px; margin-bottom:20px; background-color:white;}</style>
   </head>
   <body>
-    <div id="header">
-      <div class="container">
+    <div class="container" id="content-container">
+      <div id="header">
         <div id="header-left" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
           <img src="/public/images/header-logo.png" height="180" alt="KAS Logo" />
         </div>
         <div id="header-right" class="col-lg-6 col-md-6 col-sm-6 hidden-xs">
           <img src="/public/images/header-photo.jpg" height="180" alt="KAS Happy Family" />
         </div>
+        <div class="clear"></div>
       </div>
-    </div>
-    <div class="container" id="content-container">
       <div id="left" class="col-lg-3 col-md-3 col-sm-4 col-xs-5">
         <div>
           <h3>Enrolment Form</h3>
@@ -41,9 +41,8 @@
       </div>
     </div>
     <!--JavaScript and CSS. - after document since serve then format.-->
-    <link rel="stylesheet" type="text/css" href="/public/bstrap-small/bootstrap.min.css" defer>
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans" rel="stylesheet" defer>
-    <link rel="stylesheet" type="text/css" href="public/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/main.min.css" defer />
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans" rel="stylesheet" defer />
     <script src="/public/js/external_modules/jQueryAndUI.min.js"></script>
     <script src="/public/js/watchers.js"></script>
   </body>

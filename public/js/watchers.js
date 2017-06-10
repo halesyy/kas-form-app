@@ -1,3 +1,4 @@
+window.ThemeColor = '#003F80';
 /*
 | WHY IS THE MAIN AND WATCHER FILE TOGETHER JACK?
 | I'm obsessed with performance and since my audit score
@@ -6,7 +7,6 @@
 | Combining the Main.JS and Watchers.js file is a good
 | move.
 */
-
 $(document).ready(function(){
   /*
   | Function to initialize the first load of the application
@@ -19,11 +19,11 @@ $(document).ready(function(){
     if (Hash.length <= 1) {
       LoadQuick('enrolment-information');
       $('.enrolment-information')
-      .css({'color':'#003F80', 'font-weight':'bold'});
+      .css({'color':window.ThemeColor, 'font-weight':'bold'});
     } else {
       LoadQuick(window.location.hash.replace('#', ''));
       $('.'+window.location.hash.replace('#', '').replace('/','-'))
-      .css({'color':'#003F80', 'font-weight':'bold'});
+      .css({'color':window.ThemeColor, 'font-weight':'bold'});
     }
   }
 
@@ -33,17 +33,20 @@ $(document).ready(function(){
   | a response in HTML format to supply to the #right > div.
   */
   function Load(ToServe) {
-    $.get('api/get/'+ToServe, function(body){
-      $placer = $('#right > div');
-      $placer.hide("slide", { direction: "left" }, 500, function(){
-        $placer.html(body).show("slide", { direction: "right" }, 500);
+    /*blocks re-requesting the same file again and again..*/
+    if (window.currentlyLoaded === ToServe) {} else {
+      window.currentlyLoaded = ToServe;
+      $.get('api/get/'+ToServe, function(body){
+        $placer = $('#right > div');
+        $placer.hide("slide", { direction: "left" }, 500, function(){
+          $placer.html(body).show("slide", { direction: "right" }, 500);
+        });
       });
-    });
+    }
   }
   function LoadQuick(ToServe) {
-    $.get('api/get/'+ToServe, function(body){
-      $('#right > div').html(body);
-    });
+    window.currentlyLoaded = ToServe;
+    $.get('api/get/'+ToServe, function(body){$('#right > div').html(body);});
   }
 
   FirstLoad(); //#Let's go first load!
@@ -62,7 +65,7 @@ $(document).ready(function(){
       var ToServe = $this.attr('href');
       Load(ToServe);
         $('.load').css({'color':'black', 'font-weight':'400'});
-        $this.css({'color':'#003F80', 'font-weight':'bold'});
+        $this.css({'color':window.ThemeColor, 'font-weight':'bold'});
       window.location.href = "#"+ToServe;
     return false;
   });
@@ -96,5 +99,48 @@ $(document).ready(function(){
           $right.removeClass('col-lg-offset-3 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
       }
   });
+
+
+
+  /*
+  | Window function for registering forms as watchable
+  | and manageable to send POST requests to the POST API.
+  */
+  window.registerForm = function(access, dataObject, callback) {
+    $access = $(access);
+    $access.submit(function(event){
+      event.preventDefault();
+
+        $.post('/api/', {
+          type: dataObject.type,
+          formData: $access.serializeArray()
+        }, function(body){
+          callback(body);
+        });
+
+      return false;
+    });
+  }
+  /*
+  | Registers modals to a button so when clicked will react
+  | and load up modal.
+  */
+  window.registerModal = function(access, modalAccess) {
+    $(access).click(function(){
+      $(modalAccess).fadeIn(250);
+    });
+  }
+  $(document).on('click', '.close', function(){
+    $('.modal').fadeOut(250);
+  });
+
+
+
+
+
+
+
+
+
 
 });

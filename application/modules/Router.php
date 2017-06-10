@@ -85,7 +85,7 @@
         if (self::First() == $capture) {
 
           require App::Config('database'); #Loads in the $config['database'] variable segment.
-          $psm = new PSM("{$config['database']['hostname']} {$config['database']['database']} {$config['database']['username']} {$config['database']['password']}");
+          // $psm = new PSM("{$config['database']['hostname']} {$config['database']['database']} {$config['database']['username']} {$config['database']['password']}");
           $r   = $handshake();
 
           if (count($r) != 2) die('Counting of GET callback not 2');

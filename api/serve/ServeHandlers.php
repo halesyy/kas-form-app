@@ -7,7 +7,7 @@
     },
     'students' => function($Sunrise) {
       $Sunrise->Render('form-areas/Students.form', [
-        'x' => 5
+        'students' => $Sunrise->Mini('form-areas/custom/AllCurrentStudents', '..')
       ], '..');
     }
   ];

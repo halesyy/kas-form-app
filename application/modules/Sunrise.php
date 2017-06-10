@@ -32,10 +32,22 @@
         $this->RetrieveFileContent($dir);
         $this->ImportVariables($fileData);
 
-        if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
-          ob_start('ob_gzhandler');
-        }
         echo $this->Content;
+      }
+
+      /*
+      | @param String:MiniFileName
+      | Meant for areas in forms that are dynamic and need to be loaded
+      | in using PHP and HTML combined. Will use an output buffer to render
+      | and return the data.
+      */
+      public function Mini($fileName, $prepend = false) {
+        $dir = "serve/{$fileName}.php";
+        $dir = ($prepend)? $prepend.'/'.$dir: $dir;
+
+        // ob_start();
+        require "$dir";
+        // return ob_get_contents();
       }
 
 
