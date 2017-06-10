@@ -50,4 +50,11 @@
         echo "<pre>", print_r($array) ,"</pre>";
       }
 
+      /*return array of module locations.*/
+      public static function Modules($moduleArray) {
+        foreach ($moduleArray as &$module)
+        $module = "application/modules/$module";
+        print_r($moduleArray);
+      }
+
   }

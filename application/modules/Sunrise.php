@@ -17,18 +17,24 @@
 
 
       /*
-      | @param String:ServeFileName, Array:Data
+      | @param String:ServeFileName, Array:Data, String:PrependToString
       | 1. Will use the internal class method to
       |    safely retrieve data.
       | 2. Using another internal method to implement
       |    user data into document.
       */
-      public function Render($fileName, $fileData = []) {
+      public function Render($fileName, $fileData = [], $prepend = false) {
         $dir = $this->ServeDirectory;
+        #//prepend is used if the require for example API isn't in the entry.php
+        #//file, and anchor is different.
+        if ($prepend !== false) $dir = $prepend.'/'.$dir;
         $dir .= $fileName.'.php';
         $this->RetrieveFileContent($dir);
         $this->ImportVariables($fileData);
 
+        if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+          ob_start('ob_gzhandler');
+        }
         echo $this->Content;
       }
 
