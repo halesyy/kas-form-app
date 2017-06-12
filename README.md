@@ -13,8 +13,7 @@ having a new Student in SESSION will be:
 
 ```json
 {
-  "fullName": "Jack G. Hales",
-  /*etc...*/
+  "fullName": "Jack G. Hales"
 }
 ```
 
