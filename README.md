@@ -8,8 +8,8 @@ They return some wacky stuff at times, so this is a way to describe the behaviou
 
 ### When creating a new Student in the SESSION
 Since the web application is meant to be one page I've built it so the same data is served when
-refreshed as well as submitted. When sending the form data to the API to process, the return for
-having a new Student in SESSION will be:
+refreshed as well as submitted. When sending the form data to the API to process, an **example**
+JSON return from the API would be:
 
 ```json
 {
