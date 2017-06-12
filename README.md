@@ -1,4 +1,4 @@
-# kas-form-app
+# KAS Form Application
 Web application allowing KAS to further monitor their registration service and serve 
 valueable market data to increase the amount of clients and students entering the school.
 
@@ -14,7 +14,7 @@ having a new Student in SESSION will be:
 ```json
 {
   "fullName": "Jack G. Hales",
-  . . .
+  /*etc...*/
 }
 ```
 
