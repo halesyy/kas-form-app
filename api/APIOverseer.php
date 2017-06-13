@@ -199,12 +199,24 @@
         //Looping cached form data and type checking from
         //referencing internal $this->Types variable.
         foreach ($this->CacheFormData as $name => $value) {
+          if ( !isset($sanitizeVersion[$count]) ) $count = 0;
           if ( !$this->Types[$sanitizeVersion[$count]]($value) ) {
             $this->Error('SANITIZE_TYPE_NOT_CORRECT');
           }
           $count++;
         }
         return $this->CacheFormData;
+      }
+
+
+      /*
+      | @param String:FirstName, String:MiddleName, String:LastName
+      | Turns basic name data into names that can be represented as
+      | reference names.
+      */
+      public function CreateFullName($fname, $mname, $lname) {
+        if (!isset($mname) || empty($mname)) return "$fname $lname";
+        else return "$fname {$mname[0]}. $lname";
       }
 
 
@@ -216,6 +228,16 @@
           'success' => 'false',
           'message' => $message
         ]);
+        die;
+      }
+
+      /*
+      | Returns JSON data as successful.
+      */
+      public function JSON($array) {
+        $default = ['success' => true];
+        $array   = array_merge($array, $default);
+        echo json_encode($array);
         die;
       }
 

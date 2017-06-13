@@ -37,7 +37,7 @@ $(document).ready(function(){
     if (window.currentlyLoaded === ToServe) {} else {
       window.currentlyLoaded = ToServe;
       $.get('api/get/'+ToServe, function(body){
-        $placer = $('#right > div');
+        $placer = $('#right-place');
         $placer.hide("slide", { direction: "left" }, 500, function(){
           $placer.html(body).show("slide", { direction: "right" }, 500);
         });
@@ -46,7 +46,7 @@ $(document).ready(function(){
   }
   function LoadQuick(ToServe) {
     window.currentlyLoaded = ToServe;
-    $.get('api/get/'+ToServe, function(body){$('#right > div').html(body);});
+    $.get('api/get/'+ToServe, function(body){$('#right-place').html(body);});
   }
 
   FirstLoad(); //#Let's go first load!
@@ -91,13 +91,13 @@ $(document).ready(function(){
   */
   var $left = $('#left'), $right = $('#right');
   $(document).scroll(function(event) {
-      if($(this).scrollTop() > $("#header").height()) {
-          $left.css({"position":"fixed", "top":"10px"});
-          $right.addClass('col-lg-offset-3 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
-      } else {
-          $left.css("position", "static");
-          $right.removeClass('col-lg-offset-3 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
-      }
+    if ($(this).scrollTop() > $("#header").height()) {
+      $left.css({"position":"fixed", "top":"10px"});
+      $right.addClass('col-lg-offset-3 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
+    } else {
+      $left.css("position", "static");
+      $right.removeClass('col-lg-offset-3 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
+    }
   });
 
 

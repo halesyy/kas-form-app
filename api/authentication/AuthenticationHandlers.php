@@ -2,13 +2,20 @@
   $Authentication = [
     'NewStudent' => function($Sunrise, $API) {
       $Sanitize = $API->Sanitize('formData', [
-        'fname', 'lname'
+        'fname', 'lname', 'mname', 'pname', 'email', 'homephone', 'mobilephone', 'yeartoenrol', 'gender'
       ])->Types([
-        'string', 'string'
+        'string'
       ]);
+      $fullName = $API->CreateFullName($Sanitize['fname'], $Sanitize['mname'], $Sanitize['lname']);
       array_push($_SESSION['form']['students'], [
         'firstName' => $Sanitize['fname'],
-        'lastName'  => $Sanitize['lname']
+        'lastName'  => $Sanitize['lname'],
+        'middleName' => $Sanitize['mname'],
+        'fullName' => $fullName
+      ]);
+      // Sending JSON response back.
+      $API->JSON([
+        'fullName' => $fullName
       ]);
     }
   ];

@@ -1,5 +1,7 @@
 @import '../bstrap-small/bootstrap-smaller';
 
+$themeColor: #003f80;
+
 body {
   font-family: 'Open Sans';
   font-size: 17px;
@@ -23,7 +25,7 @@ h2, h3, h4 {
 */
 #header {
   background-color: white;
-  border-bottom: solid #003f80 20px;
+  border-bottom: solid $themeColor 20px;
   #header-left > img, #header-right img {
     height: 180px;
   }
@@ -57,8 +59,6 @@ h2, h3, h4 {
     padding: 10px;
   }
   #left {
-    // position: fixed;
-    // top: 180px;
     background-color: whitesmoke;
     div {
       ul {
@@ -74,13 +74,35 @@ h2, h3, h4 {
   #right {
     background-color: whitesmoke;
     text-align: justify;
-    // overflow-y: scroll;
     h2, h3, h4 {
       text-align: left;
     }
-    div {
-      margin-bottom: 50px;
+    #right-place {
+      // margin-bottom: 50px;
     }
+  }
+}
+
+/*
+| Form design and elements inside of it.
+*/
+.kasform {
+  input[type="text"], input[type="email"], input[type="number"], select {
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+  }
+  h3 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid $themeColor;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+  }
+  h3 span {
+    background: #fff;
+    margin: 0 10px 0 20px;
+    padding: 5px;
   }
 }
 
@@ -89,23 +111,33 @@ h2, h3, h4 {
 | Modal code, setting classes and etc!...
 */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 .modal-content {
-    background-color: #fefefe;
-    margin: 20%;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 60%; /* Could be more or less, depending on screen size */
+  background-color: #fefefe;
+  margin: 15%;
+  border: 1px solid #888;
+  width: 70%; /* Could be more or less, depending on screen size */
+}
+.modal-body, .modal-header {
+  padding: 20px 20px 0 20px;
+}
+.modal-header {
+  padding: 20px;
+  background-color: $themeColor;
+  h2 {
+    padding: 0;
+    margin: 0;
+  }
 }
 .close {
     color: #aaa;
@@ -118,4 +150,20 @@ h2, h3, h4 {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+/*
+| The dynamically generated content styling, such as forms, etc...
+*/
+.studentSelection {
+  padding-left: 0;
+  li {
+    margin: 5px;
+    background-color: #ededed;
+    list-style-type: none;
+    padding: 20px;
+    font-size: 20px;
+    border: solid silver 1px;
+  }
 }

@@ -24,10 +24,8 @@
           <ul>
             <li><a href="enrolment-information" class="load enrolment-information">Enrolment Information</a>
             <li><a href="students" class="load students">Students</a></li>
-            <ol class="second">
-              <li><a href="student/jack-hales" class="load student-jack-hales">Jack Hales</a>
-              <li><a href="student/elon-musk" class="load student-elon-musk">Elon Musk</a>
-              <li><a href="student/steve-jobs" class="load student-steve-jobs">Steve Jobs</a>
+            <ol class="second NewStudentPlace">
+              {{studentSelectionList}}
             </ol>
             <li><a href="family-details" class="load family-details">Family Details</a></li>
             <li><a href="fee-information" class="load fee-information">Fee Information</a></li>
@@ -37,7 +35,7 @@
         </div>
       </div>
       <div id="right" class="col-lg-9 col-md-9 col-sm-8 col-xs-7">
-        <div><!--Where content is placed.--></div>
+        <div id="right-place"><!--Where content is placed.--></div>
       </div>
     </div>
     <!--JavaScript and CSS. - after document since serve then format.-->

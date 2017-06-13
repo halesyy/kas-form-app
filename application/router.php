@@ -1,6 +1,6 @@
 <?php
-  Router::get('/', function(){
-    return ['Form.serve', [
-      'name' => 'jack hales'
-    ]];
+  Router::get('/', function($Sunrise){
+    $Sunrise->Render('Form.serve', [
+      'studentSelectionList' => $Sunrise->Mini('form-areas/custom/StudentSelectionList')
+    ]);
   });

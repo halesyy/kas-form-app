@@ -86,11 +86,11 @@
 
           require App::Config('database'); #Loads in the $config['database'] variable segment.
           // $psm = new PSM("{$config['database']['hostname']} {$config['database']['database']} {$config['database']['username']} {$config['database']['password']}");
-          $r   = $handshake();
+          $r   = $handshake(new Sunrise);
 
-          if (count($r) != 2) die('Counting of GET callback not 2');
-          $sunrise = new Sunrise; #Page rendering engine.
-          $sunrise->Render( $r[0], $r[1] ); #Supplying callback data to rendering engine.
+          // if (count($r) != 2) die('Counting of GET callback not 2');
+          // $sunrise = new Sunrise; #Page rendering engine.
+          // $sunrise->Render( $r[0], $r[1] ); #Supplying callback data to rendering engine.
 
         } else return false;
       }

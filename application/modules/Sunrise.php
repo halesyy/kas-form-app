@@ -31,6 +31,7 @@
         $dir .= $fileName.'.php';
         $this->RetrieveFileContent($dir);
         $this->ImportVariables($fileData);
+        $this->SortTriggers();
 
         echo $this->Content;
       }
@@ -44,10 +45,41 @@
       public function Mini($fileName, $prepend = false) {
         $dir = "serve/{$fileName}.php";
         $dir = ($prepend)? $prepend.'/'.$dir: $dir;
+        ob_start();
+          include( $dir );
+        return ob_get_clean();
+      }
 
-        // ob_start();
-        require "$dir";
-        // return ob_get_contents();
+
+      /*
+      | @param None:UsesInternalContent
+      | Looks for triggers for shorthand development. Usually
+      | used to reference cleaner code and build bootstrap grids.
+      */
+      public $TriggerConversions = [
+        'whole' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
+        'half' => 'col-lg-6 col-md-6 col-sm-6 col-xs-12',
+        'third' => 'col-lg-4 col-md-4 col-sm-4 col-xs-12',
+        'fourth' => 'col-lg-3 col-md-3 col-sm-6 col-xs-12'
+      ];
+      public function SortTriggers() {
+        $content  = $this->Content;
+        $lines = explode("\n", $content);
+        foreach ($lines as $index => $line) {
+          if (isset(trim($line)[0]) && trim($line)[0] == '@') {
+            $trigger = ltrim(explode(' ', trim($line))[0], '@'); //@trim => trim.
+              if (isset($this->TriggerConversions[$trigger])) $colstr = $this->TriggerConversions[$trigger];
+              else { echo 'Trigger conversion not found.'; return false; }
+            $params = preg_replace('/[@].* {(.*)}/', '$1', trim($line));
+            $params = array_map('trim', explode(',', $params));
+
+            $c = ["<div class='{$colstr}'>", "<input ".implode(' ', $params)." />", "</div>"];
+            $lines[$index] = implode("\n", $c);
+
+            // unset($lines[$index]); //remove line from constructor.
+          }
+        }
+        $this->Content = implode("\n", $lines);
       }
 
 
