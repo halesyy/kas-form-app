@@ -28,6 +28,7 @@
     require_once "../application/modules/PSM.php";
     require_once "../application/modules/Sunrise.php";
     require_once "../application/modules/Router.php";
+    require_once "../application/modules/Student.php";
 
   /*
   | Loading in API modules:

@@ -67,6 +67,9 @@
                     <input type="checkbox" name="isTorresStraitIs" value="true" /> <span>Torres Strait Is?</span>
                   </div>
                 </div>
+              @whole-connection
+                [label "Birth date" for "dateOfBirth"]
+                <input type="date" id="dateOfBirth" name="dateOfBirth" min="2000-00-00" placeholder="Date of Birth" required />
               @half-connection
                 [label "Student's nationality*" for "nationality"]
                 <input type="text" id="nationality" name="nationality" placeholder="Nationality" value="Australian" required />
@@ -75,7 +78,27 @@
                 <input type="text" id="languageAtHome" name="languageAtHome" placeholder="Language" value="Australian" required />
               @//
             </div>
-
+            <div class="row">
+              @fourth
+                [label "Address" for "address"]
+                <input type="text" name="address" id="address" placeholder="Address" value="7 Ferry St" />
+              @fourth-connection
+                [label "Address" for "address"]
+                <input type="text" name="town" id="town" placeholder="Town" value="Kempsey" />
+              @fourth-connection
+                [label "Address" for "address"]
+                <input type="text" name="state" id="state" placeholder="State" value="State" />
+              @fourth-connection
+                [label "Address" for "address"]
+                <input type="text" name="postCode" id="postCode" placeholder="Postcode" value="2440" />
+              @half-connection
+                [label "Lives with" for "livesWith"]
+                <input type="text" name="livesWith" id="livesWith" placeholder="Lives with" value="Mom" />
+              @half-connection
+                [label "Religion" for "religion"]
+                <input type="text" name="religion" id="religion" placeholder="Religion" value="Cosmologist" />
+              @//
+            </div>
             <!-- Split ed. inf & behaviour into two cols. -->
             <div class="row">
               <h3 class="next">
@@ -113,27 +136,25 @@
                   </div>
                 </div>
               @whole-connection
-                <textarea id="pleaseExplainBehaviour" style="display: none;" placeholder="Please explain"></textarea>
+                <textarea id="pleaseExplainBehaviour" name="pleaseExplainBehaviour" style="display: none;" placeholder="Please explain"></textarea>
               @//
             </div><!--./behaviour info row-->
-
             <!-- The students Character Reference. -->
             <div class="row">
               <h3 class="next">
                 <span>Character Reference</span>
               </h3>
               @third
-                [label "Name" for "creferenceName"]
+                [label "Name *" for "creferenceName"]
                 <input type="text" id="creferenceName" name="creferenceName" placeholder="Name" value="Name" required />
               @third-connection
-                [label "Occupation" for "creferenceOccupation"]
+                [label "Occupation *" for "creferenceOccupation"]
                 <input type="text" id="creferenceOccupation" name="creferenceOccupation" placeholder="Occupation" value="Occupation" required />
               @third-connection
-                [label "Telephone" for "creferenceTelephone"]
+                [label "Telephone *" for "creferenceTelephone"]
                 <input type="text" id="creferenceTelephone" name="creferenceTelephone" placeholder="Telephone" value="Telephone" required />
               @//
             </div>
-
             <!-- Medical information, Doc/Health Fund Info, Medical Information, Medical Conditions. -->
             <div class="row">
               @third-expands
@@ -155,9 +176,13 @@
                   </div>
                 </div>
                 <textarea id="pleaseExplainPrivateHealth" style="display: none;" placeholder="Company and Member #"></textarea>
-                <input type="text" name="medicareNumber" placeholder="Medicare Number" value="Medicare #" required />
-                <input type="text" name="medicareExpiry" placeholder="Medicare Expiry" value="Medicare Expiry" required />
-                <input type="text" name="medicarePosition" placeholder="Position on Card" value="Position on Card" required />
+                <div class="spacer"></div>
+                [label "Medicare Number" for "medicareNumber"]
+                <input type="text" id="medicareNumber" name="medicareNumber" placeholder="Medicare Number" value="Medicare #" required />
+                [label "Medicare Expiry Date" for "medicareExpiry"]
+                <input type="text" id="medicareExpiry" name="medicareExpiry" placeholder="Medicare Expiry" value="Medicare Expiry" required />
+                [label "Medicare Position" for "medicarePosition"]
+                <input type="text" id="medicarePosition" name="medicarePosition" placeholder="Position on Card" value="Position on Card" required />
               <!--end of doctor and health fund information-->
               @third-expands-connection
                 <h3 class="next">
@@ -202,34 +227,53 @@
                   <p>Has the student recieved early intervention?</p>
                   <div class="fields">
                     <input type="radio" name="earlyIntervention" value="true" /> Yes <br />
-                    <input type="radio" name="earlyIntervention" value="false" /> False <br />
+                    <input type="radio" name="earlyIntervention" value="false" /> No <br />
                   </div>
                 </div>
               <!--end of medical conditions-->
               @//
             </div><!--./medical info row-->
-
-
+            <!-- Emergency Contact Information -->
             <div class="row">
-
-
-
+              @half
+                <div class="row">
+                  <h3 class="next">
+                    <span>Emergency Contact Information #1</span>
+                  </h3>
+                  [label "Name 1*" for "emergencyName1"]
+                  <input type="text" id="emergencyName1" name="emergencyName1" placeholder="Name 1" value="Name of ECONTACT 1" />
+                  [label "Phone*" for "emergencyPhone1"]
+                  <input type="text" id="emergencyPhone1" name="emergencyPhone1" placeholder="Phone 1" value="Phone of ECONTACT 1" />
+                  [label "Relationship to Student*" for "emergencyRelationship1"]
+                  <input type="text" id="emergencyRelationship1" name="emergencyRelationship1" placeholder="Relationship to Student" value="Relationship of ECONTACT 1" />
+                </div>
+              @half-connection
+                <div class="row">
+                  <h3 class="next">
+                    <span>Emergency Contact Information #2</span>
+                  </h3>
+                  [label "Name 2*" for "emergencyName2"]
+                  <input type="text" id="emergencyName2" name="emergencyName2" placeholder="Name 2" value="Name of ECONTACT 2" />
+                  [label "Phone*" for "emergencyPhone2"]
+                  <input type="text" id="emergencyPhone2" name="emergencyPhone2" placeholder="Phone 2" value="Phone of ECONTACT 2" />
+                  [label "Relationship to Student*" for "emergencyRelationship2"]
+                  <input type="text" id="emergencyRelationship2" name="emergencyRelationship2" placeholder="Relationship to Student" value="Relationship of ECONTACT 2" />
+                </div>
+              @//
             </div><!--./emergency contact info row-->
-
-
             <input type="submit" value="Submittion" style="margin-top: 10px;" />
-          </form>
+          </form><!--./end of entire form-->
         </p>
-      </div>
+      </div><!--./end of modal body-->
     </div>
   </div>
   <script>
     window.registerModal('#AddStudent', '#ModalAddStudent');
     window.registerForm('#NewStudentForm', {type:'NewStudent'}, function(body){
-      var jdata = JSON.parse(body);
-      if (jdata.success === true) {
-        $('.NewStudentPlace').append("<li>"+jdata.fullName+"</li>");
-      }
+      // if (jdata.success === true) {
+      //   $('.NewStudentPlace').append("<li>"+jdata.fullName+"</li>");
+      // }
+      console.log(body);
     });
   </script>
 </div>

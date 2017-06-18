@@ -1,21 +1,48 @@
 <?php
   $Authentication = [
     'NewStudent' => function($Sunrise, $API) {
-      $Sanitize = $API->Sanitize('formData', [
-        'fname', 'lname', 'mname', 'pname', 'email', 'homephone', 'mobilephone', 'yeartoenrol', 'gender'
-      ])->Types([
-        'string'
+      $Student = new Student;
+
+      $Personal = $API->Sanitize('formData')->Get();
+
+      $Student->InsertPersonal([
+        'fname' => $Personal['fname'],
+        'lname' => $Personal['lname'],
+        'mname' => $Personal['mname'],
+        'pname' => $Personal['pname'],
+        'enrolYear' => $Personal['yearToEnrol'],
+        'yearLevel' => $Personal['yearLevel'],
+        'gender' => $Personal['gender'],
+        'dateOfBirth' => $Personal['dateOfBirth'],
+        'nationality' => $Personal['nationality'],
+        'isStudent' => [
+          'aboriginal' => (isset($Personal['isAboriginal']))? 'true': 'false',
+          'torresStraitIs' => (isset($Personal['isTorresStraitIs']))? 'true': 'false'
+        ],
+        'languageAtHome' => $Personal['languageAtHome'],
+        'address' => $Personal['address'],
+        'town' => $Personal['town'],
+        'state' => $Personal['state'],
+        'postCode' => $Personal['postCode'],
+        'livesWith' => $Personal['livesWith'],
+        'religion' => $Personal['religion']
       ]);
-      $fullName = $API->CreateFullName($Sanitize['fname'], $Sanitize['mname'], $Sanitize['lname']);
-      array_push($_SESSION['form']['students'], [
-        'firstName' => $Sanitize['fname'],
-        'lastName'  => $Sanitize['lname'],
-        'middleName' => $Sanitize['mname'],
-        'fullName' => $fullName
+      $Student->InsertBehaviour([
+        'hasDisciplineIssues' => (isset($Personal['hasDisciplineIssues']))? 'true': 'false',
+        'hasBeenArrested' => (isset($Personal['hasBeenArrested']))? 'true': 'false',
+        'usedAlcoholOrTobacco' => (isset($Personal['usedAlcoholOrTobacco']))? 'true': 'false',
+        'usedIllegalDrugs' => (isset($Personal['usedIllegalDrugs']))? 'true': 'false',
+        'explain' => $Personal['pleaseExplainBehaviour']
       ]);
-      // Sending JSON response back.
-      $API->JSON([
-        'fullName' => $fullName
-      ]);
+
+      echo $Student->Personal('fname');
+      echo ' - ';
+      echo $Student->Personal('lname');
+      echo ' - ';
+      echo $Student->Personal('mname');
+      echo ' - ';
+      echo $Student->Personal('pname');
+      echo ' - ';
+      echo $Student->Behaviour('explain');
     }
   ];

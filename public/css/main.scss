@@ -24,6 +24,8 @@ h2, h3, h4 {
 .nojus { text-align: left; }
 .custom-col { padding: 10px; }
 .bottom { margin-bottom: 20px !important; }
+.spacer { margin-top: 10px; }
+.required {color: #c21f1f; font-size: 16px;}
 
 /*
 | Header CSS.
@@ -92,7 +94,7 @@ h2, h3, h4 {
 */
 .kasform {
   text-align: left;
-  input[type="text"], input[type="email"], input[type="number"], select, textarea {
+  input[type="text"], input[type="email"], input[type="number"], input[type="date"], select, textarea {
     width: 100%;
     margin: 0 0 5px 0;
     padding: 7px;
@@ -121,7 +123,7 @@ h2, h3, h4 {
     .fields {
       padding: 5px;
     }
-    padding: 5px 5px 10px 5px;
+    padding: 5px;
     background-color: whitesmoke;
     border: 0;
     border-radius: 3px;
@@ -140,10 +142,6 @@ h2, h3, h4 {
     font-size: 14px;
     font-weight: bold;
     font-family: 'Open Sans', Arial;
-    .required {
-      color: #c21f1f;
-      font-size: 16px;
-    }
   }
   h3 {
     width: 100%;

@@ -8,6 +8,7 @@ window.ThemeColor = '#003F80';
 | move.
 */
 $(document).ready(function(){
+  resizeModals();
   /*
   | Function to initialize the first load of the application
   | being ran, so first load to the server.
@@ -40,13 +41,14 @@ $(document).ready(function(){
         $placer = $('#right-place');
         $placer.hide("slide", { direction: "left" }, 500, function(){
           $placer.html(body).show("slide", { direction: "right" }, 500);
+          resizeModals();
         });
       });
     }
   }
   function LoadQuick(ToServe) {
     window.currentlyLoaded = ToServe;
-    $.get('api/get/'+ToServe, function(body){$('#right-place').html(body);});
+    $.get('api/get/'+ToServe, function(body){$('#right-place').html(body);resizeModals();});
   }
 
   FirstLoad(); //#Let's go first load!
@@ -110,14 +112,12 @@ $(document).ready(function(){
     $access = $(access);
     $access.submit(function(event){
       event.preventDefault();
-
         $.post('/api/', {
           type: dataObject.type,
           formData: $access.serializeArray()
         }, function(body){
           callback(body);
         });
-
       return false;
     });
   }
@@ -148,8 +148,21 @@ $(document).ready(function(){
 
 
 
-
-
+  /*
+  | Action for when screen is resized to a small width, have
+  | to do some adjustments to the modals on screen to fit more
+  | content.
+  */
+  $(window).resize(function() {
+    resizeModals();
+  });
+  function resizeModals() {
+    if ($(window).width() < 981) {
+      $('.modal-content').css({'width':'90%', 'margin-left':'5%'});
+    } else {
+      $('.modal-content').css({'width':'70%', 'margin-left':'15%'});
+    }
+  }
 
 
 

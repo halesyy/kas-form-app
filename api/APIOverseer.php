@@ -38,99 +38,7 @@
       protected function BuildFormApplicationScheme() {
         $_SESSION['form'] = [
           'students' => [
-            /*
-            [0] => [
-              'firstName' => 'Jack',
-              'lastName' => 'Hales',
-              'middleName' => 'Geoffery',
-              'prefName' => 'Jek',
-              'email' => 'halesyy@gmail.com',
-              'homePhone' => '65628442',
-              'mobilePhone' => '0430525909',
-              'enrolYear' => '11/2018',
-              'gender' => 'Male',
-              'dateOfBirth' => '15.05.2001',
-              'placeOfBirth' => 'Sydney, Australia',
-              'nationality' => 'Whiteaf',
-              'ethnicity' => [
-                'aboriginal' => false,
-                'torres' => false
-              ],
-              'homeLanguage' => 'Very English',
-              'behaviouralInformation' => [
-                'hasHad' => [
-                  'disciplineDifficulties' => false,
-                  'arrested' => false,
-                  'alcoholOrTobacco' => false,
-                  'drugs' => false,
-                  // :D
-                  'details' => 'He\'s a very good boy!'
-                ]
-              ],
-              'emergencyDetails' => [
-                '0' => [
-                  'name' => 'Christian Aquilina',
-                  'telephone' => '123123123',
-                  'relationship' => 'Uncle'
-                ],
-                '1' => [
-                  'name' => 'Elon Musk',
-                  'telephone' => '321321321',
-                  'relationship' => 'Dad'
-                ]
-              ],
-              'medicalConditions' => [
-                'has' => [
-                  'asthma' => true,
-                  'adhd' => false,
-                  'diabetes' => false,
-                  'epilepsy' => false,
-                  'autism' => false,
-                  'allergies' => true,
-                  'details' => 'Asthma is not constant and never acts up. Allergies aren\'t often either. Has plans for both from Doctor.',
-                  'earlyIntervention' => true
-                ]
-              ],
-              'medicalInformation' => [
-                'doctorsName' => 'Ruben Kurilowichasdjaiosjdoasd',
-                'doctorsPhone' => '16121243124',
-                'immunised' => true,
-                'wears' => [
-                  'glasses' => true,
-                  'contacts' => false
-                ]
-              ],
-              'educationalInformation' => [
-                'previousSchool' => 'East Kempsey Public School',
-                'hasBeen' => [
-                  'expelled' => false,
-                  'suspended' => true,
-                  'refused' => false
-                  'details' => 'Suspended for a joke!'
-                ] HAS BEEN
-              ],
-              'characterReference' => [
-                'name' => 'What Is This',
-                'occupation' => 'What Huh Who',
-                'telephone' => 'I Really Don\'t Know'
-              ],
-              'healthInformation' => [
-                'has' => [
-                  'privateHealthInsurance' => false,
-                  'privateAmbulance' => false,
-                  'ifDoes' => [
-                    'doesnt',
-                    ...
-                    'company' => 'Jeks Sandwiches Co',
-                    'memberId' => '123123',
-                    'medicareNumber' => '123123123123',
-                    'expiryDate' => '12.2017',
-                    'positionOnCard' => '123123123'
-                  ]
-                ]
-              ]
-            ] . . . END OF STUDENT
-            */
+
           ]
         ];
       }
@@ -167,18 +75,40 @@
       | the jQuery "sanitizeArray" method into an appropriate array
       | safely so there's no manipulation client side being hacky.
       */
-      public function Sanitize($postPart, $sanitizeVersion) {
+      public function Sanitize($postPart, $sanitizeVersion = false) {
         if (!isset($_POST[$postPart])) $this->Error('SANITIZE_FORM_POST_PART_NOMATCH');
         $save = []; //Where the correct form data is placed.
-        //Iterating the $_POST form data, sorting.
-        foreach ($_POST[$postPart] as $index => $dataArray) {
-          if ($sanitizeVersion[$index] != $dataArray['name']) $this->Error('SANTIZE_FORM_DATA_INCORRECT');
-          else {
+
+        if ($sanitizeVersion === false) {
+          //Iterating the form data and placing into save array.
+          foreach ($_POST[$postPart] as $index => $dataArray) {
             $save[$dataArray['name']] = $dataArray['value'];
+          }
+        } else {
+          //Iterating the $_POST form data, sorting.
+          foreach ($_POST[$postPart] as $index => $dataArray) {
+            if (!isset($sanitizeVersion[$index]) || $sanitizeVersion[$index] != $dataArray['name']) {
+              // $this->Error('SANTIZE_FORM_DATA_INCORRECT');
+              break;
+            } else {
+              $save[$dataArray['name']] = $dataArray['value'];
+            }
           }
         }
         $this->CacheFormData = $save;
         return $this;
+      }
+
+
+
+      /*
+      | @param None
+      | Returns the FormCacheData as an array if wanted after
+      | sanitizing, since sanitization returns the internal
+      | this reference object.
+      */
+      public function Get() {
+        return $this->CacheFormData;
       }
 
 
