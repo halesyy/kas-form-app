@@ -137,6 +137,18 @@ $(document).ready(function(){
 
 
 
+  /*
+  | Checkbox being pressed toggle, going to fadeIn whatever
+  | selector done using the data-toggle="" is.
+  */
+  $(document).on('click', '.toggle-checkbox', function(){
+    var toFade = $(this).attr('data-toggle');
+    $(toFade).fadeIn(300);
+  });
+
+
+
+
 
 
 

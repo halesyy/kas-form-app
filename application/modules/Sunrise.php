@@ -33,7 +33,7 @@
         $this->ImportVariables($fileData);
         $this->SortTriggers();
 
-        echo $this->Content;
+        print $this->Content;
       }
 
       /*
@@ -57,28 +57,61 @@
       | used to reference cleaner code and build bootstrap grids.
       */
       public $TriggerConversions = [
-        'whole' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-        'half' => 'col-lg-6 col-md-6 col-sm-6 col-xs-12',
-        'third' => 'col-lg-4 col-md-4 col-sm-4 col-xs-12',
-        'fourth' => 'col-lg-3 col-md-3 col-sm-6 col-xs-12'
+        'whole'  => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-col',
+        'half'   => 'col-lg-6 col-md-6 col-sm-6 col-xs-12 custom-col',
+        'third'  => 'col-lg-4 col-md-4 col-sm-4 col-xs-12 custom-col',
+        'third-expands' => 'col-lg-4 col-md-6 col-sm-12 col-xs-12 custom-col',
+        'third-expands-end' => 'col-lg-4 col-md-12 col-sm-12 col-xs-12 custom-col',
+        'fourth' => 'col-lg-3 col-md-3 col-sm-6 col-xs-12 custom-col'
       ];
       public function SortTriggers() {
-        $content  = $this->Content;
-        $lines = explode("\n", $content);
+        $Content  = $this->Content;
+        $lines = explode("\n", $Content);
         foreach ($lines as $index => $line) {
-          if (isset(trim($line)[0]) && trim($line)[0] == '@') {
-            $trigger = ltrim(explode(' ', trim($line))[0], '@'); //@trim => trim.
-              if (isset($this->TriggerConversions[$trigger])) $colstr = $this->TriggerConversions[$trigger];
-              else { echo 'Trigger conversion not found.'; return false; }
-            $params = preg_replace('/[@].* {(.*)}/', '$1', trim($line));
-            $params = array_map('trim', explode(',', $params));
+          // Managing for "triggers"
+            if (isset(trim($line)[0]) && trim($line)[0] == '@') {
+              $trigger = ltrim(explode(' ', trim($line))[0], '@'); //@trim => trim.
+              // Going to neaten this up when I get some free time for
+              // creating a better flow for development.
+              if ($trigger == 'countries') {
+                $lines[$index] = $this->Mini('form/Countries', '..');#// Generating the line to evaluate to a country selector.
+              } else if ($trigger == 'gender') {
+                $lines[$index] = $this->Mini('form/Gender', '..');#// Gender selector.
+              } else if ($trigger == 'yearlevel') {
+                $lines[$index] = $this->Mini('form/YearLevel', '..');#// Year level selector.
+              } else if ($trigger == 'yeartoenrol') {
+                $lines[$index] = $this->Mini('form/YearToEnrol', '..');#// The year to enrol selector, will be dynamic later.
+              } else if ($trigger == '//') {
+                $lines[$index] = "</div>";
+              } else if (isset($this->TriggerConversions[$trigger])) {
+                // @fourth -> <div class="col-lg-3" ...>
+                $colstr = $this->TriggerConversions[$trigger];
+                $lines[$index] = "\n<div class='{$colstr}'>";
+              } else {
+                //Remove -connection and get the TriggerConversions from the public variable.
+                if (isset($this->TriggerConversions[str_replace('-connection', '', $trigger)])) $colstr = $this->TriggerConversions[str_replace('-connection', '', $trigger)];
+                $lines[$index] = "\n</div><div class='{$colstr}'>";
+              }
+            }
 
-            $c = ["<div class='{$colstr}'>", "<input ".implode(' ', $params)." />", "</div>"];
-            $lines[$index] = implode("\n", $c);
-
-            // unset($lines[$index]); //remove line from constructor.
-          }
+          // Managing for "packets".
+            if (preg_match('/\[.*\]/', trim($line))) {
+              $line    = rtrim(ltrim(trim($line), '['), ']');
+              $pieces  = explode(' ', $line);
+              $trigger = $pieces[0];
+              if ($trigger == 'label') { #//TO REFINE. SEPERATE METHODS IN ANOTHER FILE.
+                $line   = preg_replace('/label \"(.*)\" for \"(.*)\"/', '$1::::$2', $line);
+                $pieces = explode('::::', $line);
+                if (count($pieces) != 2) die('Sunrise engine err: Not two preg replace eval zones');
+                $pieces[0] = str_replace('*', "<span class='required'>*</span>", $pieces[0]); #//turns * into class given * for requirement styling
+                // Push packet after management.
+                $lines[$index] = "\n<label for='{$pieces[1]}'>{$pieces[0]}</label>";
+              }
+            }
         }
+
+        // Push content after finishing rebuilding &
+        // reconstructing everything.
         $this->Content = implode("\n", $lines);
       }
 

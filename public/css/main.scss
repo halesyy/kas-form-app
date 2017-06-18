@@ -1,11 +1,13 @@
 @import '../bstrap-small/bootstrap-smaller';
 
+// Drawn lines, backgrounds mainly.
 $themeColor: #003f80;
+// Mainly for text color.
+$secondColor: #D3A22B;
 
 body {
   font-family: 'Open Sans';
   font-size: 17px;
-  // background-image: url('https://s-media-cache-ak0.pinimg.com/originals/6e/07/ad/6e07ade0cfe8ec9f84fd2d4b3fa7fe60.jpg');
   background-position: center;
   background-size: cover;
   background: #e5ebf2;
@@ -14,11 +16,14 @@ a, a:focus, a:hover {
   color: black;
 }
 h2, h3, h4 {
-  color: #D3A22B;
+  color: $secondColor;
   margin-top: 0;
 }
 .clear { clear: both; }
-
+.next { margin-top: 50px !important; }
+.nojus { text-align: left; }
+.custom-col { padding: 10px; }
+.bottom { margin-bottom: 20px !important; }
 
 /*
 | Header CSS.
@@ -73,7 +78,6 @@ h2, h3, h4 {
   }
   #right {
     background-color: whitesmoke;
-    text-align: justify;
     h2, h3, h4 {
       text-align: left;
     }
@@ -87,10 +91,59 @@ h2, h3, h4 {
 | Form design and elements inside of it.
 */
 .kasform {
-  input[type="text"], input[type="email"], input[type="number"], select {
+  text-align: left;
+  input[type="text"], input[type="email"], input[type="number"], select, textarea {
     width: 100%;
-    margin: 5px;
-    padding: 5px;
+    margin: 0 0 5px 0;
+    padding: 7px;
+    background-color: whitesmoke;
+    border: 0;
+    border-radius: 3px;
+    transition: 0.3s;
+    &:focus {
+      border-left: solid $themeColor 3px;
+      transition: 0.3s;
+    }
+    &:hover {
+      transition: 0;
+      background-color: #e5e5e5;
+    }
+  }
+  .field-label, .field p {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Open Sans', Arial;
+    padding-left: 5px;
+  }
+  .field {
+    .fields {
+      padding: 5px;
+    }
+    padding: 5px 5px 10px 5px;
+    background-color: whitesmoke;
+    border: 0;
+    border-radius: 3px;
+    transition: 0.3s;
+    margin-bottom: 5px;
+    &:hover {
+      transition: 0;
+      background-color: #e5e5e5;
+    }
+  }
+  .space {
+    margin-right: 10px;
+  }
+  label {
+    padding-left: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Open Sans', Arial;
+    .required {
+      color: #c21f1f;
+      font-size: 16px;
+    }
   }
   h3 {
     width: 100%;
@@ -103,6 +156,11 @@ h2, h3, h4 {
     background: #fff;
     margin: 0 10px 0 20px;
     padding: 5px;
+  }
+  textarea {
+    resize: vertical;
+    font-family: 'Open Sans', Vertical;
+    font-size: 16px;
   }
 }
 
@@ -121,22 +179,25 @@ h2, h3, h4 {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-.modal-content {
-  background-color: #fefefe;
-  margin: 15%;
-  border: 1px solid #888;
-  width: 70%; /* Could be more or less, depending on screen size */
-}
-.modal-body, .modal-header {
-  padding: 20px 20px 0 20px;
-}
-.modal-header {
-  padding: 20px;
-  background-color: $themeColor;
-  h2 {
-    padding: 0;
-    margin: 0;
+  .modal-content {
+    background-color: #fefefe;
+    margin: 100px 15% 0 15%;
+    width: 70%;
+    border-radius: 10px;
+  }
+  .modal-header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  .modal-body, .modal-header {
+    padding: 20px;
+  }
+  .modal-header {
+    background-color: $themeColor;
+    h2 {
+      padding: 0;
+      margin:  0;
+    }
   }
 }
 .close {
