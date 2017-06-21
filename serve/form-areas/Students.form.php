@@ -108,16 +108,16 @@
                 <p class="field-label">Has the student ever been:</p>
                 <div class="field">
                   <div class="fields">
-                    <input type="checkbox" class="toggle-checkbox" data-toggle="#pleaseExplainEducation" name="expelled" /> Expelled <br />
-                    <input type="checkbox" class="toggle-checkbox" data-toggle="#pleaseExplainEducation" name="suspended" /> Suspended <br />
-                    <input type="checkbox" class="toggle-checkbox" data-toggle="#pleaseExplainEducation" name="refused" /> Refused admission to a school? <br />
+                    <input type="checkbox" class="toggle-checkbox" data-toggle="#pleaseExplainEducation" name="hasBeenExpelled" /> Expelled <br />
+                    <input type="checkbox" class="toggle-checkbox" data-toggle="#pleaseExplainEducation" name="hasBeenSuspended" /> Suspended <br />
+                    <input type="checkbox" class="toggle-checkbox" data-toggle="#pleaseExplainEducation" name="hasBeenRefused" /> Refused admission to a school? <br />
                   </div>
                 </div>
               @half-connection
                 [label "Previous school" for "previousSchool"]
                 <input type="text" id="previousSchool" name="previousSchool" placeholder="Previous school" value="East Kempsey Public School" required />
               @whole-connection
-                <textarea id="pleaseExplainEducation" style="display: none;" placeholder="Please explain"></textarea>
+                <textarea name="pleaseExplainEducation" id="pleaseExplainEducation" style="display: none;" placeholder="Please explain"></textarea>
               @//
             </div><!--./edu info row-->
 
@@ -139,22 +139,6 @@
                 <textarea id="pleaseExplainBehaviour" name="pleaseExplainBehaviour" style="display: none;" placeholder="Please explain"></textarea>
               @//
             </div><!--./behaviour info row-->
-            <!-- The students Character Reference. -->
-            <div class="row">
-              <h3 class="next">
-                <span>Character Reference</span>
-              </h3>
-              @third
-                [label "Name *" for "creferenceName"]
-                <input type="text" id="creferenceName" name="creferenceName" placeholder="Name" value="Name" required />
-              @third-connection
-                [label "Occupation *" for "creferenceOccupation"]
-                <input type="text" id="creferenceOccupation" name="creferenceOccupation" placeholder="Occupation" value="Occupation" required />
-              @third-connection
-                [label "Telephone *" for "creferenceTelephone"]
-                <input type="text" id="creferenceTelephone" name="creferenceTelephone" placeholder="Telephone" value="Telephone" required />
-              @//
-            </div>
             <!-- Medical information, Doc/Health Fund Info, Medical Information, Medical Conditions. -->
             <div class="row">
               @third-expands
@@ -175,14 +159,14 @@
                     <input type="radio" name="privateHealthFund" value="false" /> No <br />
                   </div>
                 </div>
-                <textarea id="pleaseExplainPrivateHealth" style="display: none;" placeholder="Company and Member #"></textarea>
+                <textarea name="pleaseExplainPrivateHealth" id="pleaseExplainPrivateHealth" style="display: none;" placeholder="Company and Member #"></textarea>
                 <div class="spacer"></div>
                 [label "Medicare Number" for "medicareNumber"]
                 <input type="text" id="medicareNumber" name="medicareNumber" placeholder="Medicare Number" value="Medicare #" required />
                 [label "Medicare Expiry Date" for "medicareExpiry"]
                 <input type="text" id="medicareExpiry" name="medicareExpiry" placeholder="Medicare Expiry" value="Medicare Expiry" required />
                 [label "Medicare Position" for "medicarePosition"]
-                <input type="text" id="medicarePosition" name="medicarePosition" placeholder="Position on Card" value="Position on Card" required />
+                <input type="text" id="medicarePosition" name="medicarePositionOnCard" placeholder="Position on Card" value="Position on Card" required />
               <!--end of doctor and health fund information-->
               @third-expands-connection
                 <h3 class="next">
@@ -195,8 +179,8 @@
                 <div class="field">
                   <p>Is the student immunised?</p>
                   <div class="fields">
-                    <input type="radio" name="immunised" value="true" /> Yes <br />
-                    <input type="radio" name="immunised" value="false" /> No <br />
+                    <input type="radio" name="immunised" value="true" required /> Yes <br />
+                    <input type="radio" name="immunised" value="false" required /> No <br />
                   </div>
                 </div>
                 <div class="field">
@@ -222,7 +206,7 @@
                     <input type="checkbox" class="toggle-checkbox" data-toggle="#pleaseExplainCondition" name="hasAllergies" value="true" /> Allergies <br />
                   </div>
                 </div>
-                <textarea id="pleaseExplainCondition" style="display: none;" placeholder="Please explain"></textarea>
+                <textarea name="pleaseExplainCondition" id="pleaseExplainCondition" style="display: none;" placeholder="Please explain"></textarea>
                 <div class="field">
                   <p>Has the student recieved early intervention?</p>
                   <div class="fields">

@@ -11,7 +11,7 @@
     // ********************************************************************
 
       /*Stuff the user refers to as their name, phone, email*/
-      public $PersonalReference = [
+      public $Personal = [
         'fname' => '',
         'lname' => '',
         'mname' => '',
@@ -33,6 +33,13 @@
         'livesWith' => '',
         'religion' => ''
       ];
+      public $Education = [
+        'hasBeenExpelled' => '',
+        'hasBeenSuspended' => '',
+        'hasBeenRefused' => '',
+        'details' => '',
+        'previousSchool' => ''
+      ];
       public $Behaviour = [
         'hasDisciplineIssues' => '',
         'hasBeenArrested' => '',
@@ -40,52 +47,82 @@
         'usedIllegalDrugs' => '',
         'explain' => ''
       ];
+      public $Medical = [
+        'DoctorHealthFund' => [
+          'private' => [
+            'ambulance' => '',
+            'healthFund' => '',
+            'companyAndMemberId' => ''
+          ],
+          'medicareNumber' => '',
+          'medicareExpiryDate' => '',
+          'medicarePositionOnCard' => ''
+        ],
+        'MedicalInformation' => [
+          'doctorName' => '',
+          'doctorPhone' => '',
+          'isImmunised' => '',
+          'wears' => [
+            'glasses' => '',
+            'contacts' => ''
+          ]
+        ],
+        'MedicalConditions' => [
+          'has' => [
+            'asthma' => '',
+            'adhd' => '',
+            'diabetes' => '',
+            'epilepsey' => '',
+            'autism' => '',
+            'allergies' => ''
+          ],
+          'earlyIntervention' => ''
+        ]
+      ];
+      public $Emergency = [
+        0 => [
+          'name' => '',
+          'phone' => '',
+          'relationship' => ''
+        ],
+        1 => [
+          'name' => '',
+          'phone' => '',
+          'relationship' => ''
+        ]
+      ];
 
     // ********************************************************************
 
 
       /*
-      | @param Array:InseringData
-      | The students personal data, inserts recurringly data given
-      | till all in - helps to segreagate certain areas of the Student
-      | objects.
+      | @param String:ObjectReference, Array:RecurrArray
+      | Recursively iterates the given array of accesses till
+      | arrives at wanted data.
       */
-      public function InsertPersonal($InsertArray) {
-        foreach ($InsertArray as $access => $data) {
-          if (isset($this->PersonalReference[$access])) {
-            $this->PersonalReference[$access] = $data;
-          } else continue;
-        }
-      }
-      /*GET method for the personal reference data*/
-      public function Personal($access, $further = false) {
-        if (isset($this->PersonalReference[$access]) || !empty($this->PersonalRefernece[$access])) {
-          if ($further === false) return $this->PersonalReference[$access];
-          else return $this->PersonalReference[$access][$further];
-        } else return false;
-      }
+      public function RetrieveFrom($Access, $AccessArray) {
+        $Reference = $this->$Access;
+          foreach ($AccessArray as $index => $Access)
+          $Reference = $Reference[$Access];
+        return $Reference;
+      } /**/ public function Retrieve($Access, $AccessArray) { return $this->RetrieveFrom($Access, $AccessArray); }
+        /**/ public function Get($Access, $AccessArray) { return $this->RetrieveFrom($Access, $AccessArray); }
 
 
 
       /*
-      | @param Array:InseringData
-      | The students behavioural data, inserts recurringly data given
-      | till all in - helps to segreagate certain areas of the Student
-      | objects.
+      | @param String:ObjectReference, Array:RecurrObjectLoaderArray
+      | Inserts into segment of the Student object specifically.
       */
-      public function InsertBehaviour($InsertArray) {
-        foreach ($InsertArray as $access => $data) {
-          if (isset($this->Behaviour[$access])) {
-            $this->Behaviour[$access] = $data;
+      public function Insert($Into, $InsertArray) {
+        foreach ($InsertArray as $Access => $Data) {
+          if (isset($this->$Into)) {
+            $Reference = &$this->$Into;
+            $Reference[$Access] = $Data;
           } else continue;
         }
+        print_r($this->$Into);
       }
-      /*GET method for the personal reference data*/
-      public function Behaviour($access, $further = false) {
-        if (isset($this->Behaviour[$access]) || !empty($this->Behaviour[$access])) {
-          if ($further === false) return $this->Behaviour[$access];
-          else return $this->Behaviour[$access][$further];
-        } else return false;
-      }
+
 
   }
