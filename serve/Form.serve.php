@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Registration | Kempsey Adventist School</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,9 @@
         <div>
           <h3>Enrolment Form</h3>
           <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="/print" target="_print">Printable Page</a>
+            </li>
             <li><a href="enrolment-information" class="load enrolment-information">Enrolment Information</a>
             <li><a href="students" class="load students">Students</a></li>
             <ol class="second NewStudentPlace">
@@ -35,6 +38,14 @@
         </div>
       </div>
       <div id="right" class="col-lg-9 col-md-9 col-sm-8 col-xs-7">
+        <!--Where functions can be called to manage the dynamic modal so code
+        is re-usable instead of spawning a bunch of modals.-->
+        <div id="DynamicModal">
+          <div class="modal" id="DynamicModalContainer">
+            <div class="modal-content" id="DynamicModalBody">
+            </div>
+          </div>
+        </div>
         <div id="right-place"><!--Where content is placed.--></div>
       </div>
     </div>

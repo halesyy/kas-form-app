@@ -110,6 +110,7 @@ $(document).ready(function(){
   */
   window.registerForm = function(access, dataObject, callback) {
     $access = $(access);
+    if ($access.length === 0) console.log('NOPE! LOL XD');
     $access.submit(function(event){
       event.preventDefault();
         $.post('/api/', {
@@ -117,6 +118,9 @@ $(document).ready(function(){
           formData: $access.serializeArray()
         }, function(body){
           callback(body);
+          $('.modal').fadeOut(250, function(){
+            // window.location.reload();
+          });
         });
       return false;
     });
@@ -126,14 +130,51 @@ $(document).ready(function(){
   | and load up modal.
   */
   window.registerModal = function(access, modalAccess) {
-    $(access).click(function(){
+    $(document).on('click', access, function(){
       $(modalAccess).fadeIn(250);
     });
   }
+  $(document).on('click', '.open-modal', function(){
+    $('#DynamicModalContainer').fadeIn(250);
+  });
   $(document).on('click', '.close', function(){
     $('.modal').fadeOut(250);
   });
 
+
+
+
+  /*
+  | Populates the dynamic form with the data from paramater.
+  | Retrieves the file data and pushes to the dynamic body.
+  */
+  window.spawnModal = function(formComponent, callback) {
+    $.get('/api/get/modal/'+formComponent, function(body){
+      $('#DynamicModalBody').html(body);
+      callback();
+    });
+  }
+  $(document).on('click', '.edit-student', function(){
+    StudentID = $(this).attr('data-student-id');
+    $.get('/api/get/modal/Student/'+StudentID, function(body){
+      $('#DynamicModalBody').html(body);
+      $('#DynamicModalContainer').fadeIn(250, function(){
+        window.registerForm('#StudentForm', {type:'Student'}, function(body){
+          // When form is submitted this is called back.
+          console.log(body);
+        });
+      });
+    });
+  });
+  $(document).on('click', '.delete-student', function(){
+    $.post('/api/', {
+      type: 'DeleteStudent',
+      studentid: $(this).attr('data-student-id')
+    }, function(body){
+      // alert(body);
+      window.location.reload();
+    });
+  });
 
 
 

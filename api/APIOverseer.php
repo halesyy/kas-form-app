@@ -164,7 +164,7 @@
       /*
       | Returns JSON data as successful.
       */
-      public function JSON($array) {
+      public function JSON($array = []) {
         $default = ['success' => true];
         $array   = array_merge($array, $default);
         echo json_encode($array);

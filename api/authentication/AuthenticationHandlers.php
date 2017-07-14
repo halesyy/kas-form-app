@@ -1,14 +1,125 @@
 <?php
   $Authentication = [
-    'NewStudent' => function($Sunrise, $API) {
+    'DeleteStudent' => function($Sunrise, $API) {
+      $StudentID = $_POST['studentid'];
+      if (is_numeric($StudentID)) {
+        unset(
+          $_SESSION['form']['students'][$StudentID]
+        );
+      }
+      $API->JSON(['studentid' => $StudentID]);
+    },
+    'Family' => function($Sunrise, $API) {
       $Personal = $API->Sanitize('formData')->Get();
-      $Student = new Student;
+      // Since we don't have the convention of using [] in our
+      // names to build request arrays, we have a bunch of names
+      // with students ID's prefixed "studentUnderFamily", so to
+      // get existance to know which family to input, we iterate
+      // students section of session form and check for existance.
+      $studentsUnderFamily = [];
+      foreach ($_SESSION['form']['students'] as $index => &$Student):
+        if (isset($Personal["studentUnderFamily{$index}"]))
+        array_push($studentsUnderFamily, $index);
+      endforeach;
+
+      $Family = new Family;
+
+      $Family->Insert('Mother', [
+        'fname' => $Personal['motherFname'],
+        'lname' => $Personal['motherLname'],
+        'occupation' => $Personal['motherOccupation'],
+        'nationality' => $Personal['motherNationality'],
+        'firstLanguage' => $Personal['motherFirstLanguage'],
+        'employer' => $Personal['motherEmployer'],
+        'religion' => $Personal['motherReligion'],
+        'placeOfWorship' => $Personal['motherPlaceOfWorship'],
+        'homePhone' => $Personal['motherHomePhone'],
+        'businessPhone' => $Personal['motherBusinessPhone'],
+        'mobilePhone' => $Personal['motherMobilePhone'],
+        'address' => $Personal['motherAddress'],
+        'town' => $Personal['motherTown'],
+        'state' => $Personal['motherState'],
+        'postcode' => $Personal['motherPostcode'],
+        'email' => $Personal['motherEmail']
+      ]);
+      $Family->Insert('Father', [
+        'fname' => $Personal['fatherFname'],
+        'lname' => $Personal['fatherLname'],
+        'occupation' => $Personal['fatherOccupation'],
+        'nationality' => $Personal['fatherNationality'],
+        'firstLanguage' => $Personal['fatherFirstLanguage'],
+        'employer' => $Personal['fatherEmployer'],
+        'religion' => $Personal['fatherReligion'],
+        'placeOfWorship' => $Personal['fatherPlaceOfWorship'],
+        'homePhone' => $Personal['fatherHomePhone'],
+        'businessPhone' => $Personal['fatherBusinessPhone'],
+        'mobilePhone' => $Personal['fatherMobilePhone'],
+        'address' => $Personal['fatherAddress'],
+        'town' => $Personal['fatherTown'],
+        'state' => $Personal['fatherState'],
+        'postcode' => $Personal['fatherPostcode'],
+        'email' => $Personal['fatherEmail']
+      ]);
+      $Family->Insert('Guardian', [
+        'fname' => $Personal['guardianFname'],
+        'lname' => $Personal['guardianLname'],
+        'occupation' => $Personal['guardianOccupation'],
+        'nationality' => $Personal['guardianNationality'],
+        'firstLanguage' => $Personal['guardianFirstLanguage'],
+        'employer' => $Personal['guardianEmployer'],
+        'religion' => $Personal['guardianReligion'],
+        'placeOfWorship' => $Personal['guardianPlaceOfWorship'],
+        'homePhone' => $Personal['guardianHomePhone'],
+        'businessPhone' => $Personal['guardianBusinessPhone'],
+        'mobilePhone' => $Personal['guardianMobilePhone'],
+        'address' => $Personal['guardianAddress'],
+        'town' => $Personal['guardianTown'],
+        'state' => $Personal['guardianState'],
+        'postcode' => $Personal['guardianPostcode'],
+        'email' => $Personal['guardianEmail']
+      ]);
+      $Family->Insert('Conditions', [
+        'motherDeceased' => (isset($Personal['motherDeceased'])? 'true': 'false'),
+        'fatherDeceased' => (isset($Personal['fatherDeceased'])? 'true': 'false'),
+        'motherRemarried' => (isset($Personal['motherRemarried'])? 'true': 'false'),
+        'fatherRemarried' => (isset($Personal['fatherRemarried'])? 'true': 'false'),
+        'married' => (isset($Personal['married'])? 'true': 'false'),
+        'defacto' => (isset($Personal['defacto'])? 'true': 'false'),
+        'parentsSeperated' => (isset($Personal['parentsSeperated'])? 'true': 'false'),
+        'parentsDivorced' => (isset($Personal['parentsDivorced'])? 'true': 'false'),
+        'single' => (isset($Personal['single'])? 'true': 'false'),
+        'guardian' => (isset($Personal['guardian'])? 'true': 'false'),
+        'stepParent' => (isset($Personal['stepParent'])? 'true': 'false'),
+        'grandparent' => (isset($Personal['grandparent'])? 'true': 'false'),
+        'courtOrder' => (isset($Personal['courtOrder'])? 'true': 'false')
+      ]);
+      foreach ($studentsUnderFamily as $StudentID):
+        if (isset($_SESSION['form']['students'][$StudentID])) {
+          $Family->Insert('Students', [
+            $StudentID => $_SESSION['form']['students'][$StudentID]
+          ]);
+        } else {
+          //
+        }
+      endforeach;
+      print_r($Family);
+    },
+    'Student' => function($Sunrise, $API) {
+      $Personal = $API->Sanitize('formData')->Get();
+
+      // Conditionally selecting correct Student object to use.
+      if (is_numeric($Personal['studentid'])) {
+        $Student = unserialize($_SESSION['form']['students'][ $Personal['studentid'] ]);
+      } else {
+        $Student = new Student;
+      }
+
       $Student->Insert('Personal', [
         'fname' => $Personal['fname'],
         'lname' => $Personal['lname'],
         'mname' => $Personal['mname'],
         'pname' => $Personal['pname'],
-        'enrolYear' => $Personal['yearToEnrol'],
+        'yearToEnrol' => $Personal['yearToEnrol'],
         'yearLevel' => $Personal['yearLevel'],
         'gender' => $Personal['gender'],
         'dateOfBirth' => $Personal['dateOfBirth'],
@@ -84,5 +195,13 @@
           'relationship' => $Personal['emergencyRelationship2']
         ]
       ]);
+
+      // Restoring the object to session serialized.
+      if (is_numeric($Personal['studentid'])) {
+        $_SESSION['form']['students'][$Personal['studentid']] = serialize($Student);
+      } else {
+        array_push($_SESSION['form']['students'], serialize($Student));
+      }
+      print_r($_SESSION);
     }
   ];

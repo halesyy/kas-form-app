@@ -11,6 +11,7 @@
 
       public $ServeDirectory = 'serve/';
       public $Content = '';
+      public $Cache = [];
 
     // *******************************************
 
@@ -23,15 +24,17 @@
       | 2. Using another internal method to implement
       |    user data into document.
       */
-      public function Render($fileName, $fileData = [], $prepend = false) {
+      public function Render($fileName, $fileData = [], $prepend = false, $cache = false) {
         $dir = $this->ServeDirectory;
         #//prepend is used if the require for example API isn't in the entry.php
         #//file, and anchor is different.
+        if ($cache !== false) $this->Cache = $cache;
         if ($prepend !== false) $dir = $prepend.'/'.$dir;
         $dir .= $fileName.'.php';
         $this->RetrieveFileContent($dir);
         $this->ImportVariables($fileData);
         $this->SortTriggers();
+        $this->SessionSifter();
 
         print $this->Content;
       }
@@ -126,9 +129,11 @@
       */
       public function RetrieveFileContent($fileName) {
         if (is_file($fileName)) {
-          $content = file_get_contents($fileName);
-          $this->Content = $content;
-          return $content;
+            ob_start();
+            include( $fileName );
+            $Content = ob_get_clean();
+          $this->Content = $Content;
+          return $Content;
         } else die('File not found: '.$fileName);
       }
 
@@ -150,5 +155,108 @@
         array_walk($variableNames, function(&$item){ $item = '{{'.$item.'}}'; });
         $content = str_replace($variableNames, $variableResults, $content);
         $this->Content = $content;
+      }
+
+
+
+      /*
+      | @param None
+      | Sift through the lines and find tripple triggers signalling a
+      | call to the session area or student data retireval.
+      | Usually used to get data when editing a student.
+      | * COME BACK AND CLEAN UP!
+      */
+      public function SessionSifter() {
+        $Content = $this->Content;
+        $Lines   = explode("\n", $Content);
+        foreach ($Lines as &$Line):
+
+            $Line = trim($Line);
+            if ($this->Contains(['{{{', '}}}'], $Line)) {
+              // Going to extract the inner side for what we want.
+              $Extract = []; preg_match('/{{{(.*)}}}/', $Line, $Extract);
+              $Extract = $Extract[0];
+              $Extract = str_replace(['{{{', '}}}'], ['', ''], $Extract);
+
+              if ($Extract == 'StudentID') {
+                if (isset($this->Cache['StudentID'])) $Return = $this->Cache['StudentID'];
+                else $Return = 'false';
+                $Line = preg_replace('/{{{(.*)}}}/', $Return, $Line);
+              } else if (!isset($Extract[0])  ||  !isset($this->Cache['Student'])) {
+                // No additional manip we can do so going to replace the {{{}}}
+                // with nothing.
+                $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
+              } else {
+                // Found match and got the piece - going to manage now.
+                $Student = $this->Cache['Student']; //#
+
+                /*
+                COME BACK AND RECODE WHEN MORE TIME GIVEN:
+                */
+                if (count(explode('::', $Extract)) == 2) {
+                  $Split = explode('::', $Extract);
+                  $Extract = $Split[0];
+                  $Eval    = $Split[1];
+                    $Evals = explode('--', $Eval);
+                  // Needs to eval [1] if return of [0] is true.
+                  $Pieces = explode('.', $Extract);
+                  $Entry  = $Pieces[0];
+                  $Data = $Student->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                  if ($Data == $Evals[0]) {
+                    $Line = preg_replace('/{{{(.*)}}}/', $Evals[1], $Line);
+                  } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
+                } else if (count(explode('!:', $Extract)) == 2) {
+                  $Split = explode('!:', $Extract);
+                  $Extract = $Split[0];
+                  $Eval    = $Split[1];
+                  // Needs to eval [1] if return of [0] is true.
+                  $Pieces = explode('.', $Extract);
+                  $Entry  = $Pieces[0];
+                  $Data = $Student->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                  if ($Data == 'false') {
+                    $Line = preg_replace('/{{{(.*)}}}/', $Eval, $Line);
+                  } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
+                } else if (count(explode(':', $Extract)) == 2) {
+                  $Split = explode(':', $Extract);
+                  $Extract = $Split[0];
+                  $Eval    = $Split[1];
+                  // Needs to eval [1] if return of [0] is true.
+                  $Pieces = explode('.', $Extract);
+                  $Entry  = $Pieces[0];
+                  $Data = $Student->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                  if ($Data == 'true') {
+                    $Line = preg_replace('/{{{(.*)}}}/', $Eval, $Line);
+                  } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
+                } else {
+                  // Pieces is each . in space, Entry is the enter for the
+                  // Student object.
+                  $Pieces  = explode('.', $Extract);
+                  $Entry   = $Pieces[0]; //#
+                  // We have the Student object and can now use it to gather data.
+                  $Data = $Student->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                  $Line = preg_replace('/{{{(.*)}}}/', $Data, $Line);
+                }
+              }
+            } //contains{{{}}}
+
+        endforeach;
+        $this->Content = implode("\n", $Lines);
+      }
+
+      /*SM:returns if the array strings are inside string true, else false.*/
+      public function Contains($Lookfor, $In) {
+        $Contains = true;
+        foreach ($Lookfor as $index => $Lookingfor)
+          if (strpos($In, $Lookingfor) === false)
+          $Contains = false;
+        return $Contains;
+      }
+      /*SM:returns rebuilt array from index given onwards*/
+      public function ArrayFrom($index, $Array) {
+        $c = [];
+        foreach ($Array as $i => $Data):
+          if ($i >= $index) array_push($c, $Data);
+        endforeach;
+        return $c;
       }
   }

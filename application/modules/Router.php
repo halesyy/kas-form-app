@@ -40,7 +40,9 @@
       | it split by /.
       */
       protected static function URLParser($segment) {
-        return self::$segments[$segment];
+        if (isset(self::$segments[$segment])) {
+          return self::$segments[$segment];
+        } else return false;
       }
 
 
@@ -61,6 +63,9 @@
       }
       public static function Fourth() {
         return self::URLParser(4);
+      }
+      public static function Fifth() {
+        return self::URLParser(5);
       }
       public static function Segment($segment) {
         return self::URLParser($segment);

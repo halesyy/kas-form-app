@@ -74,7 +74,8 @@
             'diabetes' => '',
             'epilepsey' => '',
             'autism' => '',
-            'allergies' => ''
+            'allergies' => '',
+            'explain' => ''
           ],
           'earlyIntervention' => ''
         ]
@@ -92,6 +93,10 @@
         ]
       ];
 
+      /*parent data and what their parents are*/
+      public $HasFamily = false;
+      public $FamilyID  = false;
+
     // ********************************************************************
 
 
@@ -103,7 +108,8 @@
       public function RetrieveFrom($Access, $AccessArray) {
         $Reference = $this->$Access;
           foreach ($AccessArray as $index => $Access)
-          $Reference = $Reference[$Access];
+          if (isset($Reference[$Access])) $Reference = $Reference[$Access];
+          else { $Reference = false; break; }
         return $Reference;
       } /**/ public function Retrieve($Access, $AccessArray) { return $this->RetrieveFrom($Access, $AccessArray); }
         /**/ public function Get($Access, $AccessArray) { return $this->RetrieveFrom($Access, $AccessArray); }
@@ -121,7 +127,32 @@
             $Reference[$Access] = $Data;
           } else continue;
         }
-        print_r($this->$Into);
+      }
+
+      /*
+      | @param Object:Parent
+      | Going to insert the parent object into the class
+      | as a dependancy.
+      */
+      public function InsertParent(Parent $Parent) {
+
+      }
+
+
+      /*
+      | @param Multi:Controller
+      | Will set the internal variable of HasParent
+      | accordingly. This is an internal reference to
+      | tell if a Student Object is given a Parent/Family
+      | or not.
+      */
+      public function SetFamily($To = 'inverse') {
+        if ($To === 'inverse') {
+          $this->HasFamily = !$this->HasFamily;
+        } else $this->HasFamily = $To;
+      }
+      public function HasFamily() {
+        return $this->HasFamily;
       }
 
 

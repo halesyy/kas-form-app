@@ -13,7 +13,7 @@ body {
   background: #e5ebf2;
 }
 a, a:focus, a:hover {
-  color: black;
+  color: #333;
 }
 h2, h3, h4 {
   color: $secondColor;
@@ -26,6 +26,17 @@ h2, h3, h4 {
 .bottom { margin-bottom: 20px !important; }
 .spacer { margin-top: 10px; }
 .required {color: #c21f1f; font-size: 16px;}
+.padding { padding: 15px; }
+.padding-notop { padding: 0 15px 15px 15px; }
+.change-buttons {
+  font-size: 12px;
+  cursor: pointer;
+  .delete-student {
+    color: #c21f1f;
+    font-weight: bold;
+  }
+}
+
 
 /*
 | Header CSS.
@@ -87,6 +98,16 @@ h2, h3, h4 {
       // margin-bottom: 50px;
     }
   }
+}
+
+/*
+| Important need-to-read areas with different
+| background colors to the rest of the scheme
+| to off-balance users.
+*/
+.note {
+  background-color: #efefef;
+  padding: 10px;
 }
 
 /*
@@ -221,8 +242,8 @@ h2, h3, h4 {
     margin: 5px;
     background-color: #ededed;
     list-style-type: none;
-    padding: 20px;
-    font-size: 20px;
+    padding: 10px;
+    font-size: 16px;
     border: solid silver 1px;
   }
 }
