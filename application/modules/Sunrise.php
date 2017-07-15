@@ -1,5 +1,6 @@
 <?php
   class Sunrise {
+
       /*
       | Sunrise is a simple Rendering engine I'm
       | building to be lightweight and incorporate
@@ -28,7 +29,7 @@
         $dir = $this->ServeDirectory;
         #//prepend is used if the require for example API isn't in the entry.php
         #//file, and anchor is different.
-        if ($cache !== false) $this->Cache = $cache;
+        if ($cache !== false)   $this->Cache = $cache;
         if ($prepend !== false) $dir = $prepend.'/'.$dir;
         $dir .= $fileName.'.php';
         $this->RetrieveFileContent($dir);
@@ -130,7 +131,7 @@
       public function RetrieveFileContent($fileName) {
         if (is_file($fileName)) {
             ob_start();
-            include( $fileName );
+            include($fileName);
             $Content = ob_get_clean();
           $this->Content = $Content;
           return $Content;
@@ -167,78 +168,87 @@
       | * COME BACK AND CLEAN UP!
       */
       public function SessionSifter() {
+        // Loading the "Counts" module, a powerful but basic
+        // line parsing Class.
+        require_once "Counts.php";
+        Counts::SetIndicator(['::', '!:', ':', '.']);
         $Content = $this->Content;
         $Lines   = explode("\n", $Content);
+        $Lines   = array_map('trim', $Lines);
+        // Looping each line of the "being-rendered" page to
+        // see if there's a need for pulls from session to insert
+        // data.
         foreach ($Lines as &$Line):
+          if ($this->Contains(['{{{', '}}}'],$Line)) { #Line contains {{{...}}}
+            // Getting what's in the {{{...}}} in the line.
+            $Extract = []; preg_match('/{{{(.*)}}}/', $Line, $Extract);
+            $Extract = $Extract[0];
+            $Extract = str_replace(['{{{', '}}}'], ['', ''], $Extract);
 
-            $Line = trim($Line);
-            if ($this->Contains(['{{{', '}}}'], $Line)) {
-              // Going to extract the inner side for what we want.
-              $Extract = []; preg_match('/{{{(.*)}}}/', $Line, $Extract);
-              $Extract = $Extract[0];
-              $Extract = str_replace(['{{{', '}}}'], ['', ''], $Extract);
+            #extract=StudentID, going to place in the StudentID.
+            if ($Extract == 'StudentID') {
+              $Return = (isset($this->Cache['StudentID']))? $this->Cache['StudentID']: 'false';
+              $Line = preg_replace('/{{{(.*)}}}/', $Return, $Line);
+            }
+            #extract[0] not set, no cached student or family - going to remove {{{...}}}.
+            else if ( !isset($Extract[0]) || !isset($this->Cache['Student']) && !isset($this->Cache['Family']) ) {
+              $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
+            }
+            #else, so do manip on inner side of it.
+            else {
+              if (isset($this->Cache['Student']))     $Handler = $this->Cache['Student'];
+              else if (isset($this->Cache['Family'])) $Handler = $this->Cache['Family'];
 
-              if ($Extract == 'StudentID') {
-                if (isset($this->Cache['StudentID'])) $Return = $this->Cache['StudentID'];
-                else $Return = 'false';
-                $Line = preg_replace('/{{{(.*)}}}/', $Return, $Line);
-              } else if (!isset($Extract[0])  ||  !isset($this->Cache['Student'])) {
-                // No additional manip we can do so going to replace the {{{}}}
-                // with nothing.
-                $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
-              } else {
-                // Found match and got the piece - going to manage now.
-                $Student = $this->Cache['Student']; //#
-
-                /*
-                COME BACK AND RECODE WHEN MORE TIME GIVEN:
-                */
-                if (count(explode('::', $Extract)) == 2) {
-                  $Split = explode('::', $Extract);
-                  $Extract = $Split[0];
-                  $Eval    = $Split[1];
-                    $Evals = explode('--', $Eval);
-                  // Needs to eval [1] if return of [0] is true.
-                  $Pieces = explode('.', $Extract);
-                  $Entry  = $Pieces[0];
-                  $Data = $Student->Get($Entry, $this->ArrayFrom(1, $Pieces));
-                  if ($Data == $Evals[0]) {
-                    $Line = preg_replace('/{{{(.*)}}}/', $Evals[1], $Line);
-                  } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
-                } else if (count(explode('!:', $Extract)) == 2) {
-                  $Split = explode('!:', $Extract);
-                  $Extract = $Split[0];
-                  $Eval    = $Split[1];
-                  // Needs to eval [1] if return of [0] is true.
-                  $Pieces = explode('.', $Extract);
-                  $Entry  = $Pieces[0];
-                  $Data = $Student->Get($Entry, $this->ArrayFrom(1, $Pieces));
-                  if ($Data == 'false') {
-                    $Line = preg_replace('/{{{(.*)}}}/', $Eval, $Line);
-                  } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
-                } else if (count(explode(':', $Extract)) == 2) {
-                  $Split = explode(':', $Extract);
-                  $Extract = $Split[0];
-                  $Eval    = $Split[1];
-                  // Needs to eval [1] if return of [0] is true.
-                  $Pieces = explode('.', $Extract);
-                  $Entry  = $Pieces[0];
-                  $Data = $Student->Get($Entry, $this->ArrayFrom(1, $Pieces));
-                  if ($Data == 'true') {
-                    $Line = preg_replace('/{{{(.*)}}}/', $Eval, $Line);
-                  } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
-                } else {
-                  // Pieces is each . in space, Entry is the enter for the
-                  // Student object.
-                  $Pieces  = explode('.', $Extract);
-                  $Entry   = $Pieces[0]; //#
-                  // We have the Student object and can now use it to gather data.
-                  $Data = $Student->Get($Entry, $this->ArrayFrom(1, $Pieces));
-                  $Line = preg_replace('/{{{(.*)}}}/', $Data, $Line);
-                }
+              ##search for :: has 1
+              if (Counts::Count($Extract)['::'] == 1) {
+                $Split = explode('::', $Extract);
+                $Extract = $Split[0];
+                $Eval    = $Split[1];
+                  $Evals = explode('--', $Eval);
+                // Needs to eval [1] if return of [0] is true.
+                $Pieces = explode('.', $Extract);
+                $Entry  = $Pieces[0];
+                $Data = $Handler->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                if ($Data == $Evals[0]) {
+                  $Line = preg_replace('/{{{(.*)}}}/', $Evals[1], $Line);
+                } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
               }
-            } //contains{{{}}}
-
+              ##search for !: has 1
+              else if (Counts::Count($Extract)['!:'] == 1) {
+                $Split = explode('!:', $Extract);
+                $Extract = $Split[0];
+                $Eval    = $Split[1];
+                // Needs to eval [1] if return of [0] is true.
+                $Pieces = explode('.', $Extract);
+                $Entry  = $Pieces[0];
+                $Data = $Handler->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                if ($Data == 'false') {
+                  $Line = preg_replace('/{{{(.*)}}}/', $Eval, $Line);
+                } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
+              }
+              ##search for : has 1
+              else if (Counts::Count($Extract)[':'] == 1) {
+                $Split = explode(':', $Extract);
+                $Extract = $Split[0];
+                $Eval    = $Split[1];
+                // Needs to eval [1] if return of [0] is true.
+                $Pieces = explode('.', $Extract);
+                $Entry  = $Pieces[0];
+                $Data = $Handler->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                if ($Data == 'true') {
+                  $Line = preg_replace('/{{{(.*)}}}/', $Eval, $Line);
+                } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
+              }
+              ##else, explode by . and serve handler data.
+              else {
+                $Pieces  = explode('.', $Extract);
+                $Entry   = $Pieces[0]; //#
+                // We have the Student object and can now use it to gather data.
+                $Data = $Handler->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                $Line = preg_replace('/{{{(.*)}}}/', $Data, $Line);
+              }
+            }//end of session serve cause contains {{{}}}
+          }//end of {{{}}} contains
         endforeach;
         $this->Content = implode("\n", $Lines);
       }

@@ -1,6 +1,6 @@
 <div class="modal-header">
-  <span class="close">&times;</span>
-  <h2>Add new student</h2>
+  <span class="close remove-for-print">&times;</span>
+  <h2 class="remove-for-print">Add new student</h2>
 </div>
 <div class="modal-body">
   <form class="kasform" id="StudentForm">
@@ -82,7 +82,7 @@
       @//
     </div>
     <!-- Split ed. inf & behaviour into two cols. -->
-    <div class="row">
+    <div class="row print-page-dedicated">
       <h3 class="next">
         <span>Educational Information</span>
       </h3>
@@ -200,7 +200,7 @@
       @//
     </div><!--./medical info row-->
     <!-- Emergency Contact Information -->
-    <div class="row">
+    <div class="row print-page-dedicated">
       @half
         <div class="row">
           <h3 class="next">
@@ -227,6 +227,6 @@
         </div>
       @//
     </div><!--./emergency contact info row-->
-    <input type="submit" value="Save Student" style="margin-top: 10px;" />
+    <input type="submit" class="remove-for-print" value="Save Student" style="margin-top: 10px;" />
   </form><!--./end of entire form-->
 </div><!--./end of modal body-->

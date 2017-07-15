@@ -167,13 +167,15 @@ $(document).ready(function(){
     });
   });
   $(document).on('click', '.delete-student', function(){
-    $.post('/api/', {
-      type: 'DeleteStudent',
-      studentid: $(this).attr('data-student-id')
-    }, function(body){
-      // alert(body);
-      window.location.reload();
-    });
+    if (confirm('Are you sure you want to delete this student?')) {
+      $.post('/api/', {
+        type: 'DeleteStudent',
+        studentid: $(this).attr('data-student-id')
+      }, function(body){
+        // alert(body);
+        window.location.reload();
+      });
+    }
   });
 
 

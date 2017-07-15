@@ -95,14 +95,26 @@
       ]);
       foreach ($studentsUnderFamily as $StudentID):
         if (isset($_SESSION['form']['students'][$StudentID])) {
+          // Deserializing the object to set as taken as a family,
+          // then reserailizing it and storing it in the family.
+          $Student = &$_SESSION['form']['students'][$StudentID];
+          $Student = unserialize($Student);
+          $Student->SetFamily(true); //has family now.
+          $Student = serialize($Student);
+          // Done with it, can now insert the serialized object
+          // into the family!
           $Family->Insert('Students', [
-            $StudentID => $_SESSION['form']['students'][$StudentID]
+            $StudentID => $Student
           ]);
         } else {
           //
         }
       endforeach;
-      print_r($Family);
+      // Making sure the family array is alive in the SESSION
+      // before insertion.
+      if (!isset($_SESSION['form']['families'])) $_SESSION['form']['families'] = [];
+
+      array_push($_SESSION['form']['families'], serialize($Family));
     },
     'Student' => function($Sunrise, $API) {
       $Personal = $API->Sanitize('formData')->Get();

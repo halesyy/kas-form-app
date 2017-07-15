@@ -130,16 +130,6 @@
       }
 
       /*
-      | @param Object:Parent
-      | Going to insert the parent object into the class
-      | as a dependancy.
-      */
-      public function InsertParent(Parent $Parent) {
-
-      }
-
-
-      /*
       | @param Multi:Controller
       | Will set the internal variable of HasParent
       | accordingly. This is an internal reference to
@@ -154,6 +144,58 @@
       public function HasFamily() {
         return $this->HasFamily;
       }
+
+      /*
+      | @param None
+      | Returns the basic preview of a student with really
+      | basic data representing the class as itself.
+      | *USES INVERSE PHP SCRIPT EXECUTION.
+      */
+      public function Preview() {
+        ?>
+          <div class="student-preview">
+            <div class="name">
+              <?=($this->Get('Personal', ['fname']))?>
+              <?=($this->Get('Personal', ['mname']) === false || $this->Get('Personal', ['mname']) === '')? '': "{$this->Get('Personal', ['mname'])[0]}.";?>
+              <?=($this->Get('Personal', ['lname']))?>
+            </div>
+            <hr />
+            <div class="details">
+              <div class="col-lg-3">
+                <strong>Age</strong> <br/>
+                <?=($this->Age())?>
+              </div>
+              <div class="col-lg-3">
+                <strong>Year enrolment</strong> <br/>
+                <?=($this->Get('Personal', ['yearToEnrol']))?>
+              </div>
+              <div class="col-lg-3">
+                <strong>Year level</strong> <br/>
+                <?=($this->Get('Personal', ['yearLevel']))?>
+              </div>
+              <div class="col-lg-3">
+                <strong>Gender</strong> <br/>
+                <?=($this->Get('Personal', ['gender']))?>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        <?php
+      }
+
+      /*
+      | @param None
+      | Uses dateOfBirth (stored in Personal[]) to calculate
+      | the Students age currently.
+      */
+      public function Age() {
+        $Date = new DateTime($this->Get('Personal', ['dateOfBirth']));
+        $Now  = new DateTime();
+        $Interval = $Now->diff($Date);
+        #returning the Interval's year difference.
+        return $Interval->y;
+      }
+
 
 
   }

@@ -23,7 +23,7 @@
           <h3>Enrolment Form</h3>
           <ul>
             <li style="margin-bottom: 10px;">
-              <a href="/print" target="_print">Printable Page</a>
+              <a href="/print/index.php" target="_print">Print your form</a>
             </li>
             <li><a href="enrolment-information" class="load enrolment-information">Enrolment Information</a>
             <li><a href="students" class="load students">Students</a></li>

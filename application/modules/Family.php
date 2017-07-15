@@ -76,7 +76,7 @@
         'grandparent' => '',
         'courtOrder' => ''
       ];
-      
+
       // Housed students in the family.
       public $Students = [
 
@@ -112,6 +112,37 @@
             $Reference[$Access] = $Data;
           } else continue;
         }
+      }
+
+      /*
+      | @param None
+      | Returns the basic preview of a family with students
+      | as well as parents base description.
+      | *USES INVERSE PHP SCRIPT EXECUTION.
+      */
+      public function Preview() {
+        ?>
+          <div class="family-preview">
+            <div class="names">
+              <div class="col-lg-4">
+                Mother
+              </div>
+              <div class="col-lg-4">
+                Father
+              </div>
+              <div class="col-lg-4">
+                Guardian
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="students-preview">
+              <?php foreach ($this->Students as $index => $Student):
+                $Student = unserialize($Student);
+                $Student->Preview();
+              endforeach; ?>
+            </div>
+          </div>
+        <?php
       }
 
 
