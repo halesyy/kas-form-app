@@ -273,8 +273,12 @@ h2, h3, h4 {
 }
 
 .family-preview {
-  margin-bottom: 10px;
+  padding: 3px;
+  margin-bottom: 5px;
   background-color: #c8c8c8;
+  .students-preview {
+    margin: 0;
+  }
   .names {
     background-color: lightgrey;
     padding: 10px;
