@@ -196,6 +196,12 @@
         return $Interval->y;
       }
 
+      /*
+      | @param String:Reference, Array:AccessParh, 
+      | Will create one line of output to the
+      | screen for printing.
+      */
+
 
 
   }

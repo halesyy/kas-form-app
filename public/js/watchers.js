@@ -7,7 +7,7 @@ window.ThemeColor = '#003F80';
 | Combining the Main.JS and Watchers.js file is a good
 | move.
 */
-$(document).ready(function(){
+// $(document).ready(function(){
   resizeModals();
   /*
   | Function to initialize the first load of the application
@@ -119,7 +119,7 @@ $(document).ready(function(){
         }, function(body){
           callback(body);
           $('.modal').fadeOut(250, function(){
-            // window.location.reload();
+            window.location.reload();
           });
         });
       return false;
@@ -211,4 +211,4 @@ $(document).ready(function(){
 
 
 
-});
+// });

@@ -6,7 +6,7 @@
   </p>
   <div>
     <?php
-      foreach ($_SESSION['form']['families'] as $index => $Family):
+      if (isset($_SESSION['form']['families'])) foreach ($_SESSION['form']['families'] as $index => $Family):
         $Family = unserialize($Family);
         $Family->Preview();
       endforeach;
@@ -21,7 +21,7 @@
       window.spawnModal('Family', function(){
         window.registerForm('#FamilyForm', {type:'Family'}, function(body){
           // When form is submitted this is called back.
-          alert(body);
+          // alert(body);
           console.log(body);
         });
       });

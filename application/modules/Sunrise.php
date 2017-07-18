@@ -62,11 +62,17 @@
       */
       public $TriggerConversions = [
         'whole'  => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-col',
+        'two'  => 'col-lg-2 col-md-2 col-sm-4 col-xs-12 custom-col',
+        'ten'   => 'col-lg-10 col-md-10 col-sm-4 col-xs-12 custom-col',
         'half'   => 'col-lg-6 col-md-6 col-sm-6 col-xs-12 custom-col',
+        'six'    => 'col-lg-6 col-md-6 col-sm-6 col-xs-12 custom-col',
         'third'  => 'col-lg-4 col-md-4 col-sm-4 col-xs-12 custom-col',
+        'three'  => 'col-lg-3 col-md-3 col-sm-4 col-xs-12 custom-col',
+        'four'   => 'col-lg-4 col-md-4 col-sm-4 col-xs-12 custom-col',
         'third-expands' => 'col-lg-4 col-md-6 col-sm-12 col-xs-12 custom-col',
         'third-expands-end' => 'col-lg-4 col-md-12 col-sm-12 col-xs-12 custom-col',
-        'fourth' => 'col-lg-3 col-md-3 col-sm-6 col-xs-12 custom-col'
+        'fourth' => 'col-lg-3 col-md-3 col-sm-6 col-xs-12 custom-col',
+        'nine' => 'col-lg-9 col-md-9 col-sm-6 col-xs-12 custom-col'
       ];
       public function SortTriggers() {
         $Content  = $this->Content;
@@ -87,10 +93,16 @@
                 $lines[$index] = $this->Mini('form/YearToEnrol', '..');#// The year to enrol selector, will be dynamic later.
               } else if ($trigger == '//') {
                 $lines[$index] = "</div>";
+              } else if ($trigger == 'row') {
+                $lines[$index] = "<div class='row'>";
               } else if (isset($this->TriggerConversions[$trigger])) {
                 // @fourth -> <div class="col-lg-3" ...>
                 $colstr = $this->TriggerConversions[$trigger];
                 $lines[$index] = "\n<div class='{$colstr}'>";
+              } else if ($trigger == 'six-row') {
+                $lines[$index] = "<div class='row'><div class='col-lg-6 col-md-6 col-sm-6 col-xs-12 custom-col'>";
+              } else if ($trigger == '////') {
+                $lines[$index] = "</div></div>";
               } else {
                 //Remove -connection and get the TriggerConversions from the public variable.
                 if (isset($this->TriggerConversions[str_replace('-connection', '', $trigger)])) $colstr = $this->TriggerConversions[str_replace('-connection', '', $trigger)];

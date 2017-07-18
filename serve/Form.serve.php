@@ -6,6 +6,11 @@
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
     <meta charset="UTF-8" />
     <style>body {background-color: #003f80;} .container {margin-top:20px; margin-bottom:20px; background-color:white;}</style>
+    <!--Deffered documents.-->
+    <link rel="stylesheet" type="text/css" href="/public/css/main.min.css" defer="defer" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans" rel="stylesheet" defer="defer" />
+    <script src="/public/js/external_modules/jQueryAndUI.min.js" defer="defer"></script>
+    <script src="/public/js/watchers.js" defer="defer"></script>
   </head>
   <body>
     <div class="container" id="content-container">
@@ -49,10 +54,5 @@
         <div id="right-place"><!--Where content is placed.--></div>
       </div>
     </div>
-    <!--JavaScript and CSS. - after document since serve then format.-->
-    <link rel="stylesheet" type="text/css" href="public/css/main.min.css" defer />
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans" rel="stylesheet" defer />
-    <script src="/public/js/external_modules/jQueryAndUI.min.js"></script>
-    <script src="/public/js/watchers.js"></script>
   </body>
 </html>

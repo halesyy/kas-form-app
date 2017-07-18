@@ -1,4 +1,8 @@
 <?php
+  /*
+  | P R I N T I N G!
+  */
+
   session_start();
   ob_start();
 
@@ -28,19 +32,12 @@
           <img id="header-qr-code" src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=http://www.kas-form-app.t.jekoder.com&choe=UTF-8" />
         </div>
         <hr />
-        <?php
-          $Sunrise->Render('form-areas/Family.form', [], '..', [
-            'Family' => $Family
-          ]);
-        ?>
-        <div class="students-preview">
-          <?php
-            foreach ($Family->Students as $index => $Student):
-              $Student = unserialize($Student);
-              $Student->Preview();
-            endforeach;
-          ?>
-        </div>
+        <?php $Sunrise->Render('printable-formats/Family.printable', [], '..', [
+          'Family' => $Family
+        ]); ?>
+        <!-- <div class="students-preview">
+
+        </div> -->
       </div>
       <script>
         window.print();
