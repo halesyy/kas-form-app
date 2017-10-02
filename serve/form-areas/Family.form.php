@@ -1,15 +1,15 @@
 <div class="modal-header">
   <span class="close remove-for-print">&times;</span>
-  <h2 class="remove-for-print">Add new family</h2>
+  <h2 class="remove-for-print">Add family</h2>
 </div>
 <div class="modal-body">
-  <form class="kasform" id="FamilyForm" enctype="multipart/form-data">
+  <form class="kasform" id="FamilyForm">
+    <input type="hidden" name="familyid" value="{{{FamilyID}}}" />
     <div class="row">
       @third
         <h3>
           <span>Mother's Details</span>
         </h3>
-        <div class="row">
           [label "First name" for "motherFname"]
           <input type="text" id="motherFname" name="motherFname" placeholder="First name" value="{{{Mother.fname}}}" />
           [label "Last name" for "motherLname"]
@@ -42,12 +42,10 @@
           <input type="text" id="motherPostcode" name="motherPostcode" placeholder="Post code" value="{{{Mother.postcode}}}" />
           [label "Email" for "motherEmail"]
           <input type="text" id="motherEmail" name="motherEmail" placeholder="Email" value="{{{Mother.email}}}" />
-        </div>
       @third-connection
         <h3>
           <span>Father's Details</span>
         </h3>
-        <div class="row">
             [label "First name" for "fatherFname"]
             <input type="text" id="fatherFname" name="fatherFname" placeholder="First name" value="{{{Father.fname}}}" />
             [label "Last name" for "fatherLname"]
@@ -80,12 +78,10 @@
             <input type="text" id="fatherPostcode" name="fatherPostcode" placeholder="Post code" value="{{{Father.postcode}}}" />
             [label "Email" for "fatherEmail"]
             <input type="text" id="fatherEmail" name="fatherEmail" placeholder="Email" value="{{{Father.email}}}" />
-        </div>
       @third-connection
         <h3>
           <span>Guardian's Details</span>
         </h3>
-        <div class="row">
             [label "First name" for "guardianFname"]
             <input type="text" id="guardianFname" name="guardianFname" placeholder="First name" value="{{{Guardian.fname}}}" />
             [label "Last name" for "guardianLname"]
@@ -118,7 +114,6 @@
             <input type="text" id="guardianPostcode" name="guardianPostcode" placeholder="Post code" value="{{{Guardian.postcode}}}" />
             [label "Email" for "guardianEmail"]
             <input type="text" id="guardianEmail" name="guardianEmail" placeholder="Email" value="{{{Guardian.email}}}" />
-        </div>
       @//
     </div><!--./end of mother|father|guardian row-->
     <div class="row">
@@ -146,26 +141,7 @@
         </div>
       </div>
     </div>
-    <div class="row print-page-dedicated">
-      <h3>
-        <span>Students under family</span>
-      </h3>
-      <p class="note">
-        Please select all students that fit under this family name/ tree from the list below:
-      </p>
-      <p>
-        <?php if (isset($_SESSION['form']['students'])) foreach($_SESSION['form']['students'] as $index => &$Student):
-        $Student = unserialize($Student); if ($Student->HasFamily()) { $Student = serialize($Student); continue; } ?>
-            <input type="checkbox" name="studentUnderFamily<?=$index?>" value="<?=$index?>" />
-              <?=($Student->Get('Personal', ['fname']))?>
-              <?=($Student->Get('Personal', ['mname']) === false || $Student->Get('Personal', ['mname']) === '')? '': "{$Student->Get('Personal', ['mname'])[0]}.";?>
-              <?=($Student->Get('Personal', ['lname']))?>
-            <br/>
-        <?php $Student = serialize($Student);
-        endforeach; ?>
-      </p>
-    </div>
 
-    <input type="submit" class="remove-for-print" value="Save Family" style="margin-top: 10px;" />
+    <input type="submit" class="remove-for-print btn btn-success" value="Save Family" style="margin-top: 10px;" />
   </form>
 </div>

@@ -25,19 +25,20 @@
       | 2. Using another internal method to implement
       |    user data into document.
       */
-      public function Render($fileName, $fileData = [], $prepend = false, $cache = false) {
+      public function Render($fileName, $fileData = [], $prepend = false, $cache = false, $predefined = []) {
         $dir = $this->ServeDirectory;
         #//prepend is used if the require for example API isn't in the entry.php
         #//file, and anchor is different.
         if ($cache !== false)   $this->Cache = $cache;
         if ($prepend !== false) $dir = $prepend.'/'.$dir;
         $dir .= $fileName.'.php';
-        $this->RetrieveFileContent($dir);
+        $this->RetrieveFileContent($dir, $predefined);
         $this->ImportVariables($fileData);
         $this->SortTriggers();
         $this->SessionSifter();
 
         print $this->Content;
+        $this->Cache = [];
       }
 
       /*
@@ -46,10 +47,11 @@
       | in using PHP and HTML combined. Will use an output buffer to render
       | and return the data.
       */
-      public function Mini($fileName, $prepend = false) {
+      public function Mini($fileName, $prepend = false, $VarDefinitions = []) {
         $dir = "serve/{$fileName}.php";
         $dir = ($prepend)? $prepend.'/'.$dir: $dir;
         ob_start();
+          foreach ($VarDefinitions as $VarName => $VarValue){ ${$VarName} = $VarValue; }
           include( $dir );
         return ob_get_clean();
       }
@@ -72,6 +74,7 @@
         'third-expands' => 'col-lg-4 col-md-6 col-sm-12 col-xs-12 custom-col',
         'third-expands-end' => 'col-lg-4 col-md-12 col-sm-12 col-xs-12 custom-col',
         'fourth' => 'col-lg-3 col-md-3 col-sm-6 col-xs-12 custom-col',
+        'fourth-stable' => 'col-lg-3 col-md-3 col-sm-3 col-xs-3 custom-col',
         'nine' => 'col-lg-9 col-md-9 col-sm-6 col-xs-12 custom-col'
       ];
       public function SortTriggers() {
@@ -140,12 +143,17 @@
       | If found, returns the file data as well
       | as sets it in the public variable $Content.
       */
-      public function RetrieveFileContent($fileName) {
+      public function RetrieveFileContent($fileName, $predefined = []) {
         if (is_file($fileName)) {
-            ob_start();
+          // print_r($predefined);
+          ob_start();
+            // foreach ($predefine as $varname => $vardata) ${$varname} = $vardata;
+            extract($predefined, EXTR_SKIP);
+            // print_r($predefined);
             include($fileName);
-            $Content = ob_get_clean();
+          $Content = ob_get_clean();
           $this->Content = $Content;
+
           return $Content;
         } else die('File not found: '.$fileName);
       }
@@ -180,10 +188,15 @@
       | * COME BACK AND CLEAN UP!
       */
       public function SessionSifter() {
+        // Removing all display:none's is there's an edit going on.
+        // if (isset($this->Cache['StudentID'])) {
+        //   $this->Content = str_replace('display: none;', '', $this->Content);
+        // }
+
         // Loading the "Counts" module, a powerful but basic
         // line parsing Class.
         require_once "Counts.php";
-        Counts::SetIndicator(['::', '!:', ':', '.']);
+        Counts::SetIndicator(['::', '!:', ':', '.', '~~']);
         $Content = $this->Content;
         $Lines   = explode("\n", $Content);
         $Lines   = array_map('trim', $Lines);
@@ -200,6 +213,11 @@
             #extract=StudentID, going to place in the StudentID.
             if ($Extract == 'StudentID') {
               $Return = (isset($this->Cache['StudentID']))? $this->Cache['StudentID']: 'false';
+              $Line = preg_replace('/{{{(.*)}}}/', $Return, $Line);
+            }
+            #extrat=FamilyID, going to place in the FamilyID.
+            else if ($Extract == 'FamilyID') {
+              $Return = (isset($this->Cache['FamilyID']))? $this->Cache['FamilyID']: 'false';
               $Line = preg_replace('/{{{(.*)}}}/', $Return, $Line);
             }
             #extract[0] not set, no cached student or family - going to remove {{{...}}}.
@@ -221,9 +239,14 @@
                 $Pieces = explode('.', $Extract);
                 $Entry  = $Pieces[0];
                 $Data = $Handler->Get($Entry, $this->ArrayFrom(1, $Pieces));
-                if ($Data == $Evals[0]) {
+                if ($Data == "{$Evals[0]}") {
                   $Line = preg_replace('/{{{(.*)}}}/', $Evals[1], $Line);
                 } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
+              }
+              #search for function call
+              else if ($this->Contains(['()'], $Extract)) {
+                $MethodName = str_replace('()', '', $Extract);
+                $Line = $Handler->$MethodName();
               }
               ##search for !: has 1
               else if (Counts::Count($Extract)['!:'] == 1) {
@@ -238,6 +261,23 @@
                   $Line = preg_replace('/{{{(.*)}}}/', $Eval, $Line);
                 } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
               }
+              ##search for ~~ has 1, to see if not empty.
+              else if (Counts::Count($Extract)['~~'] == 1) {
+                $Split = explode('~~', $Extract);
+                $Extract = $Split[0];
+                $Eval    = $Split[1];
+                $Evals   = explode('--', $Eval);
+                // Needs to eval [1] if return of [0] is true.
+                $Pieces = explode('.', $Extract);
+                $Entry  = $Pieces[0];
+                $Data = $Handler->Get($Entry, $this->ArrayFrom(1, $Pieces));
+                // echo (empty($Data))? 'YES THE AREA IS EMPTY!': 'NO THE AREA ISNT EMPTY!';
+                if (empty($Data) || $Data == '') {
+                  $Line = preg_replace('/{{{(.*)}}}/', $Eval[1], $Line);
+                } else {
+                  $Line = preg_replace('/{{{(.*)}}}/', $Eval[0], $Line);
+                }
+              }
               ##search for : has 1
               else if (Counts::Count($Extract)[':'] == 1) {
                 $Split = explode(':', $Extract);
@@ -247,10 +287,13 @@
                 $Pieces = explode('.', $Extract);
                 $Entry  = $Pieces[0];
                 $Data = $Handler->Get($Entry, $this->ArrayFrom(1, $Pieces));
-                if ($Data == 'true') {
+                if (strtolower($Data) == 'true') {
                   $Line = preg_replace('/{{{(.*)}}}/', $Eval, $Line);
                 } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
               }
+                // if ($Data == "{$Evals[0]}") {
+                //   $Line = preg_replace('/{{{(.*)}}}/', $Evals[1], $Line);
+                // } else $Line = preg_replace('/{{{(.*)}}}/', '', $Line);
               ##else, explode by . and serve handler data.
               else {
                 $Pieces  = explode('.', $Extract);

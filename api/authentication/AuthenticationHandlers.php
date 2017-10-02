@@ -1,5 +1,111 @@
 <?php
   $Authentication = [
+    'UpdateMethodOfPaymentDetails' => function($Sunrise, $API) {
+      $Family = unserialize($_SESSION['form']['families'][0]);
+
+        if (
+          !isset($Family->MethodOfPaymentDetails[$_POST['familyMember']])
+          ||
+          $Family->MethodOfPaymentDetails[$_POST['familyMember']]['through'] != $_POST['paymentMethod']
+        ) {
+          $Family->MethodOfPaymentDetails[ $_POST['familyMember'] ] = [
+            'through' => $_POST['paymentMethod'],
+            'fields' => [
+              $_POST['fieldName'] => $_POST['fieldValue']
+            ]
+          ];
+        } else {
+          $Family->MethodOfPaymentDetails[$_POST['familyMember']]['fields'][
+            $_POST['fieldName']
+          ] = $_POST['fieldValue'];
+        }
+
+        print_r($Family->MethodOfPaymentDetails);
+
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+    'CheckPercentageTotal' => function($Sunrise, $API) {
+      $Family = unserialize($_SESSION['form']['families'][0]);
+      echo json_encode([
+        'success' => true,
+        'total100' => ($Family->TotalFamilyPayPercentage() == 100) ?true :false
+      ]);
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+    'UpdateFamilyMemberPercentage' => function($Sunrise, $API) {
+      //working with $Family->FamilySplitPercentages.
+      $Family = unserialize($_SESSION['form']['families'][0]);
+      $Family->FamilySplitPercentages[$_POST['familyMember']] = $_POST['percentage'];
+      //print_r($Family->FamilySplitPercentages);
+      //return json instead now,
+      //indicating if family split percentage == 100 or not.
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+    'OtherInputsUpdate' => function($Sunrise, $API) {
+      $Family = unserialize($_SESSION['form']['families'][0]);
+      $Family->OtherInformation[$_POST['name']] = $_POST['value'];
+
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+    'ChangeFamilyResponsibility' => function($Sunrise, $API) {
+      $Family = unserialize($_SESSION['form']['families'][0]);
+      
+      $Family->PaymentResponsibilities[
+        $_POST['familyMember']
+      ] = $_POST['is'];
+      print_r($Family->PaymentResponsibilities);
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+    'ChangePaymentInterval' => function($Sunrise, $API) {
+      $Family = unserialize($_SESSION['form']['families'][0]);
+      $Family->Interval = $_POST['interval'];
+      // $Family->SetInterval($_POST['interval']);
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+    'ChangePaymentMethod' => function($Sunrise, $API) {
+      if ($_POST['method'] == 'false') $Method = '';
+      else $Method = $_POST['method'];
+
+      $Family = unserialize($_SESSION['form']['families'][0]);
+      // $Family->SetMethod($Method);
+      // $Family->PaymentMethod = [];
+      $Family->PaymentMethod[$_POST['familyMember']] = $Method;
+
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+
+    'ChangeRepeatCancel' => function($Sunrise, $API) {
+      $Family = unserialize($_SESSION['form']['families'][0]);
+
+      if (!is_array($Family->RepeatTillCancelled)) {
+        $Family->RepeatTillCancelled = [];
+        $Family->RepeatTillCancelled[$_POST['familyMember']] = $_POST['action'];
+      } else
+        $Family->RepeatTillCancelled[$_POST['familyMember']] = $_POST['action'];
+      // echo $_POST['action'];
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+
+    'ChangeAutomaticIncreases' => function($Sunrise, $API) {
+      $Family = unserialize($_SESSION['form']['families'][0]);
+
+      if (!is_array($Family->AutomaticPaymentIncreases)) {
+        $Family->AutomaticPaymentIncreases = [];
+        $Family->AutomaticPaymentIncreases[$_POST['familyMember']] = $_POST['action'];
+      } else
+        $Family->AutomaticPaymentIncreases[$_POST['familyMember']] = $_POST['action'];
+
+      // $Family->AutomaticPaymentIncreases = $_POST['action'];
+      // echo $_POST['action'];
+      // echo $Family->AutomaticPaymentIncreases;
+      $_SESSION['form']['families'][0] = serialize($Family);
+    },
+
+
+
+
+
+
     'DeleteStudent' => function($Sunrise, $API) {
       $StudentID = $_POST['studentid'];
       if (is_numeric($StudentID)) {
@@ -7,22 +113,37 @@
           $_SESSION['form']['students'][$StudentID]
         );
       }
+
+      // A new student was added, need to reboard the family.
+      if (isset($_SESSION['form']['families'][0])) {
+        $Family = unserialize($_SESSION['form']['families'][0]);
+        $Family->ReboardStudents();
+        $_SESSION['form']['families'][0] = serialize($Family);
+      }
+
       $API->JSON(['studentid' => $StudentID]);
     },
+
+
+
+
+    //
+    //   ______
+    //  |  ___|
+    //  | |_
+    //  |  _|
+    //  | |
+    //  \_|
+    //
+    //
     'Family' => function($Sunrise, $API) {
       $Personal = $API->Sanitize('formData')->Get();
-      // Since we don't have the convention of using [] in our
-      // names to build request arrays, we have a bunch of names
-      // with students ID's prefixed "studentUnderFamily", so to
-      // get existance to know which family to input, we iterate
-      // students section of session form and check for existance.
-      $studentsUnderFamily = [];
-      foreach ($_SESSION['form']['students'] as $index => &$Student):
-        if (isset($Personal["studentUnderFamily{$index}"]))
-        array_push($studentsUnderFamily, $index);
-      endforeach;
 
-      $Family = new Family;
+      if ($Personal['familyid'] == "false") {
+        $Family = new Family;
+      } else {
+        $Family = unserialize($_SESSION['form']['families'][0]);
+      }
 
       $Family->Insert('Mother', [
         'fname' => $Personal['motherFname'],
@@ -93,37 +214,50 @@
         'grandparent' => (isset($Personal['grandparent'])? 'true': 'false'),
         'courtOrder' => (isset($Personal['courtOrder'])? 'true': 'false')
       ]);
-      foreach ($studentsUnderFamily as $StudentID):
-        if (isset($_SESSION['form']['students'][$StudentID])) {
-          // Deserializing the object to set as taken as a family,
-          // then reserailizing it and storing it in the family.
-          $Student = &$_SESSION['form']['students'][$StudentID];
-          $Student = unserialize($Student);
-          $Student->SetFamily(true); //has family now.
-          $Student = serialize($Student);
-          // Done with it, can now insert the serialized object
-          // into the family!
-          $Family->Insert('Students', [
-            $StudentID => $Student
-          ]);
-        } else {
-          //
-        }
+      foreach ($_SESSION['form']['students'] as $index => $Student):
+        $Student = unserialize($Student);
+        $Student->SetFamily(true);
+        $Student = serialize($Student);
+        $Family->Insert('Students', [
+          $index => $Student
+        ]);
       endforeach;
       // Making sure the family array is alive in the SESSION
       // before insertion.
       if (!isset($_SESSION['form']['families'])) $_SESSION['form']['families'] = [];
 
-      array_push($_SESSION['form']['families'], serialize($Family));
+      // Restoring the object to session serialized.
+      if ($Personal['familyid'] == "false") {
+        array_push($_SESSION['form']['families'], serialize($Family));
+      } else {
+        $_SESSION['form']['families'][0] = serialize($Family);
+      }
+      print_r($_SESSION);
     },
+
+
+
+
+
+
+
+    //
+    //     _____
+    //    /  ___|
+    //    \ `--.
+    //     `--. \
+    //    /\__/ /
+    //    \____/
+    //
+    //
     'Student' => function($Sunrise, $API) {
       $Personal = $API->Sanitize('formData')->Get();
 
       // Conditionally selecting correct Student object to use.
-      if (is_numeric($Personal['studentid'])) {
-        $Student = unserialize($_SESSION['form']['students'][ $Personal['studentid'] ]);
-      } else {
+      if ($Personal['studentid'] == "false") {
         $Student = new Student;
+      } else {
+        $Student = unserialize($_SESSION['form']['students'][ $Personal['studentid'] ]);
       }
 
       $Student->Insert('Personal', [
@@ -146,7 +280,23 @@
         'state' => $Personal['state'],
         'postCode' => $Personal['postCode'],
         'livesWith' => $Personal['livesWith'],
-        'religion' => $Personal['religion']
+        'religion' => $Personal['religion'],
+        'prekindy' => [
+          'week1' => [
+            'monday' => (isset($Personal['preKindyWk1-Monday']))? 'true': 'false',
+            'tuesday' => (isset($Personal['preKindyWk1-Tuesday']))? 'true': 'false',
+            'wednesday' => (isset($Personal['preKindyWk1-Wednesday']))? 'true': 'false',
+            'thursday' => (isset($Personal['preKindyWk1-Thursday']))? 'true': 'false',
+            'friday' => (isset($Personal['preKindyWk1-Friday']))? 'true': 'false'
+          ],
+          'week2' => [
+            'monday' => (isset($Personal['preKindyWk2-Monday']))? 'true': 'false',
+            'tuesday' => (isset($Personal['preKindyWk2-Tuesday']))? 'true': 'false',
+            'wednesday' => (isset($Personal['preKindyWk2-Wednesday']))? 'true': 'false',
+            'thursday' => (isset($Personal['preKindyWk2-Thursday']))? 'true': 'false',
+            'friday' => (isset($Personal['preKindyWk2-Friday']))? 'true': 'false'
+          ]
+        ]
       ]);
       $Student->Insert('Education', [
         'hasBeenExpelled' => (isset($Personal['hasBeenExpelled']))? 'true': 'false',
@@ -209,11 +359,21 @@
       ]);
 
       // Restoring the object to session serialized.
-      if (is_numeric($Personal['studentid'])) {
-        $_SESSION['form']['students'][$Personal['studentid']] = serialize($Student);
-      } else {
+      if ($Personal['studentid'] == "false") {
+        echo "new student";
         array_push($_SESSION['form']['students'], serialize($Student));
+      } else {
+        echo "editing student";
+        $_SESSION['form']['students'][$Personal['studentid']] = serialize($Student);
       }
-      print_r($_SESSION);
+
+      // A new student was added, need to reboard the family.
+      if (isset($_SESSION['form']['families'][0])) {
+        $Family = unserialize($_SESSION['form']['families'][0]);
+        $Family->ReboardStudents();
+        $_SESSION['form']['families'][0] = serialize($Family);
+      }
+
+      print_r($Student);
     }
   ];

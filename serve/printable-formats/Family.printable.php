@@ -1,7 +1,9 @@
 <div class="printable-family">
   <form class="kasform">
     <div class="row">
-      <div class="col-lg-2">-</div>
+      <div class="col-lg-2">
+        <h3 style="padding-top: 1px;"></h3>
+      </div>
       <div class="spaced-third">
         <h3>
           <span>Mother's Details</span>
@@ -220,7 +222,7 @@
         {{{Guardian.email}}}
       </div>
     </div>
-    <div class="row" style="margin-top: 5px;">
+    <div class="row" style="margin-top: 20px;">
       <!-- <p class="field-label">Please tick whichever box applies: <span class="required">*</span></p> -->
       <div class="field">
         <div class="fields">

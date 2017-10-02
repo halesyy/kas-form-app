@@ -30,7 +30,7 @@
         </select>
       @third-connection
         [label "Year level*" for "yearLevel"]
-        <select id="yearLevel" name="yearLevel">
+        <select id="yearLevel" name="yearLevel" onchange="if(this.value=='-2'){$('#preKindyForm').fadeIn(250);}else{$('#preKindyForm').fadeOut(250);}">
           @yearlevel
         </select>
       @third-connection
@@ -38,6 +38,50 @@
         <select id="gender" name="gender">
           @gender
         </select>
+      @//
+    </div>
+    <div class="row" id="preKindyForm" style="display: none; background-color: #e3e3e3; margin: 5px; display: {{{Personal.yearLevel::Pre-Kindy--block}}};">
+      <!-- Pre-Kindy information -->
+      @whole
+        <h4>Pre-Kindy Enrolment</h4>
+      @whole-connection
+        <p>All children enrolled at pre-Kindy must be eligible to commence Kindergarten in the following school year, that is, turning 5 by the March 31 in their Kindergarten year.</p>
+      @whole-connection
+        <hr style="border-bottom: solid lightgrey 1px;" />
+        <strong>Preferred Pre-Kindy days: (Applicants may attend Pre-Kindy up to 5 days per fortnight)</strong>
+        <div class="row">
+          @two
+            <strong>Week 1:</strong>
+          @two-connection
+            <input type="checkbox" name="preKindyWk1-Monday" {{{Personal.prekindy.week1.monday:checked}}} /> Monday
+          @two-connection
+            <input type="checkbox" name="preKindyWk1-Tuesday" {{{Personal.prekindy.week1.tuesday:checked}}} /> Tuesday
+          @two-connection
+            <input type="checkbox" name="preKindyWk1-Wednesday" {{{Personal.prekindy.week1.wednesday:checked}}} /> Wednesday
+          @two-connection
+            <input type="checkbox" name="preKindyWk1-Thursday" {{{Personal.prekindy.week1.thursday:checked}}} /> Thursday
+          @two-connection
+            <input type="checkbox" name="preKindyWk1-Friday" {{{Personal.prekindy.week1.friday:checked}}} /> Friday
+          @//
+        </div>
+        <div class="row">
+          @two
+            <strong>Week 2:</strong>
+          @two-connection
+            <input type="checkbox" name="preKindyWk2-Monday" {{{Personal.prekindy.week2.monday:checked}}} /> Monday
+          @two-connection
+            <input type="checkbox" name="preKindyWk2-Tuesday" {{{Personal.prekindy.week2.tuesday:checked}}} /> Tuesday
+          @two-connection
+            <input type="checkbox" name="preKindyWk2-Wednesday" {{{Personal.prekindy.week2.wednesday:checked}}} /> Wednesday
+          @two-connection
+            <input type="checkbox" name="preKindyWk2-Thursday" {{{Personal.prekindy.week2.thursday:checked}}} /> Thursday
+          @two-connection
+            <input type="checkbox" name="preKindyWk2-Friday" {{{Personal.prekindy.week2.friday:checked}}} /> Friday
+          @//
+        </div>
+        <hr style="border-bottom: solid lightgrey 1px;" />
+      @whole-connection
+        <p>Please note that Pre Kindy is only available to those also enroling for Kindergarten the following year.</p>
       @//
     </div>
     <div class="row">
@@ -54,7 +98,10 @@
         <input type="date" id="dateOfBirth" name="dateOfBirth" min="2000-00-00" value="{{{Personal.dateOfBirth}}}" placeholder="Date of Birth" required />
       @half-connection
         [label "Student's nationality*" for "nationality"]
-        <input type="text" id="nationality" name="nationality" placeholder="Nationality" value="{{{Personal.nationality}}}" required />
+        <!-- <input type="text" id="nationality" name="nationality" placeholder="Nationality" value="{{{Personal.nationality}}}" required /> -->
+        <select>
+          @countries
+        </select>
       @half-connection
         [label "Language spoken at home*" for "languageAtHome"]
         <input type="text" id="languageAtHome" name="languageAtHome" placeholder="Language" value="{{{Personal.languageAtHome}}}" required />
@@ -99,7 +146,8 @@
         [label "Previous school" for "previousSchool"]
         <input type="text" id="previousSchool" name="previousSchool" placeholder="Previous school" value="{{{Education.previousSchool}}}" required />
       @whole-connection
-        <textarea name="pleaseExplainEducation" id="pleaseExplainEducation" style="display: none;" placeholder="Please explain">{{{Education.details}}}</textarea>
+        <textarea name="pleaseExplainEducation" id="pleaseExplainEducation" placeholder="Please explain..." style="{{{Education.details~~display:none;--display:block;}}} display: none;"
+        >{{{Education.details}}}</textarea>
       @//
     </div><!--./edu info row-->
 
@@ -118,7 +166,8 @@
           </div>
         </div>
       @whole-connection
-        <textarea id="pleaseExplainBehaviour" name="pleaseExplainBehaviour" style="display: none;" placeholder="Please explain">{{{Behaviour.explain}}}</textarea>
+        <textarea id="pleaseExplainBehaviour" name="pleaseExplainBehaviour" style="{{{Behaviour.explain~~display:none;--display:block;}}} display: none;" placeholder="Please explain"
+        >{{{Behaviour.explain}}}</textarea>
       @//
     </div><!--./behaviour info row-->
     <!-- Medical information, Doc/Health Fund Info, Medical Information, Medical Conditions. -->
@@ -141,7 +190,8 @@
             <input type="radio" name="privateHealthFund" value="false" {{{Medical.DoctorHealthFund.private.healthFund!:checked}}} /> No <br />
           </div>
         </div>
-        <textarea name="pleaseExplainPrivateHealth" id="pleaseExplainPrivateHealth" style="display: none;" placeholder="Company and Member #">{{{Medical.DoctorHealthFund.private.companyAndMemberId}}}</textarea>
+        <textarea name="pleaseExplainPrivateHealth" id="pleaseExplainPrivateHealth" style="{{{Medical.DoctorHealthFund.private.companyAndMemberId~~display:none;--display:block;}}} display: none;" placeholder="Company and Member #"
+        >{{{Medical.DoctorHealthFund.private.companyAndMemberId}}}</textarea>
         <div class="spacer"></div>
         [label "Medicare Number" for "medicareNumber"]
         <input type="text" id="medicareNumber" name="medicareNumber" placeholder="Medicare Number" value="{{{Medical.DoctorHealthFund.medicareNumber}}}" required />
@@ -188,7 +238,8 @@
             <input type="checkbox" class="toggle-checkbox" data-toggle="#pleaseExplainCondition" name="hasAllergies" value="true" {{{Medical.MedicalConditions.has.allergies:checked}}} /> Allergies <br />
           </div>
         </div>
-        <textarea name="pleaseExplainCondition" id="pleaseExplainCondition" style="display: none;" placeholder="Please explain">{{{Medical.MedicalConditions.has.explain}}}</textarea>
+        <textarea name="pleaseExplainCondition" id="pleaseExplainCondition" style="{{{Medical.MedicalConditions.has.explain~~display:none;--display:block;}}} display: none;" placeholder="Please explain"
+        >{{{Medical.MedicalConditions.has.explain}}}</textarea>
         <div class="field">
           <p>Has the student recieved early intervention?</p>
           <div class="fields">
@@ -202,31 +253,29 @@
     <!-- Emergency Contact Information -->
     <div class="row print-page-dedicated">
       @half
-        <div class="row">
-          <h3 class="next">
-            <span>Emergency Contact Information #1</span>
-          </h3>
-          [label "Name 1*" for "emergencyName1"]
-          <input type="text" id="emergencyName1" name="emergencyName1" placeholder="Name 1" value="{{{Emergency.0.name}}}" />
-          [label "Phone*" for "emergencyPhone1"]
-          <input type="text" id="emergencyPhone1" name="emergencyPhone1" placeholder="Phone 1" value="{{{Emergency.0.phone}}}" />
-          [label "Relationship to Student*" for "emergencyRelationship1"]
-          <input type="text" id="emergencyRelationship1" name="emergencyRelationship1" placeholder="Relationship to Student" value="{{{Emergency.0.relationship}}}" />
-        </div>
+        <h3 class="next">
+          <span>Contact 1</span>
+        </h3>
+        <div class="clear"></div>
+        [label "Name 1*" for "emergencyName1"]
+        <input type="text" id="emergencyName1" name="emergencyName1" placeholder="Name 1" value="{{{Emergency.0.name}}}" />
+        [label "Phone*" for "emergencyPhone1"]
+        <input type="text" id="emergencyPhone1" name="emergencyPhone1" placeholder="Phone 1" value="{{{Emergency.0.phone}}}" />
+        [label "Relationship to Student*" for "emergencyRelationship1"]
+        <input type="text" id="emergencyRelationship1" name="emergencyRelationship1" placeholder="Relationship to Student" value="{{{Emergency.0.relationship}}}" />
       @half-connection
-        <div class="row">
-          <h3 class="next">
-            <span>Emergency Contact Information #2</span>
-          </h3>
-          [label "Name 2*" for "emergencyName2"]
-          <input type="text" id="emergencyName2" name="emergencyName2" placeholder="Name 2" value="{{{Emergency.1.name}}}" />
-          [label "Phone*" for "emergencyPhone2"]
-          <input type="text" id="emergencyPhone2" name="emergencyPhone2" placeholder="Phone 2" value="{{{Emergency.1.phone}}}" />
-          [label "Relationship to Student*" for "emergencyRelationship2"]
-          <input type="text" id="emergencyRelationship2" name="emergencyRelationship2" placeholder="Relationship to Student" value="{{{Emergency.1.relationship}}}" />
-        </div>
+        <h3 class="next">
+          <span>Contact 2</span>
+        </h3>
+        <div class="clear"></div>
+        [label "Name 2*" for "emergencyName2"]
+        <input type="text" id="emergencyName2" name="emergencyName2" placeholder="Name 2" value="{{{Emergency.1.name}}}" />
+        [label "Phone*" for "emergencyPhone2"]
+        <input type="text" id="emergencyPhone2" name="emergencyPhone2" placeholder="Phone 2" value="{{{Emergency.1.phone}}}" />
+        [label "Relationship to Student*" for "emergencyRelationship2"]
+        <input type="text" id="emergencyRelationship2" name="emergencyRelationship2" placeholder="Relationship to Student" value="{{{Emergency.1.relationship}}}" />
       @//
     </div><!--./emergency contact info row-->
-    <input type="submit" class="remove-for-print" value="Save Student" style="margin-top: 10px;" />
+    <input type="submit" class="remove-for-print btn btn-success" value="Save Student" style="margin-top: 10px; margin-left: 5px;" />
   </form><!--./end of entire form-->
 </div><!--./end of modal body-->

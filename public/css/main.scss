@@ -1,4 +1,4 @@
-@import '../bstrap-small/bootstrap-smaller';
+@import '../bstrap-small/bootstrap-smallest';
 
 // KAS BLUE.
 $themeColor: #003f80;
@@ -6,6 +6,10 @@ $blue: $themeColor;
 // KAS GOLD.
 $secondColor: #D3A22B;
 $gold: $secondColor;
+
+.primary { color: $themeColor; }
+.secondary { color: $secondColor; }
+.bold { font-weight: bold; }
 
 body {
   font-family: 'Open Sans';
@@ -22,6 +26,7 @@ h2, h3, h4 {
   margin-top: 0;
 }
 .clear { clear: both; }
+.center { text-align: center; }
 .next { margin-top: 50px !important; }
 .nojus { text-align: left; }
 .custom-col { padding: 5px; }
@@ -30,19 +35,40 @@ h2, h3, h4 {
 .required {color: #c21f1f; font-size: 16px;}
 .padding { padding: 15px; }
 .padding-notop { padding: 0 15px 15px 15px; }
+.small-left-pad { padding-left: 5px; }
+.medium-left-pad { padding-left: 10px; }
 .change-buttons {
-  font-size: 12px;
+  font-size: 16px;
   cursor: pointer;
   .delete-student {
     color: #c21f1f;
     font-weight: bold;
   }
 }
-
+.noclick {cursor: grab; &:hover {text-decoration: none;}}
+.no-col-padding { padding-left: 0; padding-right: 0; }
+.row { margin-left: 0; margin-right: 0; }
+.modal-backdrop { display: none; }
+.rainbow {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
+}
+.space {
+  margin-right: 10px;
+}
+.darker {
+  background-color: lightgrey;
+}
+// .row [class*=col] { padding-left: 0; padding-right: 0; }
+/*strikethrough h3's*/
 
 /*
 | Header CSS.
 */
+#DynamicModal { padding: 0 !important; margin: 0 !important; }
 #header {
   background-color: white;
   border-bottom: solid $themeColor 20px;
@@ -111,13 +137,17 @@ h2, h3, h4 {
   background-color: #efefef;
   padding: 10px;
 }
+.curved {
+  border: solid silver 1px;
+  border-radius: 3px;
+}
 
 /*
 | Form design and elements inside of it.
 */
 .kasform {
   text-align: left;
-  input[type="text"], input[type="email"], input[type="number"], input[type="date"], select, textarea {
+  input[type="text"], input[type="week"], input[type="email"], input[type="number"], input[type="date"], select, textarea {
     width: 100%;
     margin: 0 0 5px 0;
     padding: 7px;
@@ -134,6 +164,9 @@ h2, h3, h4 {
       background-color: #e5e5e5;
     }
   }
+  input[type="submit"] {
+
+  }
   .field-label, .field p {
     margin: 0;
     margin-bottom: 5px;
@@ -141,6 +174,18 @@ h2, h3, h4 {
     font-weight: bold;
     font-family: 'Open Sans', Arial;
     padding-left: 5px;
+  }
+  h3 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid $themeColor;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+  }
+  h3 span {
+    background: #fff;
+    margin: 0 10px 0 20px;
+    padding: 5px;
   }
   .field {
     .fields {
@@ -157,26 +202,11 @@ h2, h3, h4 {
       background-color: #e5e5e5;
     }
   }
-  .space {
-    margin-right: 10px;
-  }
   label {
     padding-left: 4px;
     font-size: 14px;
     font-weight: bold;
     font-family: 'Open Sans', Arial;
-  }
-  h3 {
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid $themeColor;
-    line-height: 0.1em;
-    margin: 10px 0 20px;
-  }
-  h3 span {
-    background: #fff;
-    margin: 0 10px 0 20px;
-    padding: 5px;
   }
   textarea {
     resize: vertical;
@@ -241,7 +271,8 @@ h2, h3, h4 {
 .studentSelection {
   padding-left: 0;
   li {
-    margin: 5px;
+    // margin: 5px;
+    border-radius: 3px;
     background-color: #ededed;
     list-style-type: none;
     padding: 10px;
@@ -260,7 +291,7 @@ h2, h3, h4 {
   background: whitesmoke;
   padding: 10px;
   hr {
-    border-top: solid $blue 1px !important;
+    border-bottom: solid lightgrey 1px !important;
     margin-top: 10px;
     margin-bottom: 5px;
   }
@@ -272,15 +303,53 @@ h2, h3, h4 {
   }
 }
 
+.box {
+  border-radius: 3px;
+  border: solid silver 1px;
+  background-color: #ededed;
+  padding: 5px;
+}
+
 .family-preview {
-  padding: 3px;
+  margin-top: 5px;
   margin-bottom: 5px;
-  background-color: #c8c8c8;
-  .students-preview {
-    margin: 0;
-  }
+  background-color: #ededed;
+  border: solid silver 1px;
+  border-radius: 3px;
   .names {
-    background-color: lightgrey;
-    padding: 10px;
+    padding: 5px;
   }
+}
+.spaced-third {
+  width: 27.77% !important;
+  float: left;
+}
+
+// Any CSS relating to the fee table on the #fee-information
+.fee-table-container {
+  padding: 10px;
+  background-color: #ededed;
+  .fee-table {
+    width: 100% !important;
+    font-size: 14px;
+  }
+}
+
+
+.next-selector {
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
+  .btn-right {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .btn-left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  margin-top: 5px;
 }

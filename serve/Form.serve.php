@@ -9,8 +9,11 @@
     <!--Deffered documents.-->
     <link rel="stylesheet" type="text/css" href="/public/css/main.min.css" defer="defer" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans" rel="stylesheet" defer="defer" />
+    <script src="/public/js/external_modules/Shortcuts.js" defer="defer"></script>
     <script src="/public/js/external_modules/jQueryAndUI.min.js" defer="defer"></script>
+    <script src="/public/bstrap-small/bootstrap-smallest.min.js" defer="defer"></script>
     <script src="/public/js/watchers.js" defer="defer"></script>
+    <script src="/public/js/external_modules/bootbox.min.js" defer="defer"></script>
   </head>
   <body>
     <div class="container" id="content-container">
@@ -23,26 +26,24 @@
         </div>
         <div class="clear"></div>
       </div>
-      <div id="left" class="col-lg-3 col-md-3 col-sm-4 col-xs-5">
+      <div id="left" class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
         <div>
-          <h3>Enrolment Form</h3>
+          <h3>Application for Enrolment</h3>
           <ul>
-            <li style="margin-bottom: 10px;">
+            <!-- <li style="margin-bottom: 10px;">
               <a href="/print/index.php" target="_print">Print your form</a>
-            </li>
-            <li><a href="enrolment-information" class="load enrolment-information">Enrolment Information</a>
-            <li><a href="students" class="load students">Students</a></li>
-            <ol class="second NewStudentPlace">
-              {{studentSelectionList}}
-            </ol>
-            <li><a href="family-details" class="load family-details">Family Details</a></li>
-            <li><a href="fee-information" class="load fee-information">Fee Information</a></li>
-            <li><a href="gengov-information" class="load gengov-information">General/Gov. Information</a></li>
-            <li><a href="guardian-agreement" class="load guardian-agreement">Guardian Agreement</a></li>
+            </li> -->
+            <li><a class="noclick enrolment-information" onclick="event.preventDefault();">Enrolment Information</a>
+            <li><a class="noclick students" onclick="event.preventDefault();">Students</a></li>
+            <li><a class="noclick family-details" onclick="event.preventDefault();">Family Details</a></li>
+            <li><a class="noclick fee-information" onclick="event.preventDefault();">Fee Information</a></li>
+            <li><a class="noclick fee-payment" onclick="event.preventDefault();">Fee Payment</a></li>
+            <li><a class="noclick gengov-information" onclick="event.preventDefault();">General/Gov. Information</a></li>
+            <li><a class="noclick guardian-agreement" onclick="event.preventDefault();">Parent/Guardian Agreement</a></li>
           </ul>
         </div>
       </div>
-      <div id="right" class="col-lg-9 col-md-9 col-sm-8 col-xs-7">
+      <div id="right" class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
         <!--Where functions can be called to manage the dynamic modal so code
         is re-usable instead of spawning a bunch of modals.-->
         <div id="DynamicModal">

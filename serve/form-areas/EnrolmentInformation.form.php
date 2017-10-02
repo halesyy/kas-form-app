@@ -1,5 +1,9 @@
 <div class="right-container">
-  <h3>Enrolment Information for your Child</h3>
+  <h3>Enrolment Information</h3>
+  <!-- <div class="rainbow" style="padding: 50px; text-align: center; margin-top: 10px; margin-bottom: 10px;">
+    <h1 style="color: white;">WELCOME TO KAS</h1>
+  </div> -->
+  <button onclick="javascript:$.get('/logout/load.php', function(){ window.location.reload(); });">Load Session</button>
   <p>Kempsey Adventist School (KAS) is a co-educational Pre‐Kindy to Year 12 School that operates within the policies of the Board of Studies (NSW) while providing an education underpinned by Christian values and principles. KAS is owned and operated by Seventh‐day Adventist Schools (NNSW) Limited.</p>
   <p>Enrolment at KAS is open to families of all faiths and religious backgrounds who have regard for Adventist Christian faith and wish for their children to fully participate in all aspects of the school program. Fees are competitively structured to provide affordable access to private Christian education.</p>
   <p>Completion of this application form does not guarantee a position at KAS.</p>
@@ -34,4 +38,11 @@
       Enrolment positions will then be confirmed and held upon receipt of the non refundable enrolment fee deposit of $100.
     </li>
   </ol>
+</div>
+
+<div class="next-selector">
+  <div class="right">
+    <a href="students" class="load next btn btn-primary">Begin</a>
+  </div>
+  <div class="clear"></div>
 </div>

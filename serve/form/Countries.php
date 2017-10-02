@@ -1,4 +1,4 @@
-<option value="none">Country...</option>
+<option value="none">-- Select --</option>
 <option value="Afganistan">Afghanistan</option>
 <option value="Albania">Albania</option>
 <option value="Algeria">Algeria</option>

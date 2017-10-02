@@ -1,3 +1,4 @@
+<h3><span>Students</span></h3>
 <div>
   <div>
     <div>
@@ -6,8 +7,15 @@
       </ol>
     </div>
   </div>
-  <button onclick="javascript:ManageStudentModal();" class="open-modal">Add student</button>
-  <button onclick="$.get('/logout/index.php', function(body){ window.location.reload(); });">Reset Session</button>
+  <div class="next-selector">
+    <div class="left">
+      <button onclick="javascript:ManageStudentModal();" class="btn btn-primary open-modal">Add Student</button>
+    </div>
+    <div class="right">
+      <a href="enrolment-information" class="load back btn btn-primary btn-left">Back</a><a href="family-details" class="load fwd btn btn-primary btn-right">Next</a>
+    </div>
+    <div class="clear"></div>
+  </div>
   <script>
     /*Function to spawn in new modal then register
     form as a POST request & not normal form, etc...*/

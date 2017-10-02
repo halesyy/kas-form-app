@@ -1,19 +1,29 @@
+<h3><span>Family Details</span></h3>
 <div>
-  <p class="note">
-    Families work as groups that students are part of. If you're registering multiple children with different families,
-    please make multiple and register them under different families. ALSO Please finish adding all students wanting to be
-    registered before adding families. :)
-  </p>
+  <!-- <p class="note curved">
+    Make sure you have all students under family before commencing to finalizing your family.
+  </p> -->
   <div>
     <?php
       if (isset($_SESSION['form']['families'])) foreach ($_SESSION['form']['families'] as $index => $Family):
         $Family = unserialize($Family);
-        $Family->Preview();
+        $Family->PreviewBeta();
       endforeach;
     ?>
   </div>
-  <button onclick="javascript:ManageParentModal();" class="open-modal">Add family</button>
-  <button onclick="$.get('/logout/family.php', function(body){ window.location.reload(); });" class="open-modal">Reset families and students as not-assigned families</button>
+  <div class="next-selector" style="margin-top: 10px;/*5px more than default*/">
+    <div class="left">
+      <?php if (count($_SESSION['form']['families']) == 0): ?>
+        <button onclick="javascript:ManageParentModal();" class="open-modal btn btn-primary">Add family</button>
+      <?php else: ?>
+        <button onclick="window.EditFamily();" class="btn btn-primary">Edit Family</button>
+      <?php endif; ?>
+    </div>
+    <div class="right">
+      <button href="students" class="load back btn btn-primary btn-left">Back</button><button href="fee-information" class="load fwd btn btn-primary btn-right">Next</button>
+    </div>
+    <div class="clear"></div>
+  </div>
   <script>
     /*Function to spawn in new modal then register
     form as a POST request & not normal form, etc...*/

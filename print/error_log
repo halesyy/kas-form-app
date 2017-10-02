@@ -1,0 +1,2 @@
+[20-Jul-2017 05:31:31 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home2/jekoderc/public_html/t/kas-form-app/print/index.php on line 36
+[20-Jul-2017 05:31:31 America/Chicago] PHP Fatal error:  Call to a member function Get() on boolean in /home2/jekoderc/public_html/t/kas-form-app/application/modules/Sunrise.php on line 264

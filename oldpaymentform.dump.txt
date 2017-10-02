@@ -1,0 +1,126 @@
+<?php $Family = unserialize($_SESSION['form']['families'][0]); $Family->Fees(); ?>
+
+<?php if ($Family->Interval == 'yearly') echo '<h3><span>Yearly Payments</span></h3>'; ?>
+<?php if ($Family->Interval == 'termly') echo '<h3><span>Termly Payments</span></h3>'; ?>
+<?php if ($Family->Interval == 'fortnightDD') echo '<h3><span>Direct Debit Fortnightly Payments</span></h3>'; ?>
+<?php if ($Family->Interval == 'fortnightCC') echo '<h3><span>Credit Card Fortnightly Payments</span></h3>'; ?>
+<?php if ($Family->Interval == 'fortnightCL') echo '<h3><span>Centrelink Fortnightly Payments</span></h3>'; ?>
+<div class="clear"></div>
+
+<form class="kasform darker">
+
+    <?php if ($Family->Interval == 'yearly'): ?>
+      <div>
+        You have to find a way to get us $$$!!!!! YEARLY MATE.
+      </div>
+    <?php elseif ($Family->Interval == 'termly'): ?>
+      <div>
+        You have to find a way to get us $$$!!!!! TERMLY MATE.
+      </div>
+    <?php elseif ($Family->Interval == 'fortnightDD'): ?>
+      <div>
+        @half
+          [label "Banking Institution*" for "dd_banking_institute"]
+          <!--name of banking inst, account ame, bsb, account number-->
+          <input type="text" id="dd_banking_institute" name="dd_banking_institute" placeholder="Banking Institution" />
+        @half-connection
+          [label "Account Name*" for "dd_account_name"]
+          <input type="text" id="dd_account_name" name="dd_account_name" placeholder="Account Name" />
+        @third-connection
+          [label "BSB*" for "dd_bsb"]
+          <input type="text" id="dd_bsb" name="dd_bsb" placeholder="BSB" />
+        @third-connection
+          [label "Account Number*" for "dd_account_number"]
+          <input type="text" id="dd_account_number" name="dd_account_number" placeholder="Account Number" />
+        @third-connection
+          [label "Amount to be deducted per fortnight*" for "dd_to_be_deducted"]
+          <input type="text" class="master_unlock" name="dd_to_be_deducted" id="dd_to_be_deducted" placeholder="Amount" disabled="disabled" value="$<?=number_format($Family->ImportantTotals['FortnightlyPayments'], 2)?>" />
+        @//
+      </div>
+    <?php elseif ($Family->Interval == 'fortnightCC'): ?>
+      <div>
+        <!--name on card, credit card number, expiry date-->
+        @third
+          [label "Name (as appears on card)*" for "cc_name_on_card"]
+          <input type="text" id="cc_name_on_card" name="cc_name_on_card" placeholder="Name (as appears on card)" />
+        @third-connection
+          [label "Card number (no dashes or spaces)*" for "cc_credit_card_no"]
+          <input type="text" id="cc_credit_card_no" name="cc_credit_card_no" placeholder="Card number (no dashes or spaces)" />
+        @third-connection
+          [label "Amount to be deducted per fortnight*" for "cc_to_be_deducted"]
+          <input type="text" class="master_unlock" name="cc_to_be_deducted" id="cc_to_be_deducted" placeholder="Amount" disabled="disabled" value="$<?=number_format($Family->ImportantTotals['FortnightlyPayments'], 2)?>" />
+        @whole-connection
+          [label "Expiry date*" for "cc_expiry_date_month"]
+        @half-connection
+          <select name="cc_expiry_date_month">
+            <option value="1">01 - January</option>
+            <option value="2">02 - February</option>
+            <option value="3">03 - March</option>
+            <option value="4">04 - April</option>
+            <option value="5">05 - May</option>
+            <option value="6">06 - June</option>
+            <option value="7">07 - July</option>
+            <option value="8">08 - August</option>
+            <option value="9">09 - September</option>
+            <option value="10">10 - October</option>
+            <option value="11">11 - November</option>
+            <option value="12">12 - December</option>
+          </select>
+        @half-connection
+          <select name="cc_expiry_date_year">
+            <?php for ($i = date('Y'); $i <= date('Y')+10; $i++): ?>
+              <option value="<?=$i?>"><?=$i?></option>
+            <?php endfor; ?>
+          </select>
+        @//
+      </div>
+    <?php else: #fortnightCL ?>
+      <div>
+        <!--family name, given name, date of birth, centrelink reference number (FORMAT STRUCTURE)
+        from which payment do you want the deducation taken, e.g. age pension, newstart allow,
+        family tax benef or parent leave pay
+        amount to be deducted (PREPOPULATED), payment date for deduction to commerce (check box for "next date"
+        or a future payment date presented by person)-->
+        @third
+          [label "Family Name*" for "cl_family_name"]
+          <input type="text" id="cl_family_name" name="cl_family_name" placeholder="Family Name" />
+        @third-connections
+          [label "Given Name*" for "cl_given_name"]
+          <input type="text" id="cl_given_name" name="cl_given_name" placeholder="Given Name" />
+        @third-connection
+          [label "Date of Birth*" for "cl_date_of_birth"]
+          <input type="date" id="cl_date_of_birth" name="cl_date_of_birth" />
+        @whole-connection
+          [label "Centrelink Reference Number*" for "cl_refnum_first"]
+        @whole-connection
+          <input type="number" style="width: 25%;" min="100" max="999" id="cl_refnum_first" placeholder="First 3 numbers" name="cl_refnum_first" /> -
+          <input type="number" style="width: 25%;" min="100" max="999" id="cl_refnum_second" placeholder="Second 3 numbers" name="cl_refnum_second" /> -
+          <input type="number" style="width: 25%;" min="100" max="999" id="cl_refnum_third" placeholder="Third 3 numbers" name="cl_refnum_third" /> -
+          <input type="number" style="width: 10%;" min="1" max="9" id="cl_refnum_fourth" placeholder="Last" name="cl_refnum_fourth" />
+        @half-connection
+          [label "Payment Deduction From*" for "cl_deduct_from"]
+          <select name="cl_deduct_from" id="cl_deduct_from">
+            <option value="age_pension">Age Pension</option>
+            <option value="newstart_allowance">Newstart Allowance</option>
+            <option value="family_tax_benefits">Family Tax Benefits</option>
+            <option value="parent_leave_pay">Parent Leave Pay</option>
+          </select>
+        @half-connection
+          [label "Amount to be deducted per fortnight*" for "cl_to_be_deducted"]
+          <input type="text" class="master_unlock" name="cl_to_be_deducted" id="cl_to_be_deducted" placeholder="Amount" disabled="disabled" value="$<?=number_format($Family->ImportantTotals['FortnightlyPayments'], 2)?>" />
+        @whole-connection
+          [label "First payment date for deduction to commence*" for "cl_commence_checkbox"]
+        @whole-connection
+          <input type="checkbox" onclick="$('#cl_select_date').slideToggle();" id="cl_commence_checkbox" checked="checked" value="first_payment_date" title="Start deducting payments from the closest deduction time to the current date. Keep ticked if you're enrolling student into school ASAP." /> Next available payment date <br/>
+          <div id="cl_select_date" style="display: none;">
+            <hr />
+            <h4 style="color: #666;;"><span>Please pick a date for deductions to commence.</span></h4>
+            <input type="week" name="cl_payment_date_week" value="<?=date('Y-').'W'.date('W')?>" />
+            <input type="date" name="cl_payment_date" />
+          </div>
+        @//
+      </div>
+    <?php endif; ?>
+
+    <div class="clear"></div>
+</form>

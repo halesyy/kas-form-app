@@ -32,12 +32,41 @@
           <img id="header-qr-code" src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=http://www.kas-form-app.t.jekoder.com&choe=UTF-8" />
         </div>
         <hr />
-        <?php $Sunrise->Render('printable-formats/Family.printable', [], '..', [
-          'Family' => $Family
-        ]); ?>
-        <!-- <div class="students-preview">
+        <h3><span>Student Overview</span></h3>
 
-        </div> -->
+        <div class="row student-preview">
+          <?php
+            $StudentTemp = new Student;
+            $StudentTemp->PreviewBetaDisplayCols();
+            
+            foreach ($Family->Students as $index => $Student):
+              $Student = unserialize($Student);
+              $Student->PreviewBeta();
+            endforeach;
+          ?>
+        </div>
+
+        <h3 style="padding-top: 10px;"><span>Family Overview</span></h3>
+        <?php
+          $Family->PreviewBeta();
+          // Each display has PRINT-CSS that delegates each new printable-format as a new page in
+          // print, so all elements rendered under here are personal-paged.
+          foreach ($Family->Students as $index => $Student):
+            $Student = unserialize($Student);
+            $Sunrise->Render('printable-formats/Student.printable', [], '..', [
+              'Student' => $Student
+            ]);
+          endforeach;
+          // ..
+          $Sunrise->Render('printable-formats/Family.printable', [], '..', [
+            'Family' => $Family
+          ]);
+        ?>
+        <div class="print-page-dedicated">
+          <h3 style="padding-top: 10px;">Signature Page</h3>
+          <br/>
+          <hr style="border-bottom: solid lightgrey 1px;" />
+        </div>
       </div>
       <script>
         window.print();

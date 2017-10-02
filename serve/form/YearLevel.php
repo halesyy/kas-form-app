@@ -1,4 +1,6 @@
-<option value="0" {{{Personal.yearLevel::0--selected}}}>Kindergarten</option>
+<option value="none">-- Select --</option>
+<option value="-2" {{{Personal.yearLevel::Pre-Kindy--selected}}}>Pre-Kindy</option>
+<option value="-1" {{{Personal.yearLevel::Kindergarten--selected}}}>Kindergarten</option>
 <option value="1" {{{Personal.yearLevel::1--selected}}}>1</option>
 <option value="2" {{{Personal.yearLevel::2--selected}}}>2</option>
 <option value="3" {{{Personal.yearLevel::3--selected}}}>3</option>

@@ -7,7 +7,7 @@ window.ThemeColor = '#003F80';
 | Combining the Main.JS and Watchers.js file is a good
 | move.
 */
-// $(document).ready(function(){
+$(document).ready(function(){
   resizeModals();
   /*
   | Function to initialize the first load of the application
@@ -33,14 +33,18 @@ window.ThemeColor = '#003F80';
   | to the API which exact serve to find. Serve is then given
   | a response in HTML format to supply to the #right > div.
   */
-  function Load(ToServe) {
+  function Load(ToServe, direction, antidirection) {
     /*blocks re-requesting the same file again and again..*/
     if (window.currentlyLoaded === ToServe) {} else {
+      //
       window.currentlyLoaded = ToServe;
-      $.get('api/get/'+ToServe, function(body){
+      window.direction = direction;
+      window.antidirection = antidirection;
+      //
+      $.get('/api/get/'+ToServe, function(body){
         $placer = $('#right-place');
-        $placer.hide("slide", { direction: "left" }, 500, function(){
-          $placer.html(body).show("slide", { direction: "right" }, 500);
+        $placer.hide("slide", { direction: window.antidirection }, 500, function(){
+          $placer.html(body).show("slide", { direction: window.direction }, 500);
           resizeModals();
         });
       });
@@ -48,7 +52,7 @@ window.ThemeColor = '#003F80';
   }
   function LoadQuick(ToServe) {
     window.currentlyLoaded = ToServe;
-    $.get('api/get/'+ToServe, function(body){$('#right-place').html(body);resizeModals();});
+    $.get('/api/get/'+ToServe, function(body){$('#right-place').html(body);resizeModals();});
   }
 
   FirstLoad(); //#Let's go first load!
@@ -61,13 +65,18 @@ window.ThemeColor = '#003F80';
   | Also sets the color of the link to simulate the color
   | getting chosen.
   */
-  $('.load').click(function(event){
+  $(document).on('click', '.load', function(event){
     event.preventDefault();
       var $this = $(this);
       var ToServe = $this.attr('href');
-      Load(ToServe);
+      //sets the beginning animation to whatever the class is -- then reverses it after
+      if ($this.hasClass('back')) {direction = "left"; antidirection = "right";}
+      else if ($this.hasClass('fwd')) {direction = "right"; antidirection = "left";}
+      else {direction = "right"; antidirection = "left";}
+      //
+      Load(ToServe, direction, antidirection);
         $('.load').css({'color':'black', 'font-weight':'400'});
-        $this.css({'color':window.ThemeColor, 'font-weight':'bold'});
+        $('.'+ToServe).css({'color':window.ThemeColor, 'font-weight':'bold'});
       window.location.href = "#"+ToServe;
     return false;
   });
@@ -95,10 +104,10 @@ window.ThemeColor = '#003F80';
   $(document).scroll(function(event) {
     if ($(this).scrollTop() > $("#header").height()) {
       $left.css({"position":"fixed", "top":"10px"});
-      $right.addClass('col-lg-offset-3 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
+      $right.addClass('col-lg-offset-2 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
     } else {
       $left.css("position", "static");
-      $right.removeClass('col-lg-offset-3 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
+      $right.removeClass('col-lg-offset-2 col-md-offset-3 col-sm-offset-4 col-xs-offset-5');
     }
   });
 
@@ -117,7 +126,9 @@ window.ThemeColor = '#003F80';
           type: dataObject.type,
           formData: $access.serializeArray()
         }, function(body){
+          // alert(body);
           callback(body);
+          // console.log(body);
           $('.modal').fadeOut(250, function(){
             window.location.reload();
           });
@@ -143,7 +154,14 @@ window.ThemeColor = '#003F80';
 
 
 
-
+  window.EditFamily = function() {
+    window.spawnModal('Family/edit', function(){
+      $('#DynamicModalContainer').fadeIn(250);
+      window.registerForm('#FamilyForm', {type:'Family'}, function(body){
+        console.log(body);
+      });
+    });
+  }
   /*
   | Populates the dynamic form with the data from paramater.
   | Retrieves the file data and pushes to the dynamic body.
@@ -167,15 +185,31 @@ window.ThemeColor = '#003F80';
     });
   });
   $(document).on('click', '.delete-student', function(){
-    if (confirm('Are you sure you want to delete this student?')) {
-      $.post('/api/', {
-        type: 'DeleteStudent',
-        studentid: $(this).attr('data-student-id')
-      }, function(body){
-        // alert(body);
-        window.location.reload();
-      });
-    }
+    var studentid = $(this).attr('data-student-id');
+    bootbox.confirm({
+      message: "Are you sure you want to delete this student?",
+      buttons: {
+          confirm: {
+              label: 'Yes',
+              className: 'btn-success'
+          },
+          cancel: {
+              label: 'No',
+              className: 'btn-danger'
+          }
+      },
+      callback: function (result) {
+        if (result == true) {
+          $.post('/api/', {
+            type: 'DeleteStudent',
+            studentid: studentid
+          }, function(body){
+            // alert(body);
+            window.location.reload();
+          });
+        }
+      }
+    });
   });
 
 
@@ -209,6 +243,199 @@ window.ThemeColor = '#003F80';
 
 
 
+  /*
+  | Wanting us to populate the IDs on page for calculating
+  | the total student price after payment interval selected.
+  | - resets all methods for selecting.
+  | - disables ones that can't be clicked.
+  */
+  window.SetPaymentInterval = function(type) {
+    //resets payment methods. - all have .paymentType
+    $('.paymentType').prop("checked", false);
+    window.SetPaymentMethod('false');
+    // window.PaymentType = type;
+
+    //resets all payment types then manages what type was called
+    //and eliminates some payment intervals.
+    // $('.paymentType').prop("disabled", false);
+    // $('#repeatTillCancelled').prop("disabled", false);
+    // if (type == 'fortnightly') {
+    //   $('#PT_Cash').prop("disabled", true);
+    //   $('#repeatTillCancelled').prop("disabled", true);
+    //   if ($('#repeatTillCancelled').is(':checked')) {} else {
+    //     $('#repeatTillCancelled').click();
+    //   }
+    // } else if (type == 'termly' || type == 'annually') {
+    //   $('#PT_Centrelink').prop("disabled", true);
+    // }
 
 
-// });
+    //sending AJAX off to change the payment interval.
+    $.post('/api/', {
+      type: 'ChangePaymentInterval',
+      //familyMember: familyMember,
+      interval: type
+    }, function(body){
+      //alert(body);
+    });
+  }
+
+
+  /*
+  | setting payment.
+  */
+  window.SetPaymentMethod = function(familyMember, type) {
+    window.familyMember = familyMember;
+    $.post('/api/', {
+      type: 'ChangePaymentMethod',
+      familyMember: familyMember,
+      method: type
+    }, function(body){
+      // alert(body);
+    });
+    $.get('/api/get/form.'+type+'/'+familyMember, function(body){
+      // console.log(body+" "+'.'+window.familyMember+'-payment-details');
+      window.tbody = body;
+      $('.'+window.familyMember+'-payment-details > div').slideUp(250, function(){
+        $('.'+window.familyMember+'-payment-details > div').html(window.tbody).slideDown(250);
+      });
+    });
+  }
+
+
+
+
+
+  /*
+  |
+  */
+  window.SetRepeatCancel = function(familyMember) {
+    if ($('.repeatTillCancelled-'+familyMember).is(':checked'))
+      $('.AutomaticIncreaseContainer-'+familyMember).fadeIn(250);
+    else {
+      $('.AutomaticIncreaseContainer-'+familyMember).fadeOut(250);
+      $('.allowAutomaticIncreases-'+familyMember).prop("checked", false);
+    }
+
+    $.post('/api/', {
+      type:   'ChangeRepeatCancel',
+      action: $('.repeatTillCancelled-'+familyMember).is(':checked'),
+      familyMember: familyMember
+    }, function(body){
+      // alert(body);
+      // window.location.reload();
+    });
+  }
+  window.SetAutomaticIncreases = function(familyMember) {
+    $.post('/api/', {
+      type: 'ChangeAutomaticIncreases',
+      action: $('.allowAutomaticIncreases-'+familyMember).is(':checked'),
+      familyMember: familyMember
+    }, function(body){
+      // alert(body);
+      // window.location.reload();
+    });
+  }
+
+  // set if the family member will be paying at all
+  window.SetResponsibility = function(FamilyMember, ToggledObject) {
+    $.post('/api/', {
+      type: 'ChangeFamilyResponsibility',
+      familyMember: FamilyMember,
+      is: $(ToggledObject).is(':checked')
+    }, function(body){
+      console.log(body);
+    });
+
+    //doing a toggle on one of the percentage fillouts to
+    //make sure that there's the warning for newly added
+    //people that there's not a 100 percentage present.
+    window.CheckPercentageTotal();
+
+    //once done, unlock the "percentage" area for the parent
+    //just made responsible.
+    if ($(ToggledObject).is(':checked')) {
+      $('.'+FamilyMember+'-splitting-payment').slideDown(250);
+    } else {
+      $('.'+FamilyMember+'-splitting-payment').slideUp(250);
+    }
+  }
+
+
+  /*
+  | Nice fat function to pipe data into the Family
+  | object's field of MethodOfPaymentDetails.
+  */
+  window.UpdateMethodOfPaymentDetails = function(familyMember, paymentMethod, fieldName, fieldValue) {
+    $.post('/api/', {
+      type: 'UpdateMethodOfPaymentDetails',
+      familyMember: familyMember,
+      paymentMethod: paymentMethod,
+      fieldName: fieldName,
+      fieldValue: fieldValue
+    }, function(body){
+      console.log(body);
+    });
+  }
+
+  window.OtherPayingForFeesManage = function(ToggledObject) {
+    if ($(ToggledObject).is(':checked')) {
+      //ticked.
+      $('#OtherGuardianCapture').fadeIn(250);
+    } else {
+      //unticked.
+      $('#OtherGuardianCapture').fadeOut(250);
+    }
+  }
+
+  window.OtherInputsUpdate = function(ToggledObject) {
+    var Name  = $(ToggledObject).attr('name');
+    var Value = $(ToggledObject).val();
+    $.post('/api/', {
+      type: 'OtherInputsUpdate',
+      name: Name,
+      value: Value
+    }, function(body){
+      // alert(body);
+    });
+  }
+
+  //updating how much a family member contributes to the fee payment.
+  window.UpdateFamilyMemberPercentage = function(FamilyMember, ToggledObject) {
+    $.post('/api/', {
+      type: 'UpdateFamilyMemberPercentage',
+      familyMember: FamilyMember,
+      percentage: $(ToggledObject).val()
+    }, function(body){
+      console.log(body);
+      window.CheckPercentageTotal();
+    });
+  }
+  //will display that all percentages don't equate to 100.
+  window.CheckPercentageTotal = function() {
+    $.post('/api/', {
+      type: 'CheckPercentageTotal'
+    }, function(body){
+      var tbody = JSON.parse(body);
+      console.log(tbody);
+      $errorRead = $('#returnCombinationErrorMessage');
+      if (tbody.total100 == true) $errorRead.slideUp(250);
+      else $errorRead.slideDown(250);
+    });
+  }
+
+
+  /*
+  | "SUPERUSER" changing of some form elements being disabled overide.
+  */
+  shortcut.add('Ctrl+K', function(){
+    $('.master_unlock').prop("disabled", false);
+  });
+
+  $(document).on('click', '#yearLevel', function(){
+    // alert('to check!');
+  });
+
+
+
+});
