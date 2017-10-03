@@ -1,0 +1,34 @@
+
+    /*
+     * For styling any input in the entire application.
+     */
+
+
+    .formation {
+      div { // for col's that alter width.
+        padding-left:  0;
+        padding-right: 0;
+      }
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"] {
+
+        width: 100%;
+
+        border-radius: 3px;
+        border: solid lightgrey 1px;
+        padding: 5px 10px 5px 10px;
+
+        font-size: 14px;
+
+    }
+
+    .label {
+
+        color: grey;
+        font-size: 12px;
+        padding-bottom: 3px;
+
+    }

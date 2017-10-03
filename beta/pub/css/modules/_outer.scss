@@ -1,0 +1,25 @@
+$body: #ebf4f4;
+
+$blue: #003f80;
+$gold: #D3A22B;
+$blue_comfy: #517397;
+
+$green_success: #27e4bc;
+
+/*
+ * All colors, major style allocation and scss-related
+ * bootstrapping.
+ */
+
+body {
+
+    background: $body;
+
+}
+
+.no {
+
+  padding-left:  0;
+  padding-right: 0;
+
+}
