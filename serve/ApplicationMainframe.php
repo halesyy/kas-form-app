@@ -57,7 +57,7 @@
         <div class="row">
           <div id="content" class="col-12">
             <div class="row align-items-start">
-              <div id="information-snappet" class="col-lg-4 col-md-4 col-sm-4 hidden-xs-down no" style="padding-right: 15px;">
+              <div id="information-snappet" class="col-lg-4 col-md-4 col-sm-4 hidden-xs-down no">
                 <div id="welcome">
                   <div class="header-image image"></div>
                   <div class="welcome">
@@ -73,7 +73,7 @@
                     <ul>
                   </div>
                 </div>
-                <div class="left-box" style="margin-top: 15px;">
+                <div class="left-box" style="margin-top: 30px;">
                   <div class="welcome">
                     <h4>Session Dump</h2>
                     <pre style="color: white;"><?=print_r($_SESSION)?></pre>
