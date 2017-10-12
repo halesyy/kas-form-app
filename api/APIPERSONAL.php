@@ -1,12 +1,15 @@
 <?php
   class APIPERSONAL {
 
-      public function get_new_parent(Sunrise $Sunrise) {
+      public $conversion_s = ['students' => 'students', 'parent-guardians' => 'parents'];
+      public $conversion_f = ['students' => 'Students_Form', 'parent-guardians' => 'Parent_Guardians_Form'];
+
+      public function create_new_object(Sunrise $Sunrise, $type) {
         $ID   = hash('gost', rand(0, 1000000));
-        $Form = $Sunrise->Mini('Page_Pieces/Parent_Guardians_Form', '..', [
+        $Form = $Sunrise->Mini("Page_Pieces/{$this->conversion_f[$type]}", '..', [
           'id' => $ID
         ]);
-        array_push($_SESSION['parents'], [
+        array_push($_SESSION[ $this->conversion_s[$type] ], [
           'id'   => $ID,
           'data' => []
         ]);
@@ -17,10 +20,10 @@
       }
 
 
-      public function &find_parent($id, $nofind_die = false) {
-        foreach ($_SESSION['parents'] as $index => &$parent) {
-          if ($id == $parent['id']) {
-            return $parent;
+      public function &find_object($id, $nofind_die, $type) {
+        foreach ($_SESSION[ $this->conversion_s[$type] ] as $index => &$Object) {
+          if ($id == $Object['id']) {
+            return $Object;
           }
         }
         if ($nofind_die) die('Couldn\'t find ID, ending self.');

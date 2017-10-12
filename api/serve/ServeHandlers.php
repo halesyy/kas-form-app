@@ -23,44 +23,37 @@
 
   $Serve_Pieces = [
 
-      'parent-guardians-fillout' => function($Sunrise, $api) {
-        if (count($_SESSION['parents']) != 0) {
-          # returning the JSON of [{id:unique_tag, body:html}]
+      'fillout' => function($Sunrise, $api) {
+        #/api/get/fillout/{student/parent-guardians}
+        if (!in_array(Router::Fourth(), array_keys($api->conversion_s))) $api->error('Reference not in converter as key.');
+        else $type = Router::Fourth();
+
+        if (count($_SESSION[ $api->conversion_s[$type] ]) != 0) {
           $forms = [];
-          foreach ($_SESSION['parents'] as $index => $Parent) {
-            array_push($forms, [
-              'id'   => $Parent['id'],
-              'body' => $Sunrise->Mini('Page_Pieces/Parent_Guardians_Form', '..', [
-                'id' => $Parent['id'],
-                'data' => $Parent['data']
+          foreach ($_SESSION[ $api->conversion_s[$type] ] as $index => $Object) {
+            array_push($forms, [ 'id'   => $Object['id'],
+              'body' => $Sunrise->Mini("Page_Pieces/{$api->conversion_f[$type]}", '..', [
+                'id' => $Object['id'],
+                'data' => $Object['data']
               ])
             ]);
-          }
-          $api->JSON([
-            'forms' => $forms
-          ]);
-        }
-        else {
-          # creating a new form to fill out - initialization
-          $r = $api->get_new_parent($Sunrise);
-          $api->JSON([
-            'forms' => [[
-              'id' => $r['id'],
-              'body' => $r['form']
-            ]]
-          ]);
+          }//
+          $api->JSON([ 'forms' => $forms ]);
         }
 
+        else {
+          $r = $api->create_new_object($Sunrise, $type);
+          $api->JSON(['forms' => [
+            ['id' => $r['id'], 'body' => $r['form']]
+          ]]);
+        }
       },
 
+      'new' => functioN($Sunrise, $api) {
+        if (!in_array(Router::Fourth(), array_keys($api->conversion_s))) $api->error('Reference not in converter as key.');
+        else $type = Router::Fourth();
 
-
-
-
-
-
-      'new-parent' => function($Sunrise, $api) {
-        $r = $api->get_new_parent($Sunrise);
+        $r = $api->create_new_object($Sunrise, $type);
         $api->JSON([
           'forms' => [[
             'id'   => $r['id'],
@@ -68,6 +61,8 @@
           ]]
         ]);
       }
+
+
 
   ];
 

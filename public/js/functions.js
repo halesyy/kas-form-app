@@ -18,6 +18,9 @@ window.fn = {
         $('.point').removeClass('selected');
         $('.'+selected).addClass('selected');
       });
+      $(document).on('click', '.delete', function(){
+        console.log('deleting...');
+      });
       window.fn.loading.fast();
     },
 
@@ -62,13 +65,12 @@ window.fn = {
 
       window.save_timeouts[$this.attr('name')] = setTimeout(function(){
 
-          // var $this   = window.save_timeouts_inputs[]
-
           var id = $parent.attr('data-id');
           var type = $parent.attr('data-type');
 
           $.post('/api/post', {
-            type: 'save-'+type,
+            type: 'save',
+            saveto: type,
             id:   id,
             name:  $this.attr('name'),
             value: $this.val()
@@ -86,6 +88,7 @@ window.fn = {
               let body = response;
               window.$placer.fadeOut(500, function(){
                 window.$placer.html(body).fadeIn(600);
+                $('html, body').animate({scrollTop:0}, 'slow');
               });
           });
       },
@@ -101,10 +104,10 @@ window.fn = {
     new: {
       form: function(type) {
         // Type refers to Parent or Student.
-        $.get('/api/get/new-'+type, function(response){
+        $.get('/api/get/new/'+type, function(response){
             // console.log(response);
             let json = JSON.parse(response);
-            $(json.forms[0].body).hide().appendTo("#parent-guardian-container").fadeIn(1000);
+            $(json.forms[0].body).hide().appendTo("#"+type+"-container").fadeIn(1000);
 
         });
       }

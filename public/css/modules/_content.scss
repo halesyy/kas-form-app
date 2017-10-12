@@ -4,7 +4,7 @@
 
     #information-snappet {
 
-      #welcome {
+      #welcome, .left-box {
 
         background: $blue;
         color: white;
@@ -136,4 +136,10 @@
 }
 .blue {
     background: $blue !important;
+}
+
+
+.delete {
+  color: #c21f1f;
+  cursor: pointer;
 }

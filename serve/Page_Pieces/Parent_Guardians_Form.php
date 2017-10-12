@@ -1,13 +1,14 @@
-<div data-id="<?=$id?>" data-type="parent">
+<div data-id="<?=$id?>" data-type="parent-guardians">
   <div class="box row formation">
 
 
 
-    <h4 class="parent-title" style="width: 100%;">
+    <h4 class="parent-guardians-title" style="width: 100%;">
       <span id="first-name-title"><?=(isset($data['first-name']))?$data['first-name']:""?></span>
       <span id="middle-name-title"><?=(isset($data['middle-name']))?$data['middle-name']:""?></span>
       <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
 
+      <span class="delete delete-parent" title="Delete Parent / Guardian" data-type="parent" data-id="<?=$id?>" style="float: right;">x</span>
     </h4>
 
     <?php // echo "<pre style='width: 100%;'>", print_r($data) ,"</pre>" ?>

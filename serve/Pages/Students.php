@@ -2,14 +2,35 @@
   <h2 style="margin: 0;">Students</h2>
 </div>
 
+<div>
+  <div id="students-container">
+
+  </div>
+</div>
+
 <div class="box" style="margin-bottom: 30px;">
-  <!-- <button
+  <button
     type="button"
-    onclick="window.fn.new.form('parent');"
-    style="width: 100%; margin-bottom: 10px;"
+    onclick="window.location.href = '/#parent-guardians'"
+    style="float: left; margin-right: 15px;"
+    class="nice-button"
+  >BACK</button>
+  <button
+    type="button"
+    onclick="window.fn.new.form('students');"
+    style="float: left;"
     class="nice-button green"
-  >ADD ANOTHER PARENT/GUARDIAN</button> -->
-  <button onclick="window.location.href='#parent-guardians';" type="button" style="float: left;" class="nice-button">BACK</button>
-  <button onclick="window.location.href='#';" type="button" style="float: right;" class="nice-button">NEXT</button>
+  >ADD STUDENT TO FAMILY</button>
+  <button
+    onclick="window.location.href = '/#students';"
+    type="button"
+    style="float: right;"
+    class="nice-button"
+  >NEXT</button>
   <div style="clear: both;"></div>
 </div>
+
+<script>
+  /* Students.js starter to load in students.*/
+  ST_init_loadin();
+</script>

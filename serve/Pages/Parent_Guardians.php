@@ -3,13 +3,28 @@
 </div>
 
 <div>
-  <div id="parent-guardian-container">
+  <div id="parent-guardians-container">
 
   </div>
 </div>
 
 <div class="box" style="margin-bottom: 30px;">
-  <button type="button" onclick="window.fn.new.form('parent');" style="float: left;" class="nice-button green">ADD PARENT/GUARDIAN</button>
-  <button onclick="window.location.href = '/#students';" type="button" style="float: right;" class="nice-button">NEXT</button>
+  <button
+    type="button"
+    onclick="window.fn.new.form('parent-guardians');"
+    style="float: left;"
+    class="nice-button green"
+  >ADD TO FAMILY</button>
+  <button
+    onclick="window.location.href = '/#students';"
+    type="button"
+    style="float: right;"
+    class="nice-button"
+  >NEXT</button>
   <div style="clear: both;"></div>
 </div>
+
+<script>
+  /* Parent-Guardians.js starter to load in parents.*/
+  PG_init_loadin();
+</script>
