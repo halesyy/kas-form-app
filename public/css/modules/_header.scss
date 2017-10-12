@@ -1,0 +1,87 @@
+#nav-container {
+
+    /*
+     * There are a total of 7 different selectables that have to be
+     * able to be togged and changed color.
+     * Each point has to be able to enforce a name for its own point
+     * as well as be able to get connected to.
+     * Like: o-o-o-o-o-o-o (o=point, -=connection)
+     */
+
+    $nav_scale:   75;
+    $nav_scalepx: 75px;
+
+    $point_count:       5;
+    $connection_count:  4;
+
+    #nav {
+
+        margin-bottom: $nav_scalepx / 2;
+
+        .point {
+
+            width:  $nav_scalepx;
+            float: left;
+
+            .ball { // the ball that's highlighted
+                height:        $nav_scalepx / 2;
+                width:         $nav_scalepx / 2;
+                border-radius: $nav_scalepx / 2;
+                background-color: white;
+                margin:        $nav_scalepx / 4;
+                border: solid lightgrey 1px;
+
+                transition: 0.3s;
+
+                &:hover { // default hovering over button
+                    transition: 0.3s;
+                    background: whitesmoke;
+                }
+                .ball-num {
+                  cursor: default;
+                  font-size: 14px;
+                  text-align: center;
+
+                  padding-top: #{(($nav_scale / 4) - 12)}px;
+                }
+            }
+
+            .title { // displaying what the point is
+              text-align: center;
+              float: none;
+              margin-top: -20px;
+              font-size: 12px;
+            }
+
+        }
+
+        .selected { // when a .point class is selected it contains this class
+
+            animation: none !important;
+
+            .ball {
+                background: $blue_comfy;
+
+                .ball-num {
+                    color: white;
+                }
+                &:hover {
+                    background: #27e4bc;
+                }
+            }
+        }
+
+        .connection {
+
+            width:  calc( (100% - #{$point_count*$nav_scale+'px'}) /#{$connection_count} );
+            height: 1px;
+
+            float: left;
+            background: #0c5959;
+            margin-top: ($nav_scalepx - 1) / 2;
+
+        }
+
+    }
+
+}

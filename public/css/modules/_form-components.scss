@@ -1,0 +1,64 @@
+
+    /*
+     * For styling any input in the entire application.
+     */
+
+
+    .formation {
+      .col { // for col's that alter width.
+        padding-left:  0;
+        padding-right: 0;
+      }
+      margin-left: 0;
+      margin-right: 0;
+
+      margin-bottom: $spacing_between_formations;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], input[type="number"], .boxed, select {
+
+        width: 100%;
+
+        border-radius: 3px;
+        border: solid lightgrey 1px;
+        padding: 10px 13px 10px 13px;
+
+        font-size: 14px;
+        background: whitesmoke;
+
+        height: 40px;
+    }
+
+    .connected-left {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+    .connected-right {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-left: 0 !important;
+    }
+    .connected-middle {
+        border-radius: 0 !important;
+        border-left: 0 !important;
+    }
+
+    .center {
+
+        text-align: center;
+
+    }
+
+    .label {
+
+        color: grey;
+        font-size: 12px;
+        padding-bottom: 3px;
+
+    }
+
+    .checkbox-container, .radio-container {
+
+
+
+    }

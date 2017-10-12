@@ -1,5 +1,5 @@
 <?php
-  class APIOverseer {
+  class APIOverseer extends APIPERSONAL {
       /*
       | ==================================================
       | The API Overseer is the method which gets loaded
@@ -36,14 +36,8 @@
       | application/register so far.
       */
       protected function BuildFormApplicationScheme() {
-        $_SESSION['form'] = [
-          'students' => [
-
-          ],
-          'families' => [
-            
-          ]
-        ];
+        $_SESSION['parents']  = [];
+        $_SESSION['students'] = [];
       }
 
 
@@ -58,7 +52,7 @@
       | POST API for usage.
       */
       public function Trigger() {
-        if (!isset($_SESSION['form'])) $this->BuildFormApplicationScheme();
+        if (!isset($_SESSION['parents'], $_SESSION['students'])) $this->BuildFormApplicationScheme();
 
         if (Router::Second() == 'get') {
           if ( isset($this->Handlers['serve'][Router::Third()]) ) {

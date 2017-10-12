@@ -1,0 +1,183 @@
+body, html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0; }
+
+/*
+ * All colors, major style allocation and scss-related
+ * bootstrapping.
+ */
+body {
+  background: #ebf4f4; }
+
+.no {
+  padding-left: 0;
+  padding-right: 0; }
+
+#nav-container {
+  /*
+   * There are a total of 7 different selectables that have to be
+   * able to be togged and changed color.
+   * Each point has to be able to enforce a name for its own point
+   * as well as be able to get connected to.
+   * Like: o-o-o-o-o-o-o (o=point, -=connection)
+   */ }
+  #nav-container #nav {
+    margin-bottom: 37.5px; }
+    #nav-container #nav .point {
+      width: 75px;
+      float: left; }
+      #nav-container #nav .point .ball {
+        height: 37.5px;
+        width: 37.5px;
+        border-radius: 37.5px;
+        background-color: white;
+        margin: 18.75px;
+        border: solid lightgrey 1px;
+        transition: 0.3s; }
+        #nav-container #nav .point .ball:hover {
+          transition: 0.3s;
+          background: whitesmoke; }
+        #nav-container #nav .point .ball .ball-num {
+          cursor: default;
+          font-size: 14px;
+          text-align: center;
+          padding-top: 6.75px; }
+      #nav-container #nav .point .title {
+        text-align: center;
+        float: none;
+        margin-top: -20px;
+        font-size: 12px; }
+    #nav-container #nav .selected {
+      animation: none !important; }
+      #nav-container #nav .selected .ball {
+        background: #517397; }
+        #nav-container #nav .selected .ball .ball-num {
+          color: white; }
+        #nav-container #nav .selected .ball:hover {
+          background: #27e4bc; }
+    #nav-container #nav .connection {
+      width: calc( (100% - 375px) /4 );
+      height: 1px;
+      float: left;
+      background: #0c5959;
+      margin-top: 37px; }
+
+#content {
+  font-size: 14px; }
+  #content #information-snappet #welcome {
+    background: #003f80;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px; }
+    #content #information-snappet #welcome .header-image {
+      background-image: url("/public/img/header-photo.jpg");
+      height: 200px;
+      background-size: cover;
+      background-position: right;
+      border-bottom: solid black 2px;
+      width: 100%; }
+    #content #information-snappet #welcome .welcome {
+      padding: 20px;
+      font-size: 14px; }
+  #content #form-fill #placer h2 {
+    font-family: 'Proxima Nova', Arial;
+    color: #D3A22B; }
+  #content #form-fill .box {
+    border-left: solid #003f80 1px;
+    border-right: solid #003f80 1px;
+    border-top: solid #003f80 1px;
+    background: #fbfdfd;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px; }
+    #content #form-fill .box .divider {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 100%; }
+    #content #form-fill .box hr[class="divider"] {
+      margin-top: 20px !important;
+      margin-bottom: 20px !important; }
+  #content #form-fill .last, #content #form-fill .not-segmented, #content #form-fill .no-segment {
+    padding-top: 0; }
+  #content #form-fill .bigbox {
+    padding: 0 10px 10px 10px;
+    border-left: solid #D3A22B 2px;
+    margin-bottom: 20px; }
+    #content #form-fill .bigbox .title {
+      font-size: 20px;
+      padding-bottom: 3px;
+      color: #D3A22B; }
+  #content #form-fill .segment {
+    width: 100%;
+    height: 1px;
+    background: darkgrey;
+    border-left: solid #003f80 1px; }
+  #content #form-fill .invisibile-segment {
+    width: 100%;
+    border-left: solid #003f80 1px;
+    background: transparent; }
+  #content #form-fill .title {
+    border-top: solid #003f80 1px;
+    margin-bottom: 15px; }
+  #content #form-fill .parent-title {
+    font-family: 'Proxima Nova', Arial; }
+
+.nice-button {
+  font-size: 16px;
+  border: 0;
+  height: 30px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 3px;
+  background: #003f80;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px; }
+
+.green {
+  background: #2cd4b8 !important; }
+
+.blue {
+  background: #003f80 !important; }
+
+/*
+ * For styling any input in the entire application.
+ */
+.formation {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 15px; }
+  .formation .col {
+    padding-left: 0;
+    padding-right: 0; }
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], .boxed, select {
+  width: 100%;
+  border-radius: 3px;
+  border: solid lightgrey 1px;
+  padding: 10px 13px 10px 13px;
+  font-size: 14px;
+  background: whitesmoke;
+  height: 40px; }
+
+.connected-left {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important; }
+
+.connected-right {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-left: 0 !important; }
+
+.connected-middle {
+  border-radius: 0 !important;
+  border-left: 0 !important; }
+
+.center {
+  text-align: center; }
+
+.label {
+  color: grey;
+  font-size: 12px;
+  padding-bottom: 3px; }
+
+/*# sourceMappingURL=style.min.css.map */

@@ -1,0 +1,30 @@
+$body: #ebf4f4;
+
+$blue: #003f80;
+$gold: #D3A22B;
+$green: #2cd4b8;
+
+$blue_comfy: #517397;
+
+$green_success: #27e4bc;
+
+$border_pixels: 1px;
+$spacing_between_formations: 15px;
+
+/*
+ * All colors, major style allocation and scss-related
+ * bootstrapping.
+ */
+
+body {
+
+    background: $body;
+
+}
+
+.no {
+
+  padding-left:  0;
+  padding-right: 0;
+
+}

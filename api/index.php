@@ -40,6 +40,7 @@
 
     require_once "authentication/AuthenticationHandlers.php"; #//post
     require_once "serve/ServeHandlers.php"; #//get
+    require_once "APIPERSONAL.php"; #//for manager needing personal functions
     require_once "APIOverseer.php"; #//manager
 
     Router::Initialize();
