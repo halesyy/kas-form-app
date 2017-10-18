@@ -1,5 +1,7 @@
 <div class="box title">
-  <h2 style="margin: 0;">Students</h2>
+  <h2 style="margin: 0;">
+    Students
+  </h2>
 </div>
 
 <div>
@@ -15,18 +17,19 @@
     style="float: left; margin-right: 15px;"
     class="nice-button"
   >BACK</button>
-  <button
-    type="button"
-    onclick="window.fn.new.form('students');"
-    style="float: left;"
-    class="nice-button green"
-  >ADD STUDENT TO FAMILY</button>
+
   <button
     onclick="window.location.href = '/#students';"
     type="button"
     style="float: right;"
     class="nice-button"
   >NEXT</button>
+  <button
+  type="button"
+  onclick="window.fn.new.form('students');"
+  style="float: right; margin-right: 10px;"
+  class="nice-button green"
+  >ADD STUDENT TO FAMILY</button>
   <div style="clear: both;"></div>
 </div>
 

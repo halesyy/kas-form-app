@@ -11,6 +11,9 @@ $green_success: #27e4bc;
 $border_pixels: 1px;
 $spacing_between_formations: 15px;
 $spacer: 30px;
+
+
+
 /*
  * All colors, major style allocation and scss-related
  * bootstrapping.
@@ -22,9 +25,15 @@ body {
 
 }
 
+h1, h2, h3, h4, h5, h6, p, div {
+
+    font-family: 'Proxima Nova', Arial;
+
+}
+
 .no {
 
-  padding-left:  0;
-  padding-right: 0;
+    padding-left:  0;
+    padding-right: 0;
 
 }

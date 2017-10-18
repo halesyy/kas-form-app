@@ -19,7 +19,17 @@ window.fn = {
         $('.'+selected).addClass('selected');
       });
       $(document).on('click', '.delete', function(){
-        console.log('deleting...');
+        window.fn.delete( $(this).attr('data-type'), window.fn.get_parent_from_child($(this)).attr('data-id') );
+      });
+      $(document).on('click', '.open', function(){
+        let toclose = $(this).attr('data-open');
+        let $parent = window.fn.get_parent_from_child($(this));
+        $parent.find(toclose).slideDown(500);
+      });
+      $(document).on('click', '.none', function(){
+        let toclose = $(this).attr('data-close');
+        let $parent = window.fn.get_parent_from_child($(this));
+        $parent.find(toclose).slideUp(500);
       });
       window.fn.loading.fast();
     },
@@ -65,15 +75,17 @@ window.fn = {
 
       window.save_timeouts[$this.attr('name')] = setTimeout(function(){
 
-          var id = $parent.attr('data-id');
+          var id   = $parent.attr('data-id');
           var type = $parent.attr('data-type');
+          var val  = $this.val();
+          if (val == "on") val = $this.is(':checked');
 
           $.post('/api/post', {
             type: 'save',
             saveto: type,
             id:   id,
             name:  $this.attr('name'),
-            value: $this.val()
+            value: val
           }, function(response){
             console.log(response);
           });
@@ -107,12 +119,32 @@ window.fn = {
         $.get('/api/get/new/'+type, function(response){
             // console.log(response);
             let json = JSON.parse(response);
-            $(json.forms[0].body).hide().appendTo("#"+type+"-container").fadeIn(1000);
+            $new = $(json.forms[0].body).hide().appendTo("#"+type+"-container").fadeIn(1000);
+            $('html, body').animate({
+              scrollTop: $new.offset().top
+            }, 'slow');
+
 
         });
       }
-
-
+    },
+    delete: function(type, id) {
+      //type,id
+      // console.log(type);
+      // console.log(id);
+      $.post('/api/post', {
+          type: 'delete',
+          objtype: type,
+          id: id
+      }, function(response){
+          let json = JSON.parse(response);
+          if (json.success == true) {
+             $('div[data-id="'+json.id+'"]').fadeOut(750);
+             console.log("Deleted "+json.id+" successfully");
+          } else {
+             console.log(response);
+          }
+      });
     }
 
 }

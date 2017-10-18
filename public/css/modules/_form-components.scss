@@ -15,7 +15,7 @@
       margin-bottom: $spacer;
     }
 
-    input[type="text"], input[type="password"], input[type="email"], input[type="number"], .boxed, select {
+    input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="date"], .boxed, select, textarea {
 
         width: 100%;
 
@@ -28,6 +28,9 @@
 
         height: 40px;
     }
+    .boxed-no-height {
+      height: auto;
+    }
 
     .connected-left {
         border-top-right-radius: 0 !important;
@@ -37,6 +40,19 @@
         border-top-left-radius: 0 !important;
         border-bottom-left-radius: 0 !important;
         border-left: 0 !important;
+    }
+    .connected-top {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+    .connected-vertical-middle {
+      border-radius: 0 !important;
+      border-top: 0;
+    }
+    .connected-bottom {
+        border-top-right-radius: 0 !important;
+        border-top-left-radius: 0 !important;
+        border-top: 0 !important;
     }
     .connected-middle {
         border-radius: 0 !important;

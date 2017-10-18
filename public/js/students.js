@@ -9,7 +9,6 @@
 
           if (json.success == true) {
             for (var i = 0; i < json.forms.length; i++) {
-              //
               // console.log(json.forms[i]);
               $('#students-container').append(
                 json.forms[i].body

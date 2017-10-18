@@ -29,4 +29,13 @@
         if ($nofind_die) die('Couldn\'t find ID, ending self.');
       }
 
+      public function find_object_id($id, $type) {
+        foreach ($_SESSION[ $this->conversion_s[$type] ] as $index => $Object) {
+          if ($id == $Object['id']) {
+            return $index;
+          }
+        }
+        return false;
+      }
+
   }

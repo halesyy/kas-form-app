@@ -1,5 +1,7 @@
 <div class="box title">
-  <h2 style="margin: 0;">Parents and Guardians</h2>
+  <h2 style="margin: 0;">
+    Parents and Guardians
+  </h2>
 </div>
 
 <div>
@@ -10,10 +12,10 @@
 
 <div class="box" style="margin-bottom: 30px;">
   <button
-    type="button"
-    onclick="window.fn.new.form('parent-guardians');"
-    style="float: left;"
-    class="nice-button green"
+  type="button"
+  onclick="window.fn.new.form('parent-guardians');"
+  style="float: left;"
+  class="nice-button green"
   >ADD TO FAMILY</button>
   <button
     onclick="window.location.href = '/#students';"
