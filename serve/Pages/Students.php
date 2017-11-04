@@ -19,7 +19,7 @@
   >BACK</button>
 
   <button
-    onclick="window.location.href = '/#students';"
+    onclick="window.location.href = '/#fees';"
     type="button"
     style="float: right;"
     class="nice-button"

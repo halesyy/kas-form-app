@@ -29,22 +29,28 @@
         else $type = Router::Fourth();
 
         if (count($_SESSION[ $api->conversion_s[$type] ]) != 0) {
-          $forms = [];
+          $forms = []; $count = 1;
           foreach ($_SESSION[ $api->conversion_s[$type] ] as $index => $Object) {
-            array_push($forms, [ 'id'   => $Object['id'],
+            array_push($forms, [
+              'id'   => $Object['id'],
               'body' => $Sunrise->Mini("Page_Pieces/{$api->conversion_f[$type]}", '..', [
                 'id' => $Object['id'],
-                'data' => $Object['data']
+                'data' => $Object['data'],
+                'first' => ($count == 1)?true: false
               ])
             ]);
-          }//
+            $count++;
+          }
           $api->JSON([ 'forms' => $forms ]);
         }
 
         else {
           $r = $api->create_new_object($Sunrise, $type);
           $api->JSON(['forms' => [
-            ['id' => $r['id'], 'body' => $r['form']]
+            [
+              'id'   => $r['id'],
+              'body' => $r['form']
+            ]
           ]]);
         }
       },
@@ -56,8 +62,8 @@
         $r = $api->create_new_object($Sunrise, $type);
         $api->JSON([
           'forms' => [[
-            'id'   => $r['id'],
-            'body' => $r['form']
+            'id'    => $r['id'],
+            'body'  => $r['form']
           ]]
         ]);
       }

@@ -1,10 +1,4 @@
 <?php
   Router::get('/', function($Sunrise){
-
-    $Sunrise->Render('ApplicationMainframe', [
-
-
-
-    ]);
-
+      $Sunrise->Render('ApplicationMainframe', []);
   });

@@ -7,7 +7,9 @@
       <span id="middle-name-title"><?=(isset($data['middle-name']))?$data['middle-name']:""?></span>
       <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
 
-      <span class="delete delete-parent" title="Delete Parent / Guardian" data-type="parent-guardians" data-id="<?=$id?>" style="float: right;">x</span>
+      <?php if (!$first): ?>
+        <span class="delete delete-parent" title="Delete Parent / Guardian" data-type="parent-guardians" data-id="<?=$id?>" style="float: right;">x</span>
+      <?php endif; ?>
     </h4>
 
     <!---->
@@ -208,7 +210,9 @@
           />
       </div>
 
-      <span class="small">By completing this form, we assume that you live in <strong>Australia</strong>, <strong>New South Wales</strong>.</span>
+      <!-- <span class="small">By completing this form, we assume that you live in <strong>Australia</strong>, <strong>New South Wales</strong>.</span> -->
+
+      
 
   </div>
 </div>

@@ -1,0 +1,19 @@
+need to add:
+
+  student
+
+
+
+
+  INPUT TEXT
+    <input
+      type="text"
+      name="NAMEOFINPUT"
+      onkeyup="window.fn.save_handler(this);"
+      value="<?=(isset($data['NAMEOFINPUT']))?$data['NAMEOFINPUT']:"";?>"
+    />
+
+    <hr class="divider" />
+    <h4 style="width: 100%;">Medical Background</h4>
+
+    <div class="col-12"><span class="label">COMPANY AND MEMBER #:</span></div>

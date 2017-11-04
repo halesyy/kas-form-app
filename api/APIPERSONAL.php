@@ -7,7 +7,8 @@
       public function create_new_object(Sunrise $Sunrise, $type) {
         $ID   = hash('gost', rand(0, 1000000));
         $Form = $Sunrise->Mini("Page_Pieces/{$this->conversion_f[$type]}", '..', [
-          'id' => $ID
+          'id' => $ID,
+          'first' => false
         ]);
         array_push($_SESSION[ $this->conversion_s[$type] ], [
           'id'   => $ID,

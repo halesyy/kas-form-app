@@ -6,7 +6,9 @@
         <span id="middle-name-title"><?=(isset($data['middle-name']))?$data['middle-name']:""?></span>
         <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
 
-        <span class="delete delete-parent" title="Delete Student" data-type="students" data-id="<?=$id?>" style="float: right;">x</span>
+        <?php if (!$first): ?>
+          <span class="delete delete-parent" title="Delete Student" data-type="students" data-id="<?=$id?>" style="float: right;">x</span>
+        <?php endif; ?>
       </h4>
 
 
@@ -76,11 +78,15 @@
           <select
             name="year-level"
             class="connected-right"
-            onchange="window.fn.save_handler(this);"
+            onchange=
+              "window.fn.save_handler(this); if (this.value == -1) {$('#pre-kindy-enrolment-<?=$id?>').slideDown(500);}else{$('#pre-kindy-enrolment-<?=$id?>').slideUp(500);}"
           >
               <option value="none">-- Select --</option>
 
-              <option value="-1" <?=(isset($data['year-level']) && $data['year-level'] == -1)? "selected='selected'":"";?>>Pre-kindy</option>
+              <option
+                value="-1"
+                <?=(isset($data['year-level']) && $data['year-level'] == -1)? "selected='selected'":"";?>
+              >Pre-kindy</option>
               <option value="0" <?=(isset($data['year-level']) && $data['year-level'] == 0)? "selected='selected'":"";?>>Kindergarten</option>
               <option value="1" <?=(isset($data['year-level']) && $data['year-level'] == 1)? "selected='selected'":"";?>>Year 1</option>
               <option value="2" <?=(isset($data['year-level']) && $data['year-level'] == 2)? "selected='selected'":"";?>>Year 2</option>
@@ -96,6 +102,92 @@
               <option value="12" <?=(isset($data['year-level']) && $data['year-level'] == 12)? "selected='selected'":"";?>>Year 12</option>
           </select>
       </div>
+
+
+      <div id="pre-kindy-enrolment-<?=$id?>" style="display: <?=(isset($data['year-level']) && $data['year-level'] == -1)?'block':'none';?>;">
+
+        <hr class="divider" />
+        <h4 style="width: 100%;">Pre-Kindy Enrolment</h4>
+        <p>All children enrolled at Pre-Kindy must be eligible to commence Kindergarten at KAS in the following school year, that is, turning 5 by 31 March in their Kindergarten year.</p>
+        <p>Please pick <strong>5 or more</strong> preferred pre-kindy days. (Pre-kindy is only available to those enroling for Kindergarten at KAS the following year.)</p>
+
+        <div class="row highlight-1" style="margin-left: 0; margin-right: 0;">
+
+          <div class="col-12"><h2>Week 1</h2></div>
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-1-1"
+            <?=(isset($data['pk-1-1']) && $data['pk-1-1'] == true)?"checked='checked'":'';?>
+          /> Monday</div>
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-1-2"
+            <?=(isset($data['pk-1-2']) && $data['pk-1-2'] == true)?"checked='checked'":'';?>
+          /> Tuesday</div>
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-1-3"
+            <?=(isset($data['pk-1-3']) && $data['pk-1-3'] == true)?"checked='checked'":'';?>
+          /> Wednesday</div>
+
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-1-4"
+            <?=(isset($data['pk-1-4']) && $data['pk-1-4'] == true)?"checked='checked'":'';?>
+          /> Thursday</div>
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-1-5"
+            <?=(isset($data['pk-1-5']) && $data['pk-1-5'] == true)?"checked='checked'":'';?>
+          /> Friday</div>
+
+        </div>
+        <div class="row highlight-2 " style="margin-left: 0; margin-right: 0;">
+
+          <div class="col-12"><h2>Week 2</h2></div>
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-2-1"
+            <?=(isset($data['pk-2-1']) && $data['pk-2-1'] == true)?"checked='checked'":'';?>
+          /> Monday</div>
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-2-2"
+            <?=(isset($data['pk-2-2']) && $data['pk-2-2'] == true)?"checked='checked'":'';?>
+          /> Tuesday</div>
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-2-3"
+            <?=(isset($data['pk-2-3']) && $data['pk-2-3'] == true)?"checked='checked'":'';?>
+          /> Wednesday</div>
+
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-2-4"
+            <?=(isset($data['pk-2-4']) && $data['pk-2-4'] == true)?"checked='checked'":'';?>
+          /> Thursday</div>
+          <div class="col-4"><input
+            type="checkbox"
+            onclick="window.fn.save_handler(this);"
+            name="pk-2-5"
+            <?=(isset($data['pk-2-5']) && $data['pk-2-5'] == true)?"checked='checked'":'';?>
+          /> Friday</div>
+
+        </div>
+
+
+      </div>
+
+
 
 
 
@@ -129,7 +221,7 @@
                       value="true"
                       onclick="window.fn.save_handler(this);"
                       <?=(isset($data['suspended-expelled']) && $data['suspended-expelled'] == "true")?"checked":""?>
-                    /> <label for="suspended-expelled-yes">Yes</label>
+                    /> <label data-ref-for="suspended-expelled-yes">Yes</label>
                     <input
                       id="suspended-expelled-no"
                       type="radio"
@@ -140,7 +232,7 @@
                       data-close="#suspended-expelled-info"
                       onclick="window.fn.save_handler(this);"
                       <?=(isset($data['suspended-expelled']) && $data['suspended-expelled'] == "false")?"checked":""?>
-                    /> <label for="suspended-expelled-no">No</label>
+                    /> <label data-ref-for="suspended-expelled-no">No</label>
 
                 </div>
             </div>
@@ -171,36 +263,59 @@
                 name="has-health-fund"
                 style="margin-left: 10px;"
                 value="true"
-                data-open="#has-health-fund-info"
+                data-open="#has-health-fund-info-<?=$id?>"
                 onclick="window.fn.save_handler(this);"
                 <?=(isset($data['has-health-fund']) && $data['has-health-fund'] == "true")?"checked":""?>
-              /> <label for="has-health-fund-yes">Yes</label>
+              /> <label data-ref-for="has-health-fund-yes">Yes</label>
               <input
                 id="has-health-fund-no"
                 type="radio"
                 class="none"
                 name="has-health-fund"
                 style="margin-left: 10px;"
-                value="true"
-                data-close="#has-health-fund-info"
+                value="false"
+                data-close="#has-health-fund-info-<?=$id?>"
                 onclick="window.fn.save_handler(this);"
                 <?=(isset($data['has-health-fund']) && $data['has-health-fund'] == "false")?"checked":""?>
-              /> <label for="has-health-fund-no">No</label>
+              /> <label data-ref-for="has-health-fund-no">No</label>
             </div>
 
-            <div id="has-health-fund-info" style="width: 100%; margin-top: 10px; display: <?=(isset($data['has-health-fund']) && $data['has-health-fund'] == "true")?"block":"none"?>;">
-              <div class="col-12">
-                  <span class="label">COMPANY AND MEMBER #:</span>
-              </div>
+            <div id="has-health-fund-info-<?=$id?>" style="width: 100%; margin-top: 10px; display: <?=(isset($data['has-health-fund']) && $data['has-health-fund'] == "true")?"block":"none"?>;">
+                  <div class="col-12"><span class="label">COMPANY AND MEMBER #:</span></div>
 
-              <div class="col-12 col">
-                  <textarea
-                    name="has-health-fund-info"
-                    class="boxed-no-height"
-                    onkeyup="window.fn.save_handler(this);"
-                    placeholder="* Please give information about reasons behind suspension, expulsion or deinal to another school..."
-                  ><?=(isset($data['has-health-fund-info']))?$data['has-health-fund-info']:"";?></textarea>
-              </div>
+                  <div class="col-12 col">
+                      <textarea
+                        name="has-health-fund-info"
+                        class="boxed-no-height"
+                        onkeyup="window.fn.save_handler(this);"
+                        placeholder="* Please supply company and member ID..."
+                      ><?=(isset($data['has-health-fund-info']))?$data['has-health-fund-info']:"";?></textarea>
+                  </div>
+
+                  <div class="row" style="margin-left: 0; margin-right: 0;">
+                      <div class="col-6"><span class="label">MEDICARE NUMBER:</span></div>
+                      <div class="col-6"><span class="label">MEDICARE EXPIRY:</span></div>
+
+
+                      <div class="col-6 col">
+                        <input
+                          type="text"
+                          class="connected-left"
+                          name="medicare-number"
+                          onkeyup="window.fn.save_handler(this);"
+                          value="<?=(isset($data['medicare-number']))?$data['medicare-number']:"";?>"
+                        />
+                      </div>
+                      <div class="col-6 col">
+                          <input
+                            type="text"
+                            class="connected-right"
+                            name="medicare-expiry"
+                            onkeyup="window.fn.save_handler(this);"
+                            value="<?=(isset($data['medicare-expiry']))?$data['medicare-expiry']:"";?>"
+                          />
+                      </div>
+                  </div>
             </div>
 
 
@@ -237,7 +352,7 @@
                 value="true"
                 onclick="window.fn.save_handler(this);"
                 <?=(isset($data['immunised']) && $data['immunised'] == "true")?"checked":""?>
-              /> <label for="immunised-yes" style="margin-right: 10px;">Yes</label>
+              /> <label data-ref-for="immunised-yes" style="margin-right: 10px;">Yes</label>
               <input
                 id="immunised-no"
                 type="radio"
@@ -245,7 +360,7 @@
                 value="false"
                 onclick="window.fn.save_handler(this);"
                 <?=(isset($data['immunised']) && $data['immunised'] == "false")?"checked":""?>
-              /> <label for="immunised-no">No</label>
+              /> <label data-ref-for="immunised-no">No</label>
             </div>
 
             <div style="margin-top: 10px;"></div>
@@ -257,14 +372,14 @@
                 name="glasses"
                 onclick="window.fn.save_handler(this);"
                 <?=(isset($data['glasses']) && $data['glasses'] == "true")?"checked":""?>
-              /> <label for="glasses" style="margin-right: 10px;">Glasses</label>
+              /> <label data-ref-for="glasses" style="margin-right: 10px;">Glasses</label>
               <input
                 id="contacts"
                 type="checkbox"
                 name="contacts"
                 onclick="window.fn.save_handler(this);"
                 <?=(isset($data['contacts']) && $data['contacts'] == "true")?"checked":""?>
-              /> <label for="contacts">Contacts</label>
+              /> <label data-ref-for="contacts">Contacts</label>
             </div>
 
 
@@ -279,33 +394,33 @@
                     <input id="asthma" type="checkbox" name="asthma" onclick="window.fn.save_handler(this);"
                     <?=(isset($data['asthma']) && $data['asthma'] == "true")?"checked":""?>
                     />
-                    <label for="asthma">Asthma</label> <br/>
+                    <label data-ref-for="asthma">Asthma</label> <br/>
 
                     <input id="diabetes" type="checkbox" name="diabetes" onclick="window.fn.save_handler(this);"
                     <?=(isset($data['diabetes']) && $data['diabetes'] == "true")?"checked":""?>
                     />
-                    <label for="diabetes">Diabetes</label> <br/>
+                    <label data-ref-for="diabetes">Diabetes</label> <br/>
 
                     <input id="allergies" type="checkbox" name="allergies" onclick="window.fn.save_handler(this);"
                     <?=(isset($data['allergies']) && $data['allergies'] == "true")?"checked":""?>
                     />
-                    <label for="allergies">Allergies</label> <br/>
+                    <label data-ref-for="allergies">Allergies</label> <br/>
                 </div>
                 <div class="col-6 col">
                     <input id="adhd" type="checkbox" name="adhd" onclick="window.fn.save_handler(this);"
                     <?=(isset($data['adhd']) && $data['adhd'] == "true")?"checked":""?>
                     />
-                    <label for="adhd">ADHD</label> <br/>
+                    <label data-ref-for="adhd">ADHD</label> <br/>
 
                     <input id="adhd" type="checkbox" name="epilepsy" onclick="window.fn.save_handler(this);"
                     <?=(isset($data['epilepsy']) && $data['epilepsy'] == "true")?"checked":""?>
                     />
-                    <label for="epilepsy">Epilepsy</label> <br/>
+                    <label data-ref-for="epilepsy">Epilepsy</label> <br/>
 
                     <input id="allergies" type="checkbox" name="allergies" onclick="window.fn.save_handler(this);"
                     <?=(isset($data['allergies']) && $data['allergies'] == "true")?"checked":""?>
                     />
-                    <label for="allergies">Allergies</label> <br/>
+                    <label data-ref-for="allergies">Allergies</label> <br/>
                 </div>
               </div>
 
@@ -323,12 +438,12 @@
                 <input id="early-intervention-yes" type="radio" name="early-intervention" onclick="window.fn.save_handler(this);" value="true"
                   <?=(isset($data['early-intervention']) && $data['early-intervention'] == "true")?"checked":""?>
                 />
-                <label for="early-intervention-yes" style="margin-right: 10px;">Yes</label>
+                <label data-ref-for="early-intervention-yes" style="margin-right: 10px;">Yes</label>
 
                 <input id="early-intervention-no" type="radio" name="early-intervention" onclick="window.fn.save_handler(this);" value="false"
                   <?=(isset($data['early-intervention']) && $data['early-intervention'] == "false")?"checked":""?>
                 />
-                <label for="early-intervention-no">No</label> <br/>
+                <label data-ref-for="early-intervention-no">No</label> <br/>
             </div>
 
 
