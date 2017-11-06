@@ -17,6 +17,14 @@
 
           ], '..');
 
+      },
+
+      'fees' => function($Sunrise) {
+
+          print $Sunrise->Mini('Pages/Fees', '..', [
+            'MoneyBags' => new MoneyBags($_SESSION['students'])
+          ]);
+
       }
 
   ];

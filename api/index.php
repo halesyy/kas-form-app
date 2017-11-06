@@ -25,11 +25,14 @@
   */
 
     require_once "../application/modules/_App.php";
+    require_once "../application/modules/_SP_Manipulation.php";
+    require_once "../application/modules/MoneyBags.php";
     require_once "../application/modules/PSM.php";
     require_once "../application/modules/Sunrise.php";
     require_once "../application/modules/Router.php";
     require_once "../application/modules/Student.php";
     require_once "../application/modules/Family.php";
+
 
   /*
   | Loading in API modules:

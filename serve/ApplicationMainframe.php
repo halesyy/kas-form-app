@@ -35,17 +35,17 @@
             <div class="title">Students</div>
           </div>
           <div class="connection"></div>
-          <div class="point">
+          <div class="point fees">
             <div class="ball"><div class="ball-num">3</div></div>
             <div class="title">Fees</div>
           </div>
           <div class="connection"></div>
-          <div class="point">
+          <div class="point government-information">
             <div class="ball"><div class="ball-num">4</div></div>
             <div class="title">Government Information</div>
           </div>
           <div class="connection"></div>
-          <div class="point">
+          <div class="point caregiver-agreement">
             <div class="ball"><div class="ball-num">5</div></div>
             <div class="title">Caregiver Agreement</div>
           </div>
