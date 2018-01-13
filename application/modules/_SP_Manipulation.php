@@ -36,14 +36,24 @@
 
           foreach ($this->studs as $index => $student) {
 
-            print $Sunrise->Mini('Page_Pieces/Student_Fee_Cost', '..', [
-              'id' => $student['id'],
-              'year_level' => $student['year-level'],
-              'name' => $student['name']
-            ]);
+            print $Sunrise->Mini('Page_Pieces/Student_Fee_Cost', '..',
+              $student
+            );
 
           }
         }
+
+
+        public function AgeCalculator($DOB) {
+
+            $Date = new DateTime($DOB);
+            $Now  = new DateTime();
+            $Interval = $Now->diff($Date);
+
+            return $Interval->y;
+
+        }
+
 
 
     }

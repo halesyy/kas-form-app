@@ -38,6 +38,8 @@
       protected function BuildFormApplicationScheme() {
         $_SESSION['parents']  = [];
         $_SESSION['students'] = [];
+        $_SESSION['government-information'] = [];
+        $_SESSION['parent-agreement'] = [];
       }
 
 

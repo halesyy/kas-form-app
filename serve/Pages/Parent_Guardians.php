@@ -16,13 +16,13 @@
   onclick="window.fn.new.form('parent-guardians');"
   style="float: left;"
   class="nice-button green"
-  >ADD TO FAMILY</button>
+  >ADD PARENT/GUARDIAN</button>
   <button
     onclick="window.location.href = '/#students';"
     type="button"
     style="float: right;"
     class="nice-button"
-  >NEXT</button>
+  >STUDENTS</button>
   <div style="clear: both;"></div>
 </div>
 

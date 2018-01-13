@@ -19,11 +19,36 @@
 
       },
 
+      'worker-group-numbers' => function($Sunrise) {
+
+        $Sunrise->Render('Pages/WorkerGroupNumbers', [
+
+        ], '..');
+
+      },
+
       'fees' => function($Sunrise) {
 
-          print $Sunrise->Mini('Pages/Fees', '..', [
-            'MoneyBags' => new MoneyBags($_SESSION['students'])
-          ]);
+            print $Sunrise->Mini('Pages/Fees', '..', [
+              'MoneyBags' => new MoneyBags($_SESSION['students'])
+            ]);
+
+
+      },
+
+      'government-information' => function($Sunrise) {
+
+        print $Sunrise->Mini('Pages/GovernmentInformation', '..', [
+
+        ]);
+
+      },
+
+      'caregiver-agreement' => function($Sunrise) {
+
+        print $Sunrise->Mini('Pages/CaregiverAgreement', '..', [
+
+        ]);
 
       }
 

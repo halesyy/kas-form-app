@@ -4,11 +4,11 @@
      */
 
 
+     .col { // for col's that alter width.
+       padding-left:  0;
+       padding-right: 0;
+     }
     .formation {
-      .col { // for col's that alter width.
-        padding-left:  0;
-        padding-right: 0;
-      }
       margin-left: 0;
       margin-right: 0;
 
@@ -112,4 +112,13 @@
         font-size: 30px;
         font-weight: bold;
         color: $blue;
+    }
+    .r {
+      text-align: right;
+    }
+
+    h4 {
+      small {
+        color: $gold;
+      }
     }

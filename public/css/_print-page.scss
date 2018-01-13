@@ -1,0 +1,35 @@
+/*
+ * All styling that directly changes
+ * the colors or styling of the printable
+ * page.
+ */
+
+   // KAS BLUE.
+   $themeColor: #003f80;
+   $blue: $themeColor;
+   // KAS GOLD.
+   $secondColor: #D3A22B;
+   $gold: $secondColor;
+
+   .gold {
+     color: $gold !important;
+   }
+   .blue {
+     color: $blue !important;
+   }
+
+   .box {
+     background: lighten(whitesmoke, 1%);
+     border-top: solid $blue 1px;
+     border-left: solid $blue 1px;
+     border-right: solid $blue 1px;
+
+     padding: 10px;
+     margin-top: 10px;
+   }
+
+   .page-title {
+     font-size: 40px;
+     margin: 0;
+     margin-bottom: 20px;
+   }

@@ -26,6 +26,22 @@
             ]);
           }
 
+      },
+
+      /*dc = data collection*/
+      'save-dc' => function($Sunrise, $api) {
+
+          $post   = (Object) $_POST;
+          $saveto = $post->saveto;
+
+          $safe = ['government-information', 'parent-agreement'];
+
+          if (!isset($post->name, $post->value) || empty($post->name)) $api->Error('Oops, we didn\'t recieve all the correct data...');
+          if (!in_array($saveto, $safe)) $api->error('UNSAFE');
+          if (!isset($_SESSION[$saveto])) $_SESSION[$saveto] = [];
+
+          $_SESSION[$saveto][$post->name] = $post->value;
+
       }
 
   ];

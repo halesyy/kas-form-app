@@ -1,4 +1,5 @@
 @media print {
+  @import 'print-page';
   /*basic laws that need to be in place when printing useful data.
   if coders don't use laws when printing, are they really coders? ;)*/
   h2, h3 {
@@ -41,7 +42,7 @@
   .space { margin-right: 20px; padding-right: 20px; }
   /*re-styling bootstrap columns and stuff to add better representation
   and compression for printing.*/
-  .spaced-third, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10 {
+  .spaced-third, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10 {
     font-size: 16px;
     float: left;
     margin-bottom: 3px;
@@ -52,40 +53,40 @@
   .col-left-1 {
     margin-left: 8.33% !important;
   }
-  .col-lg-1 {
+  .col-1 {
     width: 8.33% !important;
   }
-  .col-lg-2 {
+  .col-2 {
     width: 16.66% !important;
   }
-  .col-lg-3 {
+  .col-3 {
     width: 25.00% !important;
   }
-  .col-lg-4 {
+  .col-4 {
     width: 33.33% !important;
   }
-  .col-lg-5 {
+  .col-5 {
     width: 41.66% !important;
   }
-  .col-lg-6 {
+  .col-6 {
     width: 50.00% !important;
   }
-  .col-lg-7 {
+  .col-7 {
     width: 58.33% !important;
   }
-  .col-lg-8 {
+  .col-8 {
     width: 66.66% !important;
   }
-  .col-lg-9 {
+  .col-9 {
     width: 75% !important;
   }
-  .col-lg-10 {
+  .col-10 {
     width: 83.33% !important;
   }
   .remove-for-print {
     display: none;
   }
-  .print-page-dedicated, .printable-student, .printable-family {
+  .dedicated {
     margin-top: 5px;
     page-break-before: always;
   }
@@ -101,6 +102,10 @@
   }
   hr {
     border-bottom: solid lightgrey 1px;
+  }
+  .box {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
   }
 }
 

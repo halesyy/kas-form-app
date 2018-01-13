@@ -11,22 +11,94 @@
   </p>
 </div>
 
-
-
-
-<?php /*Financial error! Let's show them.*/ if (!$MoneyBags->no_error()): ?>
-  <div class="box" style="margin-bottom: 30px;">
-    <?php $MoneyBags->error() ?>
-  </div>
-<?php /*No financial errors, print out the financial data!*/ else:
-    $MoneyBags->Cycle_StudentFeeCost_Containers($this/*Sunrise*/);
-    endif;
-?>
 <div>
-  <div id="">
+  <div class="box" id="students-fees" style="margin-bottom: 30px;">
+      <?php /*Financial error! Let's show them.*/ if (!$MoneyBags->no_error()): ?>
+          <div class="box" style="margin-bottom: 30px;">
+            <?php $MoneyBags->error() ?>
+          </div>
+      <?php /*No financial errors, print out the financial data!*/ else:
+          $MoneyBags->Cycle_StudentFeeCost_Containers($this/*Sunrise*/);
+          endif;
+      ?>
+      <div>
+        <div id="analysis">
+
+
+
+          <div class="row" style="margin-left: 0; margin-right: 0; font-size: 15px;">
+
+              <div class="col-9 col">
+                Building Levy
+              </div>
+              <div class="col-3 col">
+                <span>
+                  $<?= number_format($MoneyBags->building_levy) ?>
+                </span>
+              </div>
+              <div class="col-9 col">
+                Total termed cost
+              </div>
+              <div class="col-3 col">
+                <span title="Total cost of enrolling students before discounts. Termed amount included (<?=number_format($MoneyBags->terms_remaining, 2, '.', '')?> term(s) remaining, only pay for them.)">
+                  $<?= number_format($MoneyBags->base_termed_costings()) ?>
+                </span>
+              </div>
+              <div style="margin-bottom: 40px;"></div>
+
+              <div class="col-9 col">
+                Family Discount
+              </div>
+              <div class="col-3 col">
+                <span title="Discount for having more than one student under enrollment.">
+                  $(<?=number_format($MoneyBags->family_discount())?>)
+                </span>
+              </div>
+              <!-- <div class="col-9 col">
+                Prompt Payment Discount
+              </div>
+              <div class="col-3 col">
+
+              </div> -->
+              <div style="margin-bottom: 40px;"></div>
+
+              <div class="col-9 col" style="font-weight: bold;">
+                Total after discounts
+              </div>
+              <div class="col-3 col" style="font-weight: bold;">
+                <span>
+                  $<?= number_format($MoneyBags->termed_total_after_discounts()) ?>
+                </span>
+              </div>
+              <!-- <div class="col-9 col" style="font-weight: bold;">
+                Total fortnightly payment
+              </div>
+              <div class="col-3 col" style="font-weight: bold;">
+                <span>
+                  $<?= number_format($MoneyBags->termed_total_after_discounts() / 46) ?>
+                </span>
+              </div> -->
+
+          </div>
+
+      </div>
 
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="box" style="margin-bottom: 30px;">
   <button
@@ -34,14 +106,14 @@
     onclick="window.location.href = '/#students'"
     style="float: left; margin-right: 15px;"
     class="nice-button"
-  >BACK</button>
+  >STUDENTS</button>
 
   <button
     onclick="window.location.href = '/#government-information';"
     type="button"
     style="float: right;"
     class="nice-button"
-  >NEXT</button>
+  >GOVERNMENT INFO</button>
   <!-- <button
   type="button"
   onclick="window.fn.new.form('students');"
