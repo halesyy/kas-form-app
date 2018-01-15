@@ -83,6 +83,9 @@
   .col-10 {
     width: 83.33% !important;
   }
+  .col-12 {
+    width: 100% !important;
+  }
   .remove-for-print {
     display: none;
   }
@@ -103,10 +106,12 @@
   hr {
     border-bottom: solid lightgrey 1px;
   }
-  .box {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+
+  @page {
+    size:   auto; /* auto is the initial value */
+    margin: 7.5mm;  /* this affects the margin in the printer settings */
   }
+
 }
 
 @media print and (color) {

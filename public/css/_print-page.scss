@@ -20,16 +20,23 @@
 
    .box {
      background: lighten(whitesmoke, 1%);
-     border-top: solid $blue 1px;
-     border-left: solid $blue 1px;
-     border-right: solid $blue 1px;
-
-     padding: 10px;
-     margin-top: 10px;
+     //  border-top: solid $blue 1px;
+     //  border-left: solid $blue 1px;
+     //  border-right: solid $blue 1px;
+     //  border-bottom: solid $blue 1px;
+     // border-bottom: solid $blue 1px;
+     padding: 10px !important;
    }
 
    .page-title {
      font-size: 40px;
      margin: 0;
      margin-bottom: 20px;
+   }
+
+   .students-wrapper, .wrapper, .guardians-wrapper, .end-total {
+     border: solid $blue 1px;
+     border-radius: 4px;
+     background: whitesmoke;
+     padding: 1px;
    }

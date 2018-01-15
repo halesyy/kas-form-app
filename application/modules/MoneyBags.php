@@ -26,6 +26,8 @@
            * forth.
            */
 
+          // Collections are the total of all the students
+          // data combined.
           public $stud_tuition_collection = [];
           public $stud_compulsory_collection = [];
           public $stud_subject_collection = [];
