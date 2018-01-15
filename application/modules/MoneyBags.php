@@ -6,13 +6,14 @@
          * NOTE named after Mr Money Mustache.
          * MoneyBags is a class devoted to precise
          * fee calculation for the Enrolment App suite.
+         * Lots of love to Sir MoneyBags for the beautiful
+         * mathematics!
          */
 
         // ****************************************************
 
           public $errors = [];
           public $studs; //[id=>ID,data=>[year-level=>YEAR-LEVEL]]
-
 
         // ****************************************************
 
@@ -301,7 +302,6 @@
         public function family_discount() {
             $tuition = $this->stud_tuition_collection;
             rsort($tuition);
-
             // echo "<pre>", print_r($tuition) ,"</pre>";
 
             /*iterating on the values to sort into correct multiplying range*/
