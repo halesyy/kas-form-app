@@ -417,10 +417,10 @@
                     />
                     <label data-ref-for="epilepsy">Epilepsy</label> <br/>
 
-                    <input id="allergies" type="checkbox" name="allergies" onclick="window.fn.save_handler(this);"
-                    <?=(isset($data['allergies']) && $data['allergies'] == "true")?"checked":""?>
+                    <input id="autism" type="checkbox" name="autism" onclick="window.fn.save_handler(this);"
+                    <?=(isset($data['autism']) && $data['autism'] == "true")?"checked":""?>
                     />
-                    <label data-ref-for="allergies">Allergies</label> <br/>
+                    <label data-ref-for="autism">Autism</label> <br/>
                 </div>
               </div>
 

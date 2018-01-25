@@ -62,6 +62,7 @@
           <?php endforeach; ?>
         </div>
 
+        <hr />
 
         <div class="guardians-wrapper" style="margin-top: 10px;">
           <?php foreach ($_SESSION['parents'] as $parent): $data = $parent['data']; ?>
@@ -79,7 +80,7 @@
                     <strong>Contact</strong>
                   </div>
                   <div class="col-3 center">
-                    <?=(isset($data['phone-number']))?$data['phone-number']:"N/A"?> (<?=(isset($data['allow-sms']) && $data['allow-sms'] == 'yes')?"YES":"NO"?> SMS)
+                    <?=(isset($data['phone-number']))?$data['phone-number']:"N/A"?> <!--(<?=(isset($data['allow-sms']) && $data['allow-sms'] == 'yes')?"YES":"NO"?> SMS)-->
                   </div>
                   <div class="col-3">
                     <strong>Relationship</strong>
@@ -244,10 +245,77 @@
                 <div class="col-6">
                   <?=$data['doctors-name']?>
                 </div>
+                <div class="col-6">
+                  <strong>Doctor's Phone</strong>
+                </div>
+                <div class="col-6">
+                  <?=$data['doctors-phone']?>
+                </div>
+                <div class="col-6">
+                  <strong>Immunised</strong>
+                </div>
+                <div class="col-6">
+                  <?=($data['immunised'] === true)?"Yes":"No"?>
+                </div>
+                <div class="col-6">
+                  <strong>Contacts</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['contacts']) && $data['contacts'] == "true")?"Yes":"No"?>
+                </div>
+                <div class="col-6">
+                  <strong>Glasses</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['glasses']) && $data['glasses'] == "true")?"Yes":"No"?>
+                </div>
               </div>
               <div class="col-6">
 
                 <h4 class="gold center" style="margin: 0; margin-bottom: 10px; margin-top: 10px;">CONDITIONS</h4>
+
+
+                <div class="col-6">
+                  <strong>Asthma</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['asthma']) && $data['asthma'] == "true")?"Yes":"No"?>
+                </div>
+
+                <div class="col-6">
+                  <strong>ADHD</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['adhd']) && $data['adhd'] == "true")?"Yes":"No"?>
+                </div>
+
+                <div class="col-6">
+                  <strong>Diabetes</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['diabetes']) && $data['diabetes'] == "true")?"Yes":"No"?>
+                </div>
+
+                <div class="col-6">
+                  <strong>Epilepsy</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['epilepsy']) && $data['epilepsy'] == "true")?"Yes":"No"?>
+                </div>
+
+                <div class="col-6">
+                  <strong>Allergies</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['allergies']) && $data['allergies'] == "true")?"Yes":"No"?>
+                </div>
+
+                <div class="col-6">
+                  <strong>Autism</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['autism']) && $data['autism'] == "true")?"Yes":"No"?>
+                </div>
 
               </div>
               <div style="clear: both;"></div>
