@@ -22,6 +22,8 @@
        'suburb', 'address'
      ];
 
+     public $needs = '';
+
      public function Force($session) {
        /*
         * Students are in $_SESSION['students'] []
@@ -30,6 +32,12 @@
 
         $students = $session['students'];
         $parents  = $session['parents'];
+
+        $students = $this->Students($students);
+        $parents  = $this->Parents($parents);
+
+        // var_dump($students);
+        // var_dump($parents);
 
         if ($students === false || $parents === false) return false;
         else return true;
@@ -40,7 +48,7 @@
        foreach ($students as $id => $student):
          $has = array_keys($student['data']);
          foreach ($this->student_crammer as $needs) {
-           if (in_array($needs, $has) === false) { return false; }
+           if (in_array($needs, $has) === false) { $this->needs = "Students $needs"; return false; }
          }
 
        endforeach;
@@ -50,7 +58,7 @@
        foreach ($parents as $id => $parent):
          $has = array_keys($parent['data']);
          foreach ($this->parent_crammer as $needs) {
-           if (in_array($needs, $has) === false) { return false; }
+           if (in_array($needs, $has) === false) { $this->needs = "Parents $needs"; return false; }
          }
 
        endforeach;
