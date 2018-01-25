@@ -11,6 +11,7 @@
       <?php require_once "../application/modules/MoneyBags.php"; ?>
       <?php $MoneyBags = new MoneyBags($_SESSION['students']); ?>
       <?php $Auther    = new Auther; ?>
+      <?php $govinf    = $_SESSION['government-information']; ?>
     </head>
     <body>
 
@@ -344,13 +345,42 @@
 
         <div class="wrapper box" style="margin-top: 10px;">
           <div class="col-6">
-            <div class="col-6"><strong></strong></div><div class="col-6"></div>
-
-
+            <div class="col-12">
+              <div class="col-6"><strong>Mother Highest Education</strong></div><div class="col-6"><?=$govinf['mother-highest-education']?></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="col-12">
+              <div class="col-6"><strong>Mother Highest Qualification</strong></div><div class="col-6"><?=$govinf['mother-highest-qualification']?></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="col-12">
+              <div class="col-6"><strong>Mother Most Spoken Language</strong></div><div class="col-6"><?=$govinf['mother-most-spoken-language']?></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="col-12">
+              <div class="col-6"><strong>Mother Occupational Group</strong></div><div class="col-6"><?=$govinf['mother-occupational-group']?></div>
+            </div>
+            <div style="clear: both;"></div>
           </div>
           <div class="col-6">
-
+            <div class="col-12">
+              <div class="col-6"><strong>Father Highest Education</strong></div><div class="col-6"><?=$govinf['father-highest-education']?></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="col-12">
+              <div class="col-6"><strong>Father Highest Qualification</strong></div><div class="col-6"><?=$govinf['father-highest-qualification']?></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="col-12">
+              <div class="col-6"><strong>Father Most Spoken Language</strong></div><div class="col-6"><?=$govinf['father-most-spoken-language']?></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="col-12">
+              <div class="col-6"><strong>Father Occupational Group</strong></div><div class="col-6"><?=$govinf['father-occupational-group']?></div>
+            </div>
+            <div style="clear: both;"></div>
           </div>
+          <div style="clear: both;"></div>
         </div>
 
 
