@@ -6,9 +6,11 @@
 
       <link rel="stylesheet" type="text/css" href="/public/css/print.min.css" />
 
+      <?php require_once "../application/modules/_Auther.php"; ?>
       <?php require_once "../application/modules/_SP_Manipulation.php"; ?>
       <?php require_once "../application/modules/MoneyBags.php"; ?>
       <?php $MoneyBags = new MoneyBags($_SESSION['students']); ?>
+      <?php $Auther    = new Auther; ?>
     </head>
     <body>
 
@@ -19,6 +21,15 @@
         </div>
         <hr />
       </div>
+
+      <?php if ($Auther->Force($_SESSION) === false):?>
+        <div>
+          <h1 style="color: #c21f1f;">
+            
+          </h1>
+        </div>
+      <?php die; endif; ?>
+
 
       <div style="margin-top: 10px;">
         <h1 class="blue page-title center" style="font-size: 34px; margin-top: 20px;">QUICK OVERVIEW</h1>
@@ -315,6 +326,23 @@
                 </div>
                 <div class="col-6">
                   <?=(isset($data['autism']) && $data['autism'] == "true")?"Yes":"No"?>
+                </div>
+                <div style="clear: both;"></div>
+
+                <hr style="margin-top: 3px;" />
+
+                <div class="col-6">
+                  <strong>Early Intervention</strong>
+                </div>
+                <div class="col-6">
+                  <?=(isset($data['early-intervention']) && $data['early-intervention'] == "true")?"Yes":"No"?>
+                </div>
+
+                <div style="clear: both;"></div>
+
+                <div style="padding-top: 4px; padding-bottom: 4px;">
+                  <strong>Explain</strong> <br/>
+                  <?=(isset($data['conditions-info']))?$data['conditions-info']:""?>
                 </div>
 
               </div>
