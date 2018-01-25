@@ -45,6 +45,29 @@ window.fn = {
       return false;
     },
 
+
+
+    /*
+     * Spans the #placer divider and finds any inputs that are required
+     * and have no data.
+     */
+    validate_page_forms: function(goto) {
+      var fail = false;
+      $('#placer input').each(function(index, input){
+        var required = $(input).attr('required');
+        if (typeof required !== typeof undefined && required !== false) {
+          if ($(input).val()) {} else {
+            console.log('validate: required field '+$(input).attr('name')+' empty');
+            alert("Missing information: "+$(input).attr('name')+" required.");
+            fail = true;
+          }
+        }
+      });
+      if (fail) {} else {
+        window.location.href = "#"+goto;
+      }
+    },
+
     /*
      * The save handler is a function that is called
      * with an object when it needs to manage a new "save"

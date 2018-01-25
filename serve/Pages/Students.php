@@ -19,16 +19,16 @@
   >PARENTS</button>
 
   <button
-    onclick="window.location.href = '/#fees';"
+    onclick="window.fn.validate_page_forms('fees');"
     type="button"
     style="float: right;"
     class="nice-button"
   >FEES</button>
   <button
-  type="button"
-  onclick="window.fn.new.form('students');"
-  style="float: right; margin-right: 10px;"
-  class="nice-button green"
+    type="button"
+    onclick="window.fn.new.form('students');"
+    style="float: right; margin-right: 10px;"
+    class="nice-button green"
   >ADD STUDENT</button>
   <div style="clear: both;"></div>
 </div>

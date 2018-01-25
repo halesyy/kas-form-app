@@ -24,6 +24,7 @@
             name="first-name"
             onkeyup="window.fn.save_handler(this);"
             value="<?=(isset($data['first-name']))?$data['first-name']:"";?>"
+            required
           />
       </div>
       <div class="col-4 col">
@@ -44,6 +45,7 @@
           class="connected-right"
           onkeyup="window.fn.save_handler(this);"
           value="<?=(isset($data['last-name']))?$data['last-name']:"";?>"
+          required
         />
       </div>
 
@@ -58,6 +60,7 @@
             name="year-starting"
             class="connected-left"
             onchange="window.fn.save_handler(this);"
+            required
           >
             <option value="none">-- Select --</option>
             <?php for ($i = date('o'); $i <= date('o')+7; $i++): ?>
@@ -72,6 +75,7 @@
             name="date-of-birth"
             onkeyup="window.fn.save_handler(this);"
             value="<?=(isset($data['date-of-birth']))?$data['date-of-birth']:"";?>"
+            required
           />
       </div>
       <div class="col-4 col">
@@ -80,6 +84,7 @@
             class="connected-right"
             onchange=
               "window.fn.save_handler(this); if (this.value == -1) {$('#pre-kindy-enrolment-<?=$id?>').slideDown(500);}else{$('#pre-kindy-enrolment-<?=$id?>').slideUp(500);}"
+            required
           >
               <option value="none">-- Select --</option>
 
@@ -254,7 +259,7 @@
       <hr class="divider" />
       <h4 style="width: 100%;">Medical Background</h4>
 
-            <div class="col-12"><span class="label">PRIVATE HEALTH FUND/ AMBULANCE:</span></div>
+            <div class="col-12"><span class="label">PRIVATE HEALTH FUND/ AMBULANCE? <strong>REQUIRED</strong>:</span></div>
             <div class="col-12 col boxed">
               <input
                 id="has-health-fund-yes"
@@ -331,6 +336,7 @@
               name="doctors-name"
               onkeyup="window.fn.save_handler(this);"
               value="<?=(isset($data['doctors-name']))?$data['doctors-name']:"";?>"
+              required
             />
 
             <div style="margin-top: 10px;"></div>
@@ -340,10 +346,11 @@
               name="doctors-phone"
               onkeyup="window.fn.save_handler(this);"
               value="<?=(isset($data['doctors-phone']))?$data['doctors-phone']:"";?>"
+              required
             />
 
             <div style="margin-top: 10px;"></div>
-            <span class="label">IS STUDENT IMMUNISED?:</span>
+            <span class="label">IS STUDENT IMMUNISED? <strong>REQUIRED</strong>:</span>
             <div class="boxed">
               <input
                 id="immunised-yes"
