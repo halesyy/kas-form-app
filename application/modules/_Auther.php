@@ -21,6 +21,10 @@
        'phone-number', 'allow-sms',
        'suburb', 'address'
      ];
+     public $govinf_crammer = [
+       'mother-highest-education', 'mother-highest-qualification', 'mother-most-spoken-language', 'mother-occupational-group',
+       'father-highest-education', 'father-highest-qualification', 'father-most-spoken-language', 'father-occupational-group'
+     ];
 
      public $needs = '';
 
@@ -32,18 +36,27 @@
 
         $students = $session['students'];
         $parents  = $session['parents'];
+        $govinf   = $session['government-information'];
 
         $students = $this->Students($students);
         $parents  = $this->Parents($parents);
+        $govinf   = $this->GovInf($govinf);
 
         // var_dump($students);
         // var_dump($parents);
 
-        if ($students === false || $parents === false) return false;
+        if ($students === false || $parents === false || $govinf === false) return false;
         else return true;
 
      }
 
+     public function GovInf($govinf) {
+       $has = array_keys($govinf);
+       foreach ($this->govinf_crammer as $needs) {
+         if (in_array($needs, $has) === false) { $this->needs = "Government Information $needs"; return false; }
+       }
+
+     }
      public function Students($students) {
        foreach ($students as $id => $student):
          $has = array_keys($student['data']);

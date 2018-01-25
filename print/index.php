@@ -108,7 +108,7 @@
           <?php endforeach; ?>
         </div>
 
-        <div class="end-total" style="bottom: 0; position: absolute; width: calc(100% - 20px); background-image: url(/public/images/striped_blue.png); background-repeat: repeat;">
+        <div class="end-total" style="bottom: 0; position: absolute; width: calc(100% - 40px); background-image: url(/public/images/striped_blue.png); background-repeat: repeat;">
           <div style="margin: 10px 10px 10px 10px; padding: 15px; background: white; border: solid #003f80 1px;">
             <div style="float: left; font-size: 22px;" class="blue">Total (Yearly)</div>
             <div style="float: right; font-size: 22px;" class="gold">
@@ -129,30 +129,22 @@
         <?php foreach ($_SESSION['students'] as $student): $data = $student['data']; ?>
           <div class="dedicated">
 
-            <h1 class="gold" style="margin: 0; margin-bottom: 5px; font-size: 40px;">
-              <span id="first-name-title"><?=(isset($data['first-name']))?$data['first-name']:""?></span>
-              <span id="middle-name-title"><?=(isset($data['middle-name']))?$data['middle-name']:""?></span>
-              <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
-              <div style="float: right;">
-                <?php if (isset($data['suspended-expelled']) && $data['suspended-expelled'] == 'true'): ?>
-                  <small style="color: #260202; font-size: 13px;">Previously Suspended / Expelled</small>
-                <?php endif; ?>
-              </div>
-            </h1>
 
             <div class="wrapper box">
+              <h1 class="gold" style="margin: 0; margin-bottom: 15px; font-size: 40px;">
+                <span id="first-name-title"><?=(isset($data['first-name']))?$data['first-name']:""?></span>
+                <span id="middle-name-title"><?=(isset($data['middle-name']))?$data['middle-name']:""?></span>
+                <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
+                <div style="float: right;">
+                  <?php if (isset($data['suspended-expelled']) && $data['suspended-expelled'] == 'true'): ?>
+                    <small style="color: #260202; font-size: 13px;">Previously Suspended / Expelled</small>
+                  <?php endif; ?>
+                </div>
+              </h1>
               <h3 style="margin: 0; margin-bottom: 10px;" class="blue">GENERAL</h3>
-
-              <div class="col-3">
-                <strong>Year Level</strong>
-              </div>
-              <div class="col-3">
-                <?="{$data['year-level']} in {$data['year-starting']}"?>
-              </div>
-
-              <div class="col-3">
-                <strong>Age</strong>
-              </div>
+              <div class="col-3"><strong>Year Level</strong></div>
+              <div class="col-3"><?="{$data['year-level']} in {$data['year-starting']}"?></div>
+              <div class="col-3"><strong>Age</strong></div>
               <div class="col-3">
                 <?php if (isset($data['date-of-birth'])): ?>
                   <?=$MoneyBags->AgeCalculator($data['date-of-birth'])?> (<?=$data['date-of-birth']?>)
@@ -297,6 +289,8 @@
                 <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
               </h1>
 
+              <h3 style="margin: 0; margin-bottom: 10px;" class="blue">PARENT</h3>
+
               <div class="col-3"><strong>Email</strong></div><div class="col-3"><?=$data['email']?></div>
               <div class="col-3"><strong>Relationship to Student</strong></div><div class="col-3"><?=ucwords($data['relationship-to-student'])?></div>
               <div class="col-3"><strong>Relationship Status</strong></div><div class="col-9"><?=ucwords($data['relationship-status'])?></div>
@@ -319,6 +313,50 @@
               <div style="clear: both;"></div>
           </div>
         <?php endforeach; ?>
+      </div>
+
+
+
+
+
+
+
+
+
+      <div class="dedicated">
+
+        <h1 class="gold" style="font-size: 40px;">
+          Commonwealth Government Information
+        </h1>
+
+        <div class="wrapper box">
+          <strong>Stated Information:</strong>
+          <p>
+            The following information is required for the collection and reporting of information on student background characteristics in all government and non-government schools by all State, Territory and Commonwealth Education Ministers.
+          </p>
+          <p>
+            All information which could identify or would reasonably identify individuals is removed from national reporting so that no personal information is reported publicly. Information collected from this form will be covered by Kempsey Adventist School’s Privacy Policy. A copy of this policy is available from the KAS office.
+          </p>
+          <p>
+            NOTE: please only fill out appropriate information regarding student.
+          </p>
+        </div>
+
+        <div class="wrapper box" style="margin-top: 10px;">
+          <div class="col-6">
+            <div class="col-6"><strong></strong></div><div class="col-6"></div>
+
+
+          </div>
+          <div class="col-6">
+
+          </div>
+        </div>
+
+
+
+
+
       </div>
 
 
