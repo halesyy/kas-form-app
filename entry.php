@@ -36,6 +36,9 @@
   | THIS ENTIRE PROJECT WAS CODED THANKS TO THE FOLLOWING MUSIC SUPPLYING
   | THE CODER JACK HALES WITH ENERGY:
   | - Angel of Death, Slayer
+  | - Rich & Sad, Post Malone
+  | - Battery, Metallica
+  | - Money, Pink Floyd
   | - Spit Out The Bone, Metallica
   | - Trapped Under Ice, Metallica
   | - Highway Star, Deep Purple

@@ -1,7 +1,7 @@
 <form class="student-form">
   <div data-id="<?=$id?>" data-type="students">
     <div class="box row formation">
-      <h4 class="students-title" style="width: 100%;">
+      <h4 class="students-title gold" style="width: 100%;">
         <span id="first-name-title"><?=(isset($data['first-name']))?$data['first-name']:""?></span>
         <span id="middle-name-title"><?=(isset($data['middle-name']))?$data['middle-name']:""?></span>
         <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
@@ -218,6 +218,105 @@
 
 
 
+      <hr class="divider" />
+      <h4 style="width: 100%;" class="gold">Demographic Background</h4>
+
+
+      <div class="col-3 col"><span class="label">COUNTRY OF BIRTH:</span></div>
+      <div class="col-3 col"><span class="label">NATIONALITY:</span></div>
+      <div class="col-3 col"><span class="label">LANGUAGE SPOKEN AT HOME:</span></div>
+      <div class="col-3 col"><span class="label">VISA:</span></div>
+
+      <div class="col-3 col">
+        <input
+          type="text"
+          onkeyup="window.fn.save_handler(this);"
+          class="required connected-left"
+          name="country-of-birth"
+          value="<?=(isset($data['country-of-birth']))?$data['country-of-birth']:"";?>"
+        />
+      </div>
+      <div class="col-3 col">
+        <input
+          type="text"
+          name="language-spoken-at-home"
+          onkeyup="window.fn.save_handler(this);"
+          class="required connected-middle"
+          value="<?=(isset($data['language-spoken-at-home']))?$data['language-spoken-at-home']:"";?>"
+        />
+      </div>
+      <div class="col-3 col">
+        <input
+          type="text"
+          name="nationality"
+          onkeyup="window.fn.save_handler(this);"
+          class="required connected-middle"
+          value="<?=(isset($data['nationality']))?$data['nationality']:"";?>"
+        />
+      </div>
+      <div class="col-3 col">
+        <select
+          name="visa"
+          onchange="window.fn.save_handler(this);"
+          class="connected-right required"
+          type="select"
+        >
+          <option value="none">-- Select --</option>
+          <option value="Resident" <?=(isset($data['visa']) && $data['visa'] == 'Resident')?"selected='selected'":""?>>Australian Resident</option>
+          <option value="Temporary"  <?=(isset($data['visa']) && $data['visa'] == 'Temporary' )?"selected='selected'":""?>>Temporary</option>
+          <option value="Permanent" <?=(isset($data['visa']) && $data['visa'] == 'Permanent')?"selected='selected'":""?>>Permanent</option>
+        </select>
+      </div>
+
+      <div class="row" style="width: 100%; margin: 0; margin-top: 20px;">
+        <div class="col-9 col">
+          <div class="boxed connected-left">
+            <strong>Is the child Aboriginal or Torres Strait Islander?</strong>
+          </div>
+        </div>
+        <div class="col-3 col">
+            <select
+            name="is-aboriginal-or-torres-strait"
+            onchange="window.fn.save_handler(this);"
+            class="connected-right required"
+            type="select"
+            >
+            <option value="none">-- Select --</option>
+            <option value="yes" <?=(isset($data['is-aboriginal-or-torres-strait']) && $data['is-aboriginal-or-torres-strait'] == 'yes')?"selected='selected'":""?>>Yes</option>
+            <option value="no"  <?=(isset($data['is-aboriginal-or-torres-strait']) && $data['is-aboriginal-or-torres-strait'] == 'no' )?"selected='selected'":""?>>No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" style="width: 100%; margin: 0; margin-top: 20px;">
+        <div class="col-6 col"><span class="label">RELIGION:</span></div>
+        <div class="col-6 col"><span class="label">PLACE OF WORSHIP:</span></div>
+        <div class="col-6 col">
+          <input
+            type="text"
+            placeholder="(optional)"
+            name="religion"
+            onkeyup="window.fn.save_handler(this);"
+            class="connected-left"
+            value="<?=(isset($data['religion']))?$data['religion']:"";?>"
+          />
+        </div>
+        <div class="col-6 col">
+          <input
+            type="text"
+            placeholder="(optional)"
+            name="place-of-worship"
+            onkeyup="window.fn.save_handler(this);"
+            class="connected-right"
+            value="<?=(isset($data['place-of-worship']))?$data['place-of-worship']:"";?>"
+          />
+        </div>
+      </div>
+
+
+
+
+
 
 
 
@@ -229,12 +328,13 @@
 
 
       <hr class="divider" />
-      <h4 style="width: 100%;">Educational Background</h4>
+      <h4 style="width: 100%;" class="gold">Educational Background</h4>
 
-            <div class="col-6"><span class="label">PREVIOUS SCHOOL:</span></div>
-            <div class="col-6"><span class="label">BEEN SUSPENDED / EXPELLED:</span></div>
+            <div class="col-4 col"><span class="label">PREVIOUS SCHOOL:</span></div>
+            <div class="col-4 col"><span class="label">PREVIOUS YEAR:</span></div>
+            <div class="col-4 col"><span class="label">BEEN SUSPENDED / REFUSED ADMISSION:</span></div>
 
-            <div class="col-6 col">
+            <div class="col-4 col">
               <input
                 type="text"
                 name="previous-school"
@@ -243,7 +343,16 @@
                 value="<?=(isset($data['previous-school']))?$data['previous-school']:"";?>"
               />
             </div>
-            <div class="col-6 col">
+            <div class="col-4 col">
+              <input
+                type="text"
+                name="previous-year"
+                class="connected-middle required"
+                onkeyup="window.fn.save_handler(this);"
+                value="<?=(isset($data['previous-year']))?$data['previous-year']:"";?>"
+              />
+            </div>
+            <div class="col-4 col">
               <select
                 name="suspended-expelled"
                 onchange="window.fn.save_handler(this);"
@@ -269,7 +378,7 @@
             </div>
 
       <hr class="divider" />
-      <h4 style="width: 100%;">Medical Background</h4>
+      <h4 style="width: 100%;" class="gold">Medical Background</h4>
 
             <div class="col-12"><span class="label">PRIVATE HEALTH FUND/ AMBULANCE? <strong>REQUIRED</strong>:</span></div>
             <div class="col-12 col boxed">
@@ -337,8 +446,6 @@
 
 
         <hr class="divider" />
-        <div class="col-6 col"><h5>DOCTOR</h5></div>
-        <div class="col-6 col"><h5>CONDITIONS</h5></div>
 
         <div class="col-6 col" style="padding-right: 7.5px;"> <!-- doctor -->
 
@@ -447,12 +554,13 @@
               ><?=(isset($data['conditions-info']))?$data['conditions-info']:"";?></textarea>
             </div>
             <div class="boxed boxed-no-height connected-bottom">
-                <span class="label">STUDENT RECIEVED EARLY INTERVENTION:</span> <br/>
+                <span class="label" style="font-weight: bold;">Has your child been recommended for any of the following: Early intervention, occupational or speech therapy, assessment by a school counsellor or psychologist?</span> <br/>
                 <select
                   name="early-intervention"
                   onchange="window.fn.save_handler(this);"
                   class="required"
                   type="select"
+                  style="margin-top: 10px;"
                 >
                   <option value="none">-- Select --</option>
                   <option value="yes" <?=(isset($data['early-intervention']) && $data['early-intervention'] == 'yes')?"selected='selected'":""?>>Yes</option>
