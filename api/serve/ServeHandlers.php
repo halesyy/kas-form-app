@@ -7,7 +7,7 @@
 
           $Page = $Sunrise->Mini('Pages/Parent_Guardians', '..', []);
           $Details = [
-            'title' => 'Step 1: Parent and Guardian',
+            'title' => 'Step 1: Parents / Guardians',
             'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
             'page' => $Page
           ];
@@ -66,7 +66,7 @@
 
           $Page = $Sunrise->Mini('Pages/Fees', '..', ['MoneyBags' => new MoneyBags($_SESSION['students'])]);
           $Details = [
-            'title' => 'Step 4: Fees',
+            'title' => 'Step 3: Fees',
             'description' => "<p>The following is an outline of the School fees by year as well as an estimate of the total fees payable based on the children that have been included in this enrolment application.</p><p>Please provide us with the details of who will be responsible for the payment of school fees and any other associated costs.</p>",
             'page' => $Page
           ];
