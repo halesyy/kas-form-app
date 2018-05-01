@@ -64,12 +64,6 @@
 
                   </div>
                 </div>
-                <div class="left-box" style="margin-top: 30px;">
-                  <div class="welcome">
-                    <h4>Session Dump - last thing to remove</h2>
-                    <pre style="color: white;"><?=print_r($_SESSION)?></pre>
-                  </div>
-                </div>
               </div>
               <div id="form-fill" class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no">
                 <div id="placer">
