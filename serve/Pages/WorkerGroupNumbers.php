@@ -71,8 +71,8 @@
 <div class="box" style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
   <button
     type="button"
-    onclick="window.location.href = '/#government-information'"
+    onclick="window.location.href = '/#parent-guardians'"
     style="margin-right: 15px;"
     class="nice-button"
-  >BACK TO GOVERNMENT INFORMATION</button>
+  >BACK TO PARENT/ GUARDIANS</button>
 </div>

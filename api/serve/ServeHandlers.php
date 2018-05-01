@@ -14,36 +14,69 @@
 
       },
 
-      'students' => function($Sunrise) {
+      'students' => function($Sunrise, $api) {
 
           $Page = $Sunrise->Mini('Pages/Students', '..', []);
+          $Details = [
+            'description' => "<p>Please provide us with the details of each of the children being enrolled as part of this application.</p><p>Additional children can be added by clicking on the  “Add Child” button at the bottom of this page.</p><p>Including all children under a single application will automatically enable family discount entitlements.</p>",
+            'page' => $Page
+          ];
+          $api->JSON($Details);
 
       },
 
-      'worker-group-numbers' => function($Sunrise) {
+      'residence-and-contact' => function($Sunrise, $api) {
+
+          $Page = $Sunrise->Mini('Pages/ResidenceAndContact', '..', []);
+          $Details = [
+            'description' => 'Please provide us with the residence and emergency contact details for the children being enrolled as part of this application. If the children being enrolled as part of this application live in separate addresses, please provide us with the address for each child, the name of the person they live with and how this person is related to the child.',
+            'page' => $Page
+          ];
+          $api->JSON($Details);
+
+      },
+
+      'worker-group-numbers' => function($Sunrise, $api) {
 
           $Page = $Sunrise->Mini('Pages/WorkerGroupNumbers', '..', []);
+          $Details = [
+            'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
+            'page' => $Page
+          ];
+          $api->JSON($Details);
 
       },
 
-      'fees' => function($Sunrise) {
+      'fees' => function($Sunrise, $api) {
 
-          $Page = $Sunrise->Mini('Pages/Fees', '..', [
-            'MoneyBags' => new MoneyBags($_SESSION['students'])
-          ]);
-
+          $Page = $Sunrise->Mini('Pages/Fees', '..', ['MoneyBags' => new MoneyBags($_SESSION['students'])]);
+          $Details = [
+            'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
+            'page' => $Page
+          ];
+          $api->JSON($Details);
 
       },
 
-      'government-information' => function($Sunrise) {
+      'government-information' => function($Sunrise, $api) {
 
           $Page = $Sunrise->Mini('Pages/GovernmentInformation', '..', []);
+          $Details = [
+            'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
+            'page' => $Page
+          ];
+          $api->JSON($Details);
 
       },
 
-      'caregiver-agreement' => function($Sunrise) {
+      'caregiver-agreement' => function($Sunrise, $api) {
 
           $Page = $Sunrise->Mini('Pages/CaregiverAgreement', '..', []);
+          $Details = [
+            'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
+            'page' => $Page
+          ];
+          $api->JSON($Details);
 
       }
 

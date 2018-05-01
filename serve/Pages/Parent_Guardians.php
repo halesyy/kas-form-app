@@ -18,7 +18,7 @@
   class="nice-button green"
   >ADD PARENT/GUARDIAN</button>
   <button
-    onclick="window.location.href = '/#students';"
+    onclick="window.fn.validate.inputs($('#parent-guardian-form'), 'students');"
     type="button"
     style="float: right;"
     class="nice-button"

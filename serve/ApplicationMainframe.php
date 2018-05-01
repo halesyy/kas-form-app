@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="public/css/style.min.css" defer="defer" type="text/css" />
 
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Roboto|Proxima+Nova" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="public/js/functions.js" defer></script>
   </head>
   <body>
     <div class="container-fluid">
@@ -40,9 +42,9 @@
             <div class="title">Fees</div>
           </div>
           <div class="connection"></div>
-          <div class="point government-information">
+          <div class="point residence-and-contact">
             <div class="ball"><div class="ball-num">4</div></div>
-            <div class="title">Government Information</div>
+            <div class="title">Residence and Contact</div>
           </div>
           <div class="connection"></div>
           <div class="point caregiver-agreement">
@@ -75,13 +77,11 @@
         </div>
     </div>
   </body>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
   <script src="public/css/external_modules/bootox.min.js"></script>
 
-  <script src="public/js/functions.js" defer></script>
   <script src="public/js/controller.js" defer></script>
   <script src="public/js/parent-guardians.js" defer></script>
   <script src="public/js/students.js" defer></script>

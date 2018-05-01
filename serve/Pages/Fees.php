@@ -109,7 +109,7 @@
   >STUDENTS</button>
 
   <button
-    onclick="window.location.href = '/#government-information';"
+    onclick="window.location.href = '/#residence-and-contact';"
     type="button"
     style="float: right;"
     class="nice-button"

@@ -52,6 +52,59 @@ window.fn = {
 
 
 
+
+
+
+
+      validate: {
+
+          inputs: function($object, thengoto) {
+            // take in jquery object.
+            var done = true;
+            $object.find(".required").each(function(index, item){
+              var type = $(this).attr('type');
+              // if type is a text-based role
+              if (type == 'text' || type == 'number' || type == 'email' || type == 'password') {
+                if ($(this).val().length === 0) {
+                  done = false;
+                  $(this).css({border:'solid #c21f1f 2px'});
+                }
+                else {
+                  $(this).css({border:'solid silver 1px'});
+                }
+              }
+              //
+              if (type == 'checkbox') {
+
+              }
+              //
+              if (type == 'select') {
+                if ($(this).val() == 'none') {
+                  done = false;
+                  $(this).css({border:'solid #c21f1f 2px'});
+                }
+                else {
+                  $(this).css({border:'solid silver 1px'});
+                }
+              }
+            });
+            if (done) {
+              window.location.hash = '#'+thengoto;
+            }
+          }
+
+
+      },
+
+
+
+
+
+
+
+
+
+
     /*
      * Spans the #placer divider and finds any inputs that are required
      * and have no data.

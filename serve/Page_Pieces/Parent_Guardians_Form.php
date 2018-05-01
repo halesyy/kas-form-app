@@ -1,4 +1,4 @@
-<form>
+<form id="parent-guardian-form">
 <div data-id="<?=$id?>" data-type="parent-guardians">
   <div class="box row formation">
 
@@ -20,6 +20,7 @@
       name="email"
       onkeyup="window.fn.save_handler(this);"
       value="<?=(isset($data['email']))? $data['email']:"";?>"
+      class="required"
     />
     <span class="small">Upon completion please check your email, we will send a copy of your enrolment form to you.</span>
 
@@ -33,9 +34,11 @@
       <div class="col-6 col">
           <select
             name="relationship-to-student"
-            class="connected-left"
+            class="connected-left required"
+            type="select"
             onchange="window.fn.save_handler(this);"
           >
+            <!---->
             <option value="none">-- Select --</option>
             <option value="mother" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "mother")? "selected='selected'":"";?>>Mother</option>
             <option value="father" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "father")? "selected='selected'":"";?>>Father</option>
@@ -45,9 +48,11 @@
       <div class="col-6 col">
           <select
             name="relationship-status"
-            class="connected-right"
+            class="connected-right required"
+            type="select"
             onchange="window.fn.save_handler(this);"
           >
+            <!---->
             <option value="none">-- Select --</option>
             <option value="single" <?=(isset($data['relationship-status']) && $data['relationship-status'] == "single")? "selected='selected'":"";?>>Single</option>
             <option value="married" <?=(isset($data['relationship-status']) && $data['relationship-status'] == "married")? "selected='selected'":"";?>>Married</option>
@@ -71,7 +76,8 @@
       <div class="col-3 col">
           <select
             name="title"
-            class="connected-left"
+            class="connected-left required"
+            type="select"
             onchange="window.fn.save_handler(this);"
           >
             <option value="none">-- Select --</option>
@@ -88,7 +94,7 @@
           <input
             type="text"
             id="first-name"
-            class="connected-middle"
+            class="connected-middle required"
             name="first-name"
             onkeyup="window.fn.save_handler(this);"
             value="<?=(isset($data['first-name']))?$data['first-name']:"";?>"
@@ -109,7 +115,7 @@
           type="text"
           id="last-name"
           name="last-name"
-          class="connected-right"
+          class="connected-right required"
           onkeyup="window.fn.save_handler(this);"
           value="<?=(isset($data['last-name']))?$data['last-name']:"";?>"
         />
@@ -126,7 +132,7 @@
       <div class="col-8 col">
         <input
           type="number"
-          class="connected-left"
+          class="connected-left required"
           name="phone-number"
           onkeyup="window.fn.save_handler(this);"
           value="<?=(isset($data['phone-number']))?$data['phone-number']:"";?>"
@@ -135,7 +141,8 @@
       <div class="col-4 col">
         <select
           name="allow-sms"
-          class="connected-right"
+          type="select"
+          class="connected-right required"
           onchange="window.fn.save_handler(this);"
         >
           <option value="none">-- Select --</option>
@@ -183,7 +190,7 @@
           <input
             type="text"
             name="suburb"
-            class="connected-left"
+            class="connected-left required"
             onkeyup="window.fn.save_handler(this);"
             value="<?=(isset($data['suburb']))?$data['suburb']:"";?>"
           />
@@ -203,16 +210,127 @@
       <div class="col-8 col">
           <input
             type="text"
-            class="connected-right"
+            class="connected-right required"
             name="address"
             onkeyup="window.fn.save_handler(this);"
             value="<?=(isset($data['address']))?$data['address']:"";?>"
           />
       </div>
 
-      <!-- <span class="small">By completing this form, we assume that you live in <strong>Australia</strong>, <strong>New South Wales</strong>.</span> -->
 
-      
+      <!-- Collecting government information -->
+
+      <hr class="divider" />
+
+      <div class="col-3"><span class="label">HIGHEST EDUCATION:</span></div>
+      <div class="col-3"><span class="label">HIGHEST QUALIFICATION:</span></div>
+      <div class="col-3"><span class="label">MOST SPOKEN LANGUAGE AT HOME:</span></div>
+      <div class="col-3"><span class="label">OCCUPATIONAL GROUP:</span></div>
+
+      <div class="col-3 col">
+        <select
+          name="highest-education"
+          class="connected-left required"
+          type="select"
+          onchange="window.fn.save_handler(this);"
+        >
+          <!---->
+          <option value="none">-- Select --</option>
+          <option value="12" <?=(isset($data['highest-education']) && $data['highest-education'] == '12')?'selected="selected"':'';?>>Year 12 or equivalent</option>
+          <option value="11" <?=(isset($data['highest-education']) && $data['highest-education'] == '11')?'selected="selected"':'';?>>Year 11 or equivalent</option>
+          <option value="10" <?=(isset($data['highest-education']) && $data['highest-education'] == '10')?'selected="selected"':'';?>>Year 10 or equivalent</option>
+          <option value="9" <?=(isset($data['highest-education']) && $data['highest-education'] == '9')?'selected="selected"':'';?>>Year 9 or equivalent/below</option>
+
+        </select>
+      </div>
+      <div class="col-3 col">
+        <select
+          name="highest-qualification"
+          class="connected-middle required"
+          type="select"
+          onchange="window.fn.save_handler(this);"
+        >
+          <!---->
+          <option value="none">-- Select --</option>
+          <option <?=(isset($data['highest-qualification']) && $data['highest-qualification'] == 'Bachelor Degree or above')?'selected="selected"':'';?>>Bachelor Degree or above</option>
+          <option <?=(isset($data['highest-qualification']) && $data['highest-qualification'] == 'Diploma/Advanced Dip')?'selected="selected"':'';?>>Diploma/Advanced Dip</option>
+          <option <?=(isset($data['highest-qualification']) && $data['highest-qualification'] == 'Certificate I,II,III, IV, Trade')?'selected="selected"':'';?>>Certificate I,II,III, IV, Trade</option>
+          <option <?=(isset($data['highest-qualification']) && $data['highest-qualification'] == 'No non-school qualification')?'selected="selected"':'';?>>No non-school qualification</option>
+        </select>
+      </div>
+      <div class="col-3 col">
+        <input
+          type="text"
+          name="most-spoken-lanugage"
+          class="connected-middle required"
+          onkeyup="window.fn.save_handler(this);"
+          value="<?=(isset($data['most-spoken-lanugage']))?$data['most-spoken-lanugage']:"";?>"
+        />
+      </div>
+      <div class="col-3 col">
+        <input
+          type="number"
+          name="occupational-group"
+          class="connected-right required"
+          onkeyup="window.fn.save_handler(this);"
+          value="<?=(isset($data['occupational-group']))?$data['occupational-group']:"";?>"
+        />
+      </div>
+
+      <div class="information" style="width: 100%; margin-top: 3px;">
+        <small style="float: right;">To see the various occupational groups, <a href="#worker-group-numbers">click here</a>.</small>
+      </div>
+
+
+
+
+
+
+
+
+      <hr class="divider" />
+
+      <div class="col-3"><span class="label">OCCUPATION:</span></div>
+      <div class="col-3"><span class="label">EMPLOYER:</span></div>
+      <div class="col-3"><span class="label">RELIGION:</span></div>
+      <div class="col-3"><span class="label">PLACE OF WORSHIP:</span></div>
+
+      <div class="col-3 col">
+        <input
+          type="text"
+          name="occupation"
+          class="connected-left required"
+          onkeyup="window.fn.save_handler(this);"
+          value="<?=(isset($data['occupation']))?$data['occupation']:"";?>"
+        />
+      </div>
+      <div class="col-3 col">
+        <input
+          type="text"
+          name="employer"
+          class="connected-middle required"
+          onkeyup="window.fn.save_handler(this);"
+          value="<?=(isset($data['employer']))?$data['employer']:"";?>"
+        />
+      </div>
+      <div class="col-3 col">
+        <input
+          type="text"
+          name="religion"
+          class="connected-middle"
+          onkeyup="window.fn.save_handler(this);"
+          value="<?=(isset($data['religion']))?$data['religion']:"";?>"
+        />
+      </div>
+      <div class="col-3 col">
+        <input
+          type="text"
+          name="place-of-worship"
+          class="connected-right"
+          onkeyup="window.fn.save_handler(this);"
+          value="<?=(isset($data['place-of-worship']))?$data['place-of-worship']:"";?>"
+        />
+      </div>
 
   </div>
 </div>
