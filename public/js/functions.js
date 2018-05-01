@@ -129,15 +129,16 @@ window.fn = {
               window.$placer.fadeOut(500, function(){
                 window.$placer.html(json.page).fadeIn(600);
                 $('html, body').animate({scrollTop:0}, 'slow');
-                $('.welcome').html(json.message);
+                $('.welcome').html(json.description);
               });
           });
       },
       fast: function() {
           let get = (window.location.hash.substring(1))? window.location.hash.substring(1): "parent-guardians";
           $.get('/api/get/'+get, function(response){
-              let body = response;
-              window.$placer.html(body);
+              let json = JSON.parse(response);
+              window.$placer.html(json.page);
+              $('.welcome').html(json.description);
           });
       }
     },

@@ -7,7 +7,7 @@
 
           $Page = $Sunrise->Mini('Pages/Parent_Guardians', '..', []);
           $Details = [
-            'description' => "",
+            'description' => "This is a message :D",
             'page' => $Page
           ];
           $api->JSON($Details);
