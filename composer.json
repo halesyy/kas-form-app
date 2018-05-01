@@ -1,0 +1,13 @@
+{
+    "name": "halesyy/kas-form-app",
+    "description": "Web application for KAS to use as a platform of student registration.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jack Hales",
+            "email": "halesyy@gmail.com"
+        }
+    ],
+    "require": {}
+}

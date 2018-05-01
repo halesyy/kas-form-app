@@ -61,21 +61,12 @@
                 <div id="welcome">
                   <div class="header-image image"></div>
                   <div class="welcome">
-                    <p>Welcome to the KAS form application page bla bla. Give us your money so we can take your kid and teach them.</p>
-                    <p>We only accept the most capable of students, you need to be able to:</p>
-                    <ul>
-                      <li>Create an OS using COSMOS</li>
-                      <li>Plant a nursery</li>
-                      <li>Maintain an aquarium for longer than a year</li>
-                      <li>Build a sky scraper</li>
-                      <li>Dual boot Linux with Windows</li>
-                      <li>Install Gentoo</li>
-                    <ul>
+
                   </div>
                 </div>
                 <div class="left-box" style="margin-top: 30px;">
                   <div class="welcome">
-                    <h4>Session Dump</h2>
+                    <h4>Session Dump - last thing to remove</h2>
                     <pre style="color: white;"><?=print_r($_SESSION)?></pre>
                   </div>
                 </div>

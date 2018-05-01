@@ -1,7 +1,0 @@
-[23-Jul-2017 00:42:18 America/Chicago] PHP Fatal error:  Class 'Counts' not found in /home2/jekoderc/public_html/t/kas-form-app/application/modules/Sunrise.php on line 186
-[27-Jul-2017 00:45:58 America/Chicago] PHP Catchable fatal error:  Argument 1 passed to DisplayStudentName() must be an instance of Student, string given, called in /home2/jekoderc/public_html/t/kas-form-app/serve/form-areas/custom/StudentSelectionList.php on line 16 and defined in /home2/jekoderc/public_html/t/kas-form-app/serve/form-areas/custom/StudentSelectionList.php on line 2
-[27-Jul-2017 00:46:07 America/Chicago] PHP Fatal error:  Call to a member function Get() on string in /home2/jekoderc/public_html/t/kas-form-app/serve/form-areas/custom/StudentSelectionList.php on line 4
-[27-Jul-2017 00:47:38 America/Chicago] PHP Fatal error:  Call to a member function Get() on string in /home2/jekoderc/public_html/t/kas-form-app/serve/form-areas/custom/StudentSelectionList.php on line 4
-[27-Jul-2017 00:47:39 America/Chicago] PHP Fatal error:  Call to a member function Get() on string in /home2/jekoderc/public_html/t/kas-form-app/serve/form-areas/custom/StudentSelectionList.php on line 4
-[27-Jul-2017 00:47:41 America/Chicago] PHP Fatal error:  Call to a member function Get() on string in /home2/jekoderc/public_html/t/kas-form-app/serve/form-areas/custom/StudentSelectionList.php on line 4
-[27-Jul-2017 00:48:16 America/Chicago] PHP Fatal error:  Call to a member function Get() on string in /home2/jekoderc/public_html/t/kas-form-app/serve/form-areas/custom/StudentSelectionList.php on line 4

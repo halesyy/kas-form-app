@@ -23,23 +23,20 @@
      ............................................. \/_____/..desk at 17:30..
   */
 
-
-
   //************************************************************************************
-
-
 
   /*
   | @NOTE: Quick run through the application.
   | Our application is  going to be segmented into two "big" sections  instead
   | of 3 minor areas (Model View Controller), we're having the RESTful API and
   | an elegant system for creating initializing code.
+  |
+  | Application initialized.
+  | Router is where action is performed.
   */
 
 
-
   //************************************************************************************
-
 
 
   /*
