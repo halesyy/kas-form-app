@@ -3,52 +3,47 @@
 
   $Serve = [
 
-      'parent-guardians' => function($Sunrise) {
+      'parent-guardians' => function($Sunrise, $api) {
 
-          $Sunrise->Render('Pages/Parent_Guardians', [
-
-          ], '..');
+          $Page = $Sunrise->Mini('Pages/Parent_Guardians', '..', []);
+          $Details = [
+            'description' => "",
+            'page' => $Page
+          ];
+          $api->JSON($Details);
 
       },
 
       'students' => function($Sunrise) {
 
-          $Sunrise->Render('Pages/Students', [
-
-          ], '..');
+          $Page = $Sunrise->Mini('Pages/Students', '..', []);
 
       },
 
       'worker-group-numbers' => function($Sunrise) {
 
-        $Sunrise->Render('Pages/WorkerGroupNumbers', [
-
-        ], '..');
+          $Page = $Sunrise->Mini('Pages/WorkerGroupNumbers', '..', []);
 
       },
 
       'fees' => function($Sunrise) {
 
-            print $Sunrise->Mini('Pages/Fees', '..', [
-              'MoneyBags' => new MoneyBags($_SESSION['students'])
-            ]);
+          $Page = $Sunrise->Mini('Pages/Fees', '..', [
+            'MoneyBags' => new MoneyBags($_SESSION['students'])
+          ]);
 
 
       },
 
       'government-information' => function($Sunrise) {
 
-        print $Sunrise->Mini('Pages/GovernmentInformation', '..', [
-
-        ]);
+          $Page = $Sunrise->Mini('Pages/GovernmentInformation', '..', []);
 
       },
 
       'caregiver-agreement' => function($Sunrise) {
 
-        print $Sunrise->Mini('Pages/CaregiverAgreement', '..', [
-
-        ]);
+          $Page = $Sunrise->Mini('Pages/CaregiverAgreement', '..', []);
 
       }
 

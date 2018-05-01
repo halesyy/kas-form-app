@@ -9,6 +9,11 @@ window.save_timeouts_inputs = [];
 
 window.fn = {
 
+
+    /*
+     * Watches for changes in the app,
+     * the session handler.
+     */
     start_watchers: function() {
       $(window).on('hashchange', function(){
         window.fn.loading.change();
