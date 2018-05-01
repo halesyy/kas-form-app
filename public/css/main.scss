@@ -2,14 +2,14 @@
 
 // KAS BLUE .
 $themeColor: #003f80;
-$blue: $themeColor;
+$blue:       $themeColor;
 // KAS GOLD .
 $secondColor: #D3A22B;
-$gold: $secondColor;
+$gold:        $secondColor;
 
 .primary { color: $themeColor; }
 .secondary { color: $secondColor; }
-.bold { font-weight: bold; }
+.bold { font-weight: bold; background: #e5ebf2; }
 
 body {
   font-family: 'Open Sans';

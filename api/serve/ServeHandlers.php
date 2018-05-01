@@ -7,7 +7,7 @@
 
           $Page = $Sunrise->Mini('Pages/Parent_Guardians', '..', []);
           $Details = [
-            'description' => "This is a message :D",
+            'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
             'page' => $Page
           ];
           $api->JSON($Details);
