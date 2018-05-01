@@ -125,10 +125,11 @@ window.fn = {
       change: function() {
           let get = (window.location.hash.substring(1))? window.location.hash.substring(1): "parent-guardians";
           $.get('/api/get/'+get, function(response){
-              let body = response;
+              let json = JSON.parse(response);
               window.$placer.fadeOut(500, function(){
-                window.$placer.html(body).fadeIn(600);
+                window.$placer.html(json.page).fadeIn(600);
                 $('html, body').animate({scrollTop:0}, 'slow');
+                $('.welcome').html(json.message);
               });
           });
       },
