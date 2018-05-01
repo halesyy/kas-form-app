@@ -62,7 +62,7 @@
               <div id="information-snappet" class="col-lg-4 col-md-4 col-sm-4 hidden-xs-down no">
                 <div id="welcome">
                   <div class="header-image image"></div>
-                  <h2 class="gold" class="webpage-title"></h2>
+                  <h2 class="gold webpage-title" style="padding: 20px 20px 0 20px; text-align: center;"></h2>
                   <div class="welcome"></div>
                 </div>
               </div>
