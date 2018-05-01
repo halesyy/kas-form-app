@@ -65,6 +65,9 @@
                   <div class="welcome">
 
                   </div>
+                  <div style="padding: 20px;">
+                    <?php echo "<pre style='color: white;'>", print_r($_SESSION) ,"</pre>"; ?>
+                  </div>
                 </div>
               </div>
               <div id="form-fill" class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no">

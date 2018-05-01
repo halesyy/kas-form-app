@@ -12,24 +12,24 @@
 
 <div class="box" style="margin-bottom: 30px;">
   <button
-    type="button"
-    onclick="window.location.href = '/#parent-guardians'"
-    style="float: left; margin-right: 15px;"
-    class="nice-button"
-  >PARENTS</button>
+  type="button"
+  onclick="window.fn.new.form('students');"
+  style="float: left;"
+  class="nice-button green"
+  >ADD STUDENT</button>
 
   <button
-    onclick="window.fn.validate_page_forms('fees');"
-    type="button"
-    style="float: right;"
-    class="nice-button"
-  >FEES</button>
+  onclick="window.fn.validate_page_forms('fees');"
+  type="button"
+  style="float: right;"
+  class="nice-button"
+  >NEXT</button>
   <button
     type="button"
-    onclick="window.fn.new.form('students');"
-    style="float: right; margin-right: 10px;"
-    class="nice-button green"
-  >ADD STUDENT</button>
+    onclick="window.location.href = '/#parent-guardians'"
+    style="float: right; margin-right: 15px;"
+    class="nice-button"
+  >BACK</button>
   <div style="clear: both;"></div>
 </div>
 

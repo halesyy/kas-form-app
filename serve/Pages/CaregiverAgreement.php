@@ -33,6 +33,7 @@ including phone, letter, email, facebook and sms.</li>
   </ol>
 </div>
 
+<!--
 <div class="box title" style="margin-top: 30px;">
   <h2 style="margin: 0;">
     Caregiver Signatures
@@ -58,21 +59,21 @@ including phone, letter, email, facebook and sms.</li>
       </div>
     </div>
   <?php endforeach; ?>
+-->
 
 
   <div class="box" style="margin-top: 30px; margin-bottom: 30px;">
-    <button
-      type="button"
-      onclick="window.location.href = '/#government-information'"
-      style="float: left; margin-right: 15px;"
-      class="nice-button"
-    >BACK</button>
-
     <button
       onclick="w = window.open('print/index.php'); w.print();"
       type="button"
       style="float: right;"
       class="nice-button"
     >PRINT</button>
+    <button
+    type="button"
+    onclick="window.location.href = '/#residence-and-contact'"
+    style="float: right; margin-right: 15px;"
+    class="nice-button"
+    >BACK</button>
     <div style="clear: both;"></div>
   </div>
