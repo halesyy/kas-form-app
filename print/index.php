@@ -36,6 +36,7 @@
       <div style="margin-top: 10px;">
         <h1 class="blue page-title center" style="font-size: 34px; margin-top: 20px;">QUICK OVERVIEW</h1>
 
+        <h2 class="gold" style="margin: 0; margin-bottom: 10px;">Students</h2>
         <div class="students-wrapper">
           <?php foreach ($_SESSION['students'] as $student): $data = $student['data']; ?>
 
@@ -44,33 +45,18 @@
                   <span id="first-name-title"><?=(isset($data['first-name']))?$data['first-name']:""?></span>
                   <span id="middle-name-title"><?=(isset($data['middle-name']))?$data['middle-name']:""?></span>
                   <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
-                  <!-- <small style="font-size: 12px;" class="blue">(Year <?=$data['year-level']?>)</small> -->
                   <div style="float: right;">
                     <?php if (isset($data['suspended-expelled']) && $data['suspended-expelled'] == 'true'): ?>
                       <small style="color: #260202; font-size: 13px;">Previously Suspended / Expelled</small>
                     <?php endif; ?>
                   </div>
                 </h2>
-                <div>
-                  <div class="col-3">
-                  </div>
-                  <div class="col-3 center">
-                  </div>
-                  <div class="col-3">
-                    <strong>Begins</strong>
-                  </div>
-                  <div class="col-3 center">
-                    <?=$data['year-starting']?>, year <?=$data['year-level']?>
-                  </div>
-                  <div class="clear"></div>
-                </div>
               </div>
 
           <?php endforeach; ?>
         </div>
 
-        <hr />
-
+        <h2 class="gold" style="margin: 0; margin-top: 20px;">Parents</h2>
         <div class="guardians-wrapper" style="margin-top: 10px;">
           <?php foreach ($_SESSION['parents'] as $parent): $data = $parent['data']; ?>
 
@@ -80,29 +66,14 @@
                   <span id="first-name-title"><?=(isset($data['first-name']))?$data['first-name']:""?></span>
                   <span id="middle-name-title"><?=(isset($data['middle-name']))?$data['middle-name']:""?></span>
                   <span id="last-name-title"><?=(isset($data['last-name']))?$data['last-name']:""?></span>
-                  <small style="font-size: 16px; color: black;"><?=(isset($data['email']))?'('.$data['email'].')':""?></small>
+                  <small style="font-size: 16px; color: black; float: right;"><?=(isset($data['email']))?'('.$data['email'].')':""?></small>
                 </h2>
-                <div>
-                  <div class="col-3">
-                    <strong>Contact</strong>
-                  </div>
-                  <div class="col-3 center">
-                    <?=(isset($data['phone-number']))?$data['phone-number']:"N/A"?> <!--(<?=(isset($data['allow-sms']) && $data['allow-sms'] == 'yes')?"YES":"NO"?> SMS)-->
-                  </div>
-                  <div class="col-3">
-                    <strong>Relationship</strong>
-                  </div>
-                  <div class="col-3 center">
-                    <?=(isset($data['relationship-to-student']))?ucwords($data['relationship-to-student']):"N/A"?>
-                  </div>
-                  <div class="clear"></div>
-                </div>
               </div>
 
           <?php endforeach; ?>
         </div>
 
-        <div class="end-total" style="bottom: 0; position: absolute; width: calc(100% - 40px); background-image: url(/public/images/striped_blue.png); background-repeat: repeat;">
+        <div class="end-total" style="bottom: 0; position: absolute; width: calc(100% - 40px);">
           <div style="margin: 10px 10px 10px 10px; padding: 15px; background: white; border: solid #003f80 1px;">
             <div style="float: left; font-size: 22px;" class="blue">Total (Yearly)</div>
             <div style="float: right; font-size: 22px;" class="gold">
@@ -117,7 +88,7 @@
       </div>
 
 
-
+      <!-- DEDICATED STUDENTS -->
 
 
         <?php foreach ($_SESSION['students'] as $student): $data = $student['data']; ?>
@@ -140,7 +111,7 @@
               <div class="col-3"><?="{$data['year-level']} in {$data['year-starting']}"?></div>
               <div class="col-3"><strong>Age</strong></div>
               <div class="col-3">
-              
+
               </div>
               <div style="clear: both;"></div>
             </div>
@@ -166,6 +137,20 @@
               <?php endif; ?>
 
               <div style="clear: both;"></div>
+            </div>
+
+
+            <div class="wrapper box" style="margin-top: 10px;">
+              <h3 style="margin: 0; margin-bottom: 10px;" class="blue">DEMOGRAPHIC BACKGROUND</h3>
+
+              <div class="col-3"><strong>Country of Bitch</strong></div>
+              <div class="col-3"><?=$data['country-of-birth']?></div>
+              <div class="col-3"><strong>Nationality</strong></div>
+              <div class="col-3"><?=$data['nationality']?></div>
+              <div class="col-3"><strong>Language spoken at home</strong></div>
+              <div class="col-3"><?=$data['language-spoken-at-home']?></div>
+              <div class="col-3"><strong>Visa / Residence</strong></div>
+              <div class="col-3"><?=$data['visa']?></div>
             </div>
 
 
