@@ -30,9 +30,16 @@
   | Our application is  going to be segmented into two "big" sections  instead
   | of 3 minor areas (Model View Controller), we're having the RESTful API and
   | an elegant system for creating initializing code.
-  |
-  | Application initialized.
-  | Router is where action is performed.
+  */
+
+  /*
+  | THIS ENTIRE PROJECT WAS CODED THANKS TO THE FOLLOWING MUSIC SUPPLYING
+  | THE CODER JACK HALES WITH ENERGY:
+  | - Angel of Death, Slayer
+  | - Spit Out The Bone, Metallica
+  | - Trapped Under Ice, Metallica
+  | - Highway Star, Deep Purple
+  | - Holy Wars... The Punishment Due, Megadeth
   */
 
 

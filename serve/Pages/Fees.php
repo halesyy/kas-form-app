@@ -104,16 +104,16 @@
   <button
     type="button"
     onclick="window.location.href = '/#students'"
-    style="float: left; margin-right: 15px;"
+    style="float: right;"
     class="nice-button"
-  >STUDENTS</button>
+  >BACK</button>
 
   <button
     onclick="window.location.href = '/#residence-and-contact';"
     type="button"
-    style="float: right;"
+    style="margin-right: 15px; float: right;"
     class="nice-button"
-  >GOVERNMENT INFO</button>
+  >NEXT</button>
   <!-- <button
   type="button"
   onclick="window.fn.new.form('students');"
