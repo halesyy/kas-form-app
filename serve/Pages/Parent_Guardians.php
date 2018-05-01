@@ -22,7 +22,7 @@
     type="button"
     style="float: right;"
     class="nice-button"
-  >STUDENTS</button>
+  >NEXT</button>
   <div style="clear: both;"></div>
 </div>
 
