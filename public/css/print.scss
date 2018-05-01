@@ -27,18 +27,6 @@
   }
   /*styling for rest of printing document, personalization of document
   to be printed.*/
-  #header-image-container {
-    width: 80%;
-    margin-left: 10%;
-    #header-reference {
-      width: 400px;
-    }
-    #header-qr-code {
-      margin-top: 20px;
-      width: 150px;
-      float: right;
-    }
-  }
   .space { margin-right: 20px; padding-right: 20px; }
   /*re-styling bootstrap columns and stuff to add better representation
   and compression for printing.*/

@@ -184,6 +184,7 @@ window.fn = {
                 window.$placer.html(json.page).fadeIn(600);
                 $('html, body').animate({scrollTop:0}, 'slow');
                 $('.welcome').html(json.description);
+                $('.webpage-title').html(json.title);
               });
           });
       },
@@ -193,6 +194,7 @@ window.fn = {
               let json = JSON.parse(response);
               window.$placer.html(json.page);
               $('.welcome').html(json.description);
+              $('.webpage-title').html(json.title);
           });
       }
     },

@@ -62,12 +62,8 @@
               <div id="information-snappet" class="col-lg-4 col-md-4 col-sm-4 hidden-xs-down no">
                 <div id="welcome">
                   <div class="header-image image"></div>
-                  <div class="welcome">
-
-                  </div>
-                  <div style="padding: 20px;">
-                    <?php echo "<pre style='color: white;'>", print_r($_SESSION) ,"</pre>"; ?>
-                  </div>
+                  <h2 class="gold" class="webpage-title"></h2>
+                  <div class="welcome"></div>
                 </div>
               </div>
               <div id="form-fill" class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no">

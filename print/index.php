@@ -16,8 +16,8 @@
     <body>
 
       <div class="dedicated">
-        <div id="header-image-container">
-          <img id="header-reference" src="/public/images/HeaderKasImage.png" />
+        <div id="header-image-container" style="text-align: center;">
+          <img id="header-reference" width="60%" src="/public/images/HeaderKasImage.png" />
         </div>
         <hr />
       </div>
@@ -55,6 +55,8 @@
 
           <?php endforeach; ?>
         </div>
+
+        <hr style="width: 100%; margin-top: 25px; margin-bottom: 10px;" />
 
         <h2 class="gold" style="margin: 0; margin-top: 20px;">Parents</h2>
         <div class="guardians-wrapper" style="margin-top: 10px;">
@@ -109,10 +111,10 @@
               <h3 style="margin: 0; margin-bottom: 10px;" class="blue">GENERAL</h3>
               <div class="col-3"><strong>Year Level</strong></div>
               <div class="col-3"><?="{$data['year-level']} in {$data['year-starting']}"?></div>
-              <div class="col-3"><strong>Age</strong></div>
-              <div class="col-3">
-
-              </div>
+              <div class="col-3"><strong>Gender</strong></div>
+              <div class="col-3"><?=ucwords($data['gender'])?></div>
+              <div class="col-6"><strong>Aboriginal / Torres Strait Is.</strong></div>
+              <div class="col-6"><?=$data['is-aboriginal-or-torres-strait']?></div>
               <div style="clear: both;"></div>
             </div>
 
@@ -127,8 +129,13 @@
               <div class="col-3">
                 <?=(isset($data['previous-school']))?$data['previous-school']:"N/A"?>
               </div>
-
-              <?php if (isset($data['suspended-expelled']) && $data['suspended-expelled'] == 'true'): ?>
+              <div class="col-3">
+                <strong>Previous Year</strong>
+              </div>
+              <div class="col-3">
+                <?=(isset($data['previous-year']))?$data['previous-year']:"N/A"?>
+              </div>
+              <?php if (isset($data['suspended-expelled']) && $data['suspended-expelled'] == 'yes'): ?>
                 <div style="clear: both;"></div>
                 <div class="col-12" style="margin-top: 10px; margin-bottom: 10px;">
                   <strong>Expelled / Suspended:</strong> <br/>
@@ -151,6 +158,9 @@
               <div class="col-3"><?=$data['language-spoken-at-home']?></div>
               <div class="col-3"><strong>Visa / Residence</strong></div>
               <div class="col-3"><?=$data['visa']?></div>
+              <div class="col-3"><strong>Lives With</strong></div>
+              <div class="col-3"><?=$data['lives-with']?></div>
+              <div style="clear: both;"></div>
             </div>
 
 
@@ -248,7 +258,7 @@
 
 
 
-
+        <!-- DEDICATED PARENTS -->
 
 
 
@@ -272,8 +282,8 @@
               <div class="col-3"><strong>Phone Number</strong></div><div class="col-3"><?=$data['phone-number']?></div>
               <div class="col-3"><strong>Allow SMS</strong></div><div class="col-3"><?=($data['allow-sms'] == "yes")?"Yes":"No"?></div>
               <div style="clear: both;"></div>
-              <hr style="width: 100%;" />
               <?php if (isset($data['home-number'])): ?>
+                <hr style="width: 100%;" />
                 <div class="col-3"><strong>Home Number</strong></div><div class="col-3"><?=$data['home-number']?></div>
               <?php endif; ?>
               <?php if (isset($data['work-number'])): ?>
@@ -283,8 +293,21 @@
               <hr style="width: 100%;" />
               <div class="col-3"><strong>Suburb</strong></div><div class="col-3"><?=$data['suburb']?></div>
               <div class="col-3"><strong>Address</strong></div><div class="col-3"><?=$data['address']?></div>
-
-
+              <hr style="width: 100%;" />
+              <div style="width: 100%;">
+                <div class="col-3"><strong>Occupation</strong></div>
+                <div class="col-3"><?=$data['occupation']?></div>
+                <div class="col-3"><strong>Employer</strong></div>
+                <div class="col-3"><?=$data['employer']?></div>
+                <div class="col-3"><strong>Religion</strong></div>
+                <div class="col-3"><?=$data['religion']?></div>
+                <div class="col-3"><strong>Place of Worship</strong></div>
+                <div class="col-3"><?=$data['place-of-worship']?></div>
+                <div style="clear: both;"></div>
+              </div>
+              <hr style="width: 100%;" />
+              <div class="col-6"><strong>Fee Split</strong></div>
+              <div class="col-6"><?=(isset($data['fee-split']))?$data['fee-split'].'%':'None';?></div>
               <div style="clear: both;"></div>
           </div>
         <?php endforeach; ?>
@@ -299,11 +322,9 @@
 
 
       <div class="dedicated">
-
         <h1 class="gold" style="font-size: 40px;">
           Commonwealth Government Information
         </h1>
-
         <div class="wrapper box">
           <strong>Stated Information:</strong>
           <p>
@@ -316,61 +337,49 @@
             NOTE: please only fill out appropriate information regarding student.
           </p>
         </div>
-
-        <div class="wrapper box" style="margin-top: 10px;">
-          <div class="col-6">
-            <div class="col-12">
-              <div class="col-6"><strong>Mother Highest Education</strong></div><div class="col-6"><?=$govinf['mother-highest-education']?></div>
-            </div>
-            <div style="clear: both;"></div>
-            <hr />
-            <div class="col-12">
-              <div class="col-6"><strong>Mother Highest Qualification</strong></div><div class="col-6"><?=$govinf['mother-highest-qualification']?></div>
-            </div>
-            <div style="clear: both;"></div>
-            <hr />
-            <div class="col-12">
-              <div class="col-6"><strong>Mother Most Spoken Language</strong></div><div class="col-6"><?=$govinf['mother-most-spoken-language']?></div>
-            </div>
-            <div style="clear: both;"></div>
-            <hr />
-            <div class="col-12">
-              <div class="col-6"><strong>Mother Occupational Group</strong></div><div class="col-6"><?=$govinf['mother-occupational-group']?></div>
-            </div>
+        <?php foreach ($_SESSION['parents'] as $parent): $data = $parent['data']; ?>
+          <div class="wrapper box" style="margin-top: 10px;">
+            <h2 class="blue" style="margin: 0; margin-bottom: 20px;"><?=$data['first-name']?> <?=$data['last-name']?> (<?=ucwords($data['relationship-to-student'])?>)</h2>
+            <div class="col-6"><strong>Highest Education</strong></div>
+            <div class="col-6"><?=$data['highest-education']?></div>
+            <div class="col-6"><strong>Highest Qualification</strong></div>
+            <div class="col-6"><?=$data['highest-qualification']?></div>
+            <div class="col-6"><strong>Most Spoken Language at Home</strong></div>
+            <div class="col-6"><?=$data['most-spoken-lanugage']?></div>
+            <div class="col-6"><strong>Occupational Group</strong></div>
+            <div class="col-6"><?=$data['occupational-group']?></div>
             <div style="clear: both;"></div>
           </div>
-          <div class="col-6">
-            <div class="col-12">
-              <div class="col-6"><strong>Father Highest Education</strong></div><div class="col-6"><?=$govinf['father-highest-education']?></div>
-            </div>
-            <div style="clear: both;"></div>
-            <hr />
-            <div class="col-12">
-              <div class="col-6"><strong>Father Highest Qualification</strong></div><div class="col-6"><?=$govinf['father-highest-qualification']?></div>
-            </div>
-            <div style="clear: both;"></div>
-            <hr />
-            <div class="col-12">
-              <div class="col-6"><strong>Father Most Spoken Language</strong></div><div class="col-6"><?=$govinf['father-most-spoken-language']?></div>
-            </div>
-            <div style="clear: both;"></div>
-            <hr />
-            <div class="col-12">
-              <div class="col-6"><strong>Father Occupational Group</strong></div><div class="col-6"><?=$govinf['father-occupational-group']?></div>
-            </div>
-            <div style="clear: both;"></div>
-          </div>
-          <div style="clear: both;"></div>
-        </div>
-
-
-
-
-
+        <?php endforeach; ?>
+        <h2 class="gold" style="font-size: 40px;">
+          Emergency Contact Information
+        </h2>
+        <h3 style="margin-bottom: 0;" class="gold">Person 1</h3>
+        <div class="col-6"><strong>Name</strong></div>
+        <div class="col-6"><?=(isset($_SESSION['emergency-contacts'][1]['name']))?$_SESSION['emergency-contacts'][1]['name']:"None";?></div>
+        <div class="col-6"><strong>Telephone</strong></div>
+        <div class="col-6"><?=(isset($_SESSION['emergency-contacts'][1]['telephone']))?$_SESSION['emergency-contacts'][1]['telephone']:"None";?></div>
+        <div class="col-6"><strong>Relation to Students</strong></div>
+        <div class="col-6"><?=(isset($_SESSION['emergency-contacts'][1]['relationship']))?$_SESSION['emergency-contacts'][1]['relationship']:"None";?></div>
+        <hr style="width: 100%; margin-top: 20px;" />
+        <h3 style="margin-bottom: 0;" class="gold">Person 1</h3>
+        <div class="col-6"><strong>Name</strong></div>
+        <div class="col-6"><?=(isset($_SESSION['emergency-contacts'][2]['name']))?$_SESSION['emergency-contacts'][2]['name']:"None";?></div>
+        <div class="col-6"><strong>Telephone</strong></div>
+        <div class="col-6"><?=(isset($_SESSION['emergency-contacts'][2]['telephone']))?$_SESSION['emergency-contacts'][2]['telephone']:"None";?></div>
+        <div class="col-6"><strong>Relation to Students</strong></div>
+        <div class="col-6"><?=(isset($_SESSION['emergency-contacts'][2]['relationship']))?$_SESSION['emergency-contacts'][2]['relationship']:"None";?></div>
       </div>
 
 
-
+      <div class="dedicated">
+        <h1 style="font-size: 60px; text-align: center; padding: 5px; padding-bottom: 15px; border-bottom: solid silver 2px;" class="gold">Signatures</h1>
+        <?php foreach ($_SESSION['parents'] as $parent): $data = $parent['data']; ?>
+          <div style="padding-bottom: 20px; border-bottom: solid silver 3px;">
+            <h2 class="gold"><?=$data['first-name']?> <?=$data['last-name']?></h2>
+          </div>
+        <?php endforeach; ?>
+      </div>
 
 
 
