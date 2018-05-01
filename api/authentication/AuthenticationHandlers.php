@@ -1,6 +1,13 @@
 <?php
   $Authentication = [
 
+      'change-fee-split-percentage' => function($Sunrise, $api) {
+        // echo "<pre>", print_r($_POST) ,"</pre>";
+        $p = (Object) $_POST;
+        $_SESSION['parents'][$p->id]['data']['fee-split'] = $p->percentage;
+        print json_encode(['success' => true]);
+      },
+
       'change-emergency-contact' => function($Sunrise, $api) {
         // echo "<pre>", print_r($_POST) ,"</pre>";
         $p = (Object) $_POST;

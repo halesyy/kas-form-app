@@ -23,11 +23,7 @@
       ?>
       <div>
         <div id="analysis">
-
-
-
           <div class="row" style="margin-left: 0; margin-right: 0; font-size: 15px;">
-
               <div class="col-9 col">
                 Building Levy
               </div>
@@ -54,12 +50,6 @@
                   $(<?=number_format($MoneyBags->family_discount())?>)
                 </span>
               </div>
-              <!-- <div class="col-9 col">
-                Prompt Payment Discount
-              </div>
-              <div class="col-3 col">
-
-              </div> -->
               <div style="margin-bottom: 40px;"></div>
 
               <div class="col-9 col" style="font-weight: bold;">
@@ -70,20 +60,49 @@
                   $<?= number_format($MoneyBags->termed_total_after_discounts()) ?>
                 </span>
               </div>
-              <!-- <div class="col-9 col" style="font-weight: bold;">
-                Total fortnightly payment
-              </div>
-              <div class="col-3 col" style="font-weight: bold;">
-                <span>
-                  $<?= number_format($MoneyBags->termed_total_after_discounts() / 46) ?>
-                </span>
-              </div> -->
-
           </div>
-
       </div>
-
   </div>
+</div>
+
+<div class="box formation">
+  <h3 style="margin: 0;" class="gold">
+    Fee Responsibility
+  </h3>
+</div>
+
+<div class="box formation">
+  <?php foreach ($_SESSION['parents'] as $id => $parent): ?>
+    <div class="row" style="margin: 0; margin-top: 10px; width: 100%;">
+      <div class="col-8 col">
+        <input
+          type="text"
+          class="connected-left"
+          disabled="disabled"
+          value="<?=$parent['data']['first-name']?> <?=$parent['data']['last-name']?>"
+        />
+      </div>
+      <div class="col-3 col">
+        <input
+          type="number"
+          value="<?=(isset($parent['data']['fee-split']))?(Int) $parent['data']['fee-split']:''?>"
+          class="connected-middle NUM_ADD_100"
+          onkeyup="$.post('/api/post', {
+            type: 'change-fee-split-percentage',
+            percentage: this.value,
+            id: '<?=$id?>'
+          }, function(response){
+            console.log(response);
+          });"
+        />
+      </div>
+      <div class="col-1 col" style="text-align: center;">
+        <div class="boxed connected-right">
+          %
+        </div>
+      </div>
+    </div>
+  <?php endforeach; ?>
 </div>
 
 
@@ -102,7 +121,11 @@
 
 <div class="box" style="margin-bottom: 30px;">
   <button
-  onclick="window.location.href = '/#residence-and-contact';"
+  onclick="$.get('/api/get/family-fee-split', function(response){
+    let json = JSON.parse(response);
+    if (json.success === true) window.location.href = '/#residence-and-contact';
+    else alert('The fee split does not round to 100%!');
+  });"
   type="button"
   style="float: right;"
   class="nice-button"

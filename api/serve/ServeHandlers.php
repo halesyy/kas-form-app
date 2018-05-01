@@ -7,7 +7,7 @@
 
           $Page = $Sunrise->Mini('Pages/Parent_Guardians', '..', []);
           $Details = [
-            'title' => 'PAGE TITLE',
+            'title' => 'Step 1: Parent and Guardian',
             'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
             'page' => $Page
           ];
@@ -15,11 +15,22 @@
 
       },
 
+      'family-fee-split' => function($Sunrise, $api) {
+
+        $total = [];
+        foreach ($_SESSION['parents'] as $id => $parent) {
+          if (isset($parent['data']['fee-split']))
+          array_push($total, $parent['data']['fee-split']);
+        }
+        $return = (round(array_sum($total)) == 100)? true: false;
+        print json_encode(['success' => $return]);
+      },
+
       'students' => function($Sunrise, $api) {
 
           $Page = $Sunrise->Mini('Pages/Students', '..', []);
           $Details = [
-            'title' => 'PAGE TITLE',
+            'title' => 'Step 2: Students',
             'description' => "<p>Please provide us with the details of each of the children being enrolled as part of this application.</p><p>Additional children can be added by clicking on the  “Add Child” button at the bottom of this page.</p><p>Including all children under a single application will automatically enable family discount entitlements.</p>",
             'page' => $Page
           ];
@@ -31,7 +42,7 @@
 
           $Page = $Sunrise->Mini('Pages/ResidenceAndContact', '..', []);
           $Details = [
-            'title' => 'PAGE TITLE',
+            'title' => 'Step 4: Residence and Emergency Contacts',
             'description' => 'Please provide us with the residence and emergency contact details for the children being enrolled as part of this application. If the children being enrolled as part of this application live in separate addresses, please provide us with the address for each child, the name of the person they live with and how this person is related to the child.',
             'page' => $Page
           ];
@@ -55,8 +66,8 @@
 
           $Page = $Sunrise->Mini('Pages/Fees', '..', ['MoneyBags' => new MoneyBags($_SESSION['students'])]);
           $Details = [
-            'title' => 'PAGE TITLE',
-            'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
+            'title' => 'Step 4: Fees',
+            'description' => "<p>The following is an outline of the School fees by year as well as an estimate of the total fees payable based on the children that have been included in this enrolment application.</p><p>Please provide us with the details of who will be responsible for the payment of school fees and any other associated costs.</p>",
             'page' => $Page
           ];
           $api->JSON($Details);
@@ -69,7 +80,7 @@
           $Details = [
             'title' => 'PAGE TITLE',
             'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
-            'page' => $Page
+            'page' => '<div class="box formation">This page is deprecated.</div>'
           ];
           $api->JSON($Details);
 
@@ -79,15 +90,13 @@
 
           $Page = $Sunrise->Mini('Pages/CaregiverAgreement', '..', []);
           $Details = [
-            'title' => 'PAGE TITLE',
-            'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
+            'title' => 'Step 5: Parent/Guardian Agreement',
+            'description' => "<p>The following outlines the terms and conditions as they relate to the enrolment of the children included in this application.</p>",
             'page' => $Page
           ];
           $api->JSON($Details);
 
       },
-
-
 
       'change-choice-rac' => function($Sunrise, $api) {
         $choice = Router::Fourth();

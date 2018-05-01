@@ -10,28 +10,27 @@
       <?php require_once "../application/modules/_SP_Manipulation.php"; ?>
       <?php require_once "../application/modules/MoneyBags.php"; ?>
       <?php $MoneyBags = new MoneyBags($_SESSION['students']); ?>
-      <?php $Auther    = new Auther; ?>
-      <?php $govinf    = $_SESSION['government-information']; ?>
+      <?php //$Auther    = new Auther; ?>
+      <?php //$govinf    = $_SESSION['government-information']; ?>
     </head>
     <body>
 
       <div class="dedicated">
         <div id="header-image-container">
           <img id="header-reference" src="/public/images/HeaderKasImage.png" />
-          <img id="header-qr-code" src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=http://www.kfa.jekoder.com&choe=UTF-8" />
         </div>
         <hr />
       </div>
 
-      <?php if ($Auther->Force($_SESSION) === false):?>
-        <div>
+      <?php // if ($Auther->Force($_SESSION) === false):?>
+        <!--<div>
           <h1 style="color: #c21f1f; text-align: center;">
             Missing data from form: <br/>
-            <small><?=$Auther->needs?></small>
+            <small><?php //print $Auther->needs ?></small>
           </h1>
         </div>
-        <script>window.print();</script>
-      <?php die; endif; ?>
+        <script>window.print();</script> -->
+      <?php // endif; ?>
 
 
       <div style="margin-top: 10px;">
@@ -54,14 +53,8 @@
                 </h2>
                 <div>
                   <div class="col-3">
-                    <strong>Age</strong>
                   </div>
                   <div class="col-3 center">
-                    <?php if (isset($data['date-of-birth'])): ?>
-                      <?=$MoneyBags->AgeCalculator($data['date-of-birth'])?>
-                    <?php else: ?>
-                      N/A
-                    <?php endif; ?>
                   </div>
                   <div class="col-3">
                     <strong>Begins</strong>
@@ -147,11 +140,7 @@
               <div class="col-3"><?="{$data['year-level']} in {$data['year-starting']}"?></div>
               <div class="col-3"><strong>Age</strong></div>
               <div class="col-3">
-                <?php if (isset($data['date-of-birth'])): ?>
-                  <?=$MoneyBags->AgeCalculator($data['date-of-birth'])?> (<?=$data['date-of-birth']?>)
-                <?php else: ?>
-                  N/A
-                <?php endif; ?>
+              
               </div>
               <div style="clear: both;"></div>
             </div>
