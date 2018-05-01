@@ -1,6 +1,13 @@
 <?php
   $Authentication = [
 
+      'change-emergency-contact' => function($Sunrise, $api) {
+        // echo "<pre>", print_r($_POST) ,"</pre>";
+        $p = (Object) $_POST;
+        $_SESSION['emergency-contacts'][$p->which][$p->name] = $p->value;
+        print json_encode(['success' => true]);
+      },
+
       'save' => function($Sunrise, $api) {
           $post   = (Object) $_POST;
           $saveto = $post->saveto;

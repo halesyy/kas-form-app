@@ -74,10 +74,6 @@ window.fn = {
                 }
               }
               //
-              if (type == 'checkbox') {
-
-              }
-              //
               if (type == 'select') {
                 if ($(this).val() == 'none') {
                   done = false;
@@ -90,6 +86,11 @@ window.fn = {
             });
             if (done) {
               window.location.hash = '#'+thengoto;
+            }
+            else {
+              $('html, body').animate({scrollTop:
+                $object.offset().top
+              }, 'slow');
             }
           }
 

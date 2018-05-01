@@ -12,17 +12,17 @@
 
 <div class="box" style="margin-bottom: 30px;">
   <button
-  type="button"
-  onclick="window.fn.new.form('students');"
-  style="float: left;"
-  class="nice-button green"
+    type="button"
+    onclick="window.fn.new.form('students');"
+    style="float: left;"
+    class="nice-button green"
   >ADD STUDENT</button>
 
   <button
-  onclick="window.fn.validate_page_forms('fees');"
-  type="button"
-  style="float: right;"
-  class="nice-button"
+    onclick="window.fn.validate.inputs($('.student-form'), 'fees');"
+    type="button"
+    style="float: right;"
+    class="nice-button"
   >NEXT</button>
   <button
     type="button"

@@ -1,4 +1,4 @@
-<form id="parent-guardian-form">
+<form class="parent-guardian-form">
 <div data-id="<?=$id?>" data-type="parent-guardians">
   <div class="box row formation">
 

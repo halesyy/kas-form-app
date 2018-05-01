@@ -1,4 +1,4 @@
-<form>
+<form class="student-form">
   <div data-id="<?=$id?>" data-type="students">
     <div class="box row formation">
       <h4 class="students-title" style="width: 100%;">
@@ -12,55 +12,67 @@
       </h4>
 
 
-      <div class="col-4"><span class="label">FIRST NAME:</span></div>
-      <div class="col-4"><span class="label">MIDDLE NAME:</span></div>
-      <div class="col-4"><span class="label">LAST NAME:</span></div>
+      <div class="col-3"><span class="label">FIRST NAME:</span></div>
+      <div class="col-3"><span class="label">MIDDLE NAME:</span></div>
+      <div class="col-3"><span class="label">PREFERRED NAME:</span></div>
+      <div class="col-3"><span class="label">LAST NAME:</span></div>
 
-      <div class="col-4 col">
+      <div class="col-3 col">
           <input
             type="text"
             id="first-name"
-            class="connected-left"
+            class="connected-left required"
             name="first-name"
             onkeyup="window.fn.save_handler(this);"
             value="<?=(isset($data['first-name']))?$data['first-name']:"";?>"
-            required
           />
       </div>
-      <div class="col-4 col">
+      <div class="col-3 col">
         <input
           type="text"
           id="middle-name"
           name="middle-name"
+          placeholder="(optional)"
           class="connected-middle"
           onkeyup="window.fn.save_handler(this);"
           value="<?=(isset($data['middle-name']))?$data['middle-name']:"";?>"
         />
       </div>
-      <div class="col-4 col">
+      <div class="col-3 col">
+        <input
+          type="text"
+          name="preferred-name"
+          placeholder="(optional)"
+          class="connected-middle"
+          onkeyup="window.fn.save_handler(this);"
+          value="<?=(isset($data['preferred-name']))?$data['preferred-name']:"";?>"
+        />
+      </div>
+      <div class="col-3 col">
         <input
           type="text"
           id="last-name"
           name="last-name"
-          class="connected-right"
+          class="connected-right required"
           onkeyup="window.fn.save_handler(this);"
           value="<?=(isset($data['last-name']))?$data['last-name']:"";?>"
-          required
         />
       </div>
 
       <hr class="divider" />
 
-      <div class="col-4"><span class="label">YEAR STARING:</span></div>
-      <div class="col-4"><span class="label">DATE OF BIRTH:</span></div>
-      <div class="col-4"><span class="label">YEAR LEVEL:</span></div>
+      <div class="col-3"><span class="label">YEAR STARING:</span></div>
+      <div class="col-3"><span class="label">DATE OF BIRTH:</span></div>
+      <div class="col-3"><span class="label">YEAR LEVEL:</span></div>
+      <div class="col-3"><span class="label">GENDER:</span></div>
 
-      <div class="col-4 col">
+
+      <div class="col-3 col">
           <select
             name="year-starting"
-            class="connected-left"
+            class="connected-left required"
+            type="select"
             onchange="window.fn.save_handler(this);"
-            required
           >
             <option value="none">-- Select --</option>
             <?php for ($i = date('o'); $i <= date('o')+7; $i++): ?>
@@ -68,23 +80,22 @@
             <?php endfor; ?>
         </select>
       </div>
-      <div class="col-4 col">
+      <div class="col-3 col">
           <input
-            type="date"
-            class="connected-middle"
+            type="text"
+            class="connected-middle required"
             name="date-of-birth"
             onkeyup="window.fn.save_handler(this);"
             value="<?=(isset($data['date-of-birth']))?$data['date-of-birth']:"";?>"
-            required
           />
       </div>
-      <div class="col-4 col">
+      <div class="col-3 col">
           <select
             name="year-level"
-            class="connected-right"
+            type="select"
+            class="connected-middle required"
             onchange=
               "window.fn.save_handler(this); if (this.value == -1) {$('#pre-kindy-enrolment-<?=$id?>').slideDown(500);}else{$('#pre-kindy-enrolment-<?=$id?>').slideUp(500);}"
-            required
           >
               <option value="none">-- Select --</option>
 
@@ -106,6 +117,19 @@
               <option value="11" <?=(isset($data['year-level']) && $data['year-level'] == 11)? "selected='selected'":"";?>>Year 11</option>
               <option value="12" <?=(isset($data['year-level']) && $data['year-level'] == 12)? "selected='selected'":"";?>>Year 12</option>
           </select>
+      </div>
+      <div class="col-3 col">
+        <select
+          name="gender"
+          type="select"
+          class="connected-right required"
+          onchange="window.fn.save_handler(this);"
+        >
+          <option value="none">-- Select --</option>
+          <option value="female" <?=(isset($data['gender']) && $data['gender'] == 'female')?"selected='selected'":"";?>>Female</option>
+          <option value="male" <?=(isset($data['gender']) && $data['gender'] == 'male')?"selected='selected'":"";?>>Male</option>
+          <option value="other" <?=(isset($data['gender']) && $data['gender'] == 'other')?"selected='selected'":"";?>>Other</option>
+        </select>
       </div>
 
 
@@ -199,6 +223,11 @@
 
 
 
+
+
+
+
+
       <hr class="divider" />
       <h4 style="width: 100%;">Educational Background</h4>
 
@@ -209,51 +238,34 @@
               <input
                 type="text"
                 name="previous-school"
-                class="connected-left"
+                class="connected-left required"
                 onkeyup="window.fn.save_handler(this);"
                 value="<?=(isset($data['previous-school']))?$data['previous-school']:"";?>"
               />
             </div>
             <div class="col-6 col">
-                <div class="boxed connected-right">
-
-                    <input
-                      id="suspended-expelled-yes"
-                      type="radio"
-                      class="open"
-                      data-open="#suspended-expelled-info"
-                      name="suspended-expelled"
-                      value="true"
-                      onclick="window.fn.save_handler(this);"
-                      <?=(isset($data['suspended-expelled']) && $data['suspended-expelled'] == "true")?"checked":""?>
-                    /> <label data-ref-for="suspended-expelled-yes">Yes</label>
-                    <input
-                      id="suspended-expelled-no"
-                      type="radio"
-                      class="none"
-                      name="suspended-expelled"
-                      style="margin-left: 10px;"
-                      value="false"
-                      data-close="#suspended-expelled-info"
-                      onclick="window.fn.save_handler(this);"
-                      <?=(isset($data['suspended-expelled']) && $data['suspended-expelled'] == "false")?"checked":""?>
-                    /> <label data-ref-for="suspended-expelled-no">No</label>
-
-                </div>
+              <select
+                name="suspended-expelled"
+                onchange="window.fn.save_handler(this);"
+                class="connected-right"
+                type="select"
+              >
+                <option value="none">-- Select --</option>
+                <option value="yes" <?=(isset($data['suspended-expelled']) && $data['suspended-expelled'] == 'yes')?"selected='selected'":""?>>Yes</option>
+                <option value="no"  <?=(isset($data['suspended-expelled']) && $data['suspended-expelled'] == 'no' )?"selected='selected'":""?>>No</option>
+              </select>
             </div>
 
-            <div id="suspended-expelled-info" style="width: 100%; margin-top: 10px; display: <?=(isset($data['suspended-expelled']) && $data['suspended-expelled'] == "true")?"block":"none"?>;">
-              <div class="col-12">
-                  <span class="label">PLEASE EXPLAIN:</span>
-              </div>
+            <div class="col-12">
+                <span class="label">PLEASE EXPLAIN:</span>
+            </div>
 
-              <div class="col-12 col">
-                  <textarea
-                    name="suspended-expelled-info"
-                    onkeyup="window.fn.save_handler(this);"
-                    placeholder="* Give information about reasons behind suspension, expulsion or deinal to another school..."
-                  ><?=(isset($data['suspended-expelled-info']))?$data['suspended-expelled-info']:"";?></textarea>
-              </div>
+            <div class="col-12 col">
+                <textarea
+                  name="suspended-expelled-info"
+                  onkeyup="window.fn.save_handler(this);"
+                  placeholder="(only yes, fill out information about suspenssion/ expulsion/ denial to other school)"
+                ><?=(isset($data['suspended-expelled-info']))?$data['suspended-expelled-info']:"";?></textarea>
             </div>
 
       <hr class="divider" />
@@ -333,6 +345,7 @@
             <span class="label">DOCTOR'S NAME:</span>
             <input
               type="text"
+              class="required"
               name="doctors-name"
               onkeyup="window.fn.save_handler(this);"
               value="<?=(isset($data['doctors-name']))?$data['doctors-name']:"";?>"
@@ -343,6 +356,7 @@
             <span class="label">DOCTOR'S PHONE:</span>
             <input
               type="text"
+              class="required"
               name="doctors-phone"
               onkeyup="window.fn.save_handler(this);"
               value="<?=(isset($data['doctors-phone']))?$data['doctors-phone']:"";?>"
@@ -351,24 +365,16 @@
 
             <div style="margin-top: 10px;"></div>
             <span class="label">IS STUDENT IMMUNISED? <strong>REQUIRED</strong>:</span>
-            <div class="boxed">
-              <input
-                id="immunised-yes"
-                type="radio"
-                name="immunised"
-                value="true"
-                onclick="window.fn.save_handler(this);"
-                <?=(isset($data['immunised']) && $data['immunised'] == "true")?"checked":""?>
-              /> <label data-ref-for="immunised-yes" style="margin-right: 10px;">Yes</label>
-              <input
-                id="immunised-no"
-                type="radio"
-                name="immunised"
-                value="false"
-                onclick="window.fn.save_handler(this);"
-                <?=(isset($data['immunised']) && $data['immunised'] == "false")?"checked":""?>
-              /> <label data-ref-for="immunised-no">No</label>
-            </div>
+            <select
+              name="immunised"
+              onchange="window.fn.save_handler(this);"
+              class="required"
+              type="select"
+            >
+              <option value="none">-- Select --</option>
+              <option value="yes" <?=(isset($data['immunised']) && $data['immunised'] == 'yes')?"selected='selected'":""?>>Yes</option>
+              <option value="no"  <?=(isset($data['immunised']) && $data['immunised'] == 'no' )?"selected='selected'":""?>>No</option>
+            </select>
 
             <div style="margin-top: 10px;"></div>
             <span class="label">STUDENT WEARS:</span>
@@ -442,15 +448,16 @@
             </div>
             <div class="boxed boxed-no-height connected-bottom">
                 <span class="label">STUDENT RECIEVED EARLY INTERVENTION:</span> <br/>
-                <input id="early-intervention-yes" type="radio" name="early-intervention" onclick="window.fn.save_handler(this);" value="true"
-                  <?=(isset($data['early-intervention']) && $data['early-intervention'] == "true")?"checked":""?>
-                />
-                <label data-ref-for="early-intervention-yes" style="margin-right: 10px;">Yes</label>
-
-                <input id="early-intervention-no" type="radio" name="early-intervention" onclick="window.fn.save_handler(this);" value="false"
-                  <?=(isset($data['early-intervention']) && $data['early-intervention'] == "false")?"checked":""?>
-                />
-                <label data-ref-for="early-intervention-no">No</label> <br/>
+                <select
+                  name="early-intervention"
+                  onchange="window.fn.save_handler(this);"
+                  class="required"
+                  type="select"
+                >
+                  <option value="none">-- Select --</option>
+                  <option value="yes" <?=(isset($data['early-intervention']) && $data['early-intervention'] == 'yes')?"selected='selected'":""?>>Yes</option>
+                  <option value="no"  <?=(isset($data['early-intervention']) && $data['early-intervention'] == 'no' )?"selected='selected'":""?>>No</option>
+                </select>
             </div>
 
 

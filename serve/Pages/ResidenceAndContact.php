@@ -1,5 +1,106 @@
 <form id="residence-and-contact">
 
+  <div class="box formation">
+    <h1 class="gold">Emergency Contact Information</h1>
+  </div>
+
+  <div class="box formation row">
+    <form id="emergency-contact-form" class="formation">
+      <div class="col-4 col"><span class="label">NAME:</span></div>
+      <div class="col-4 col"><span class="label">TELEPHONE NUMBER:</span></div>
+      <div class="col-4 col"><span class="label">RELATION TO STUDENTS:</span></div>
+      <div class="col-4 col">
+        <input
+          type="text"
+          value="<?=(isset($_SESSION['emergency-contacts'][1]['name']))?$_SESSION['emergency-contacts'][1]['name']:""?>"
+          class="connected-left"
+          onkeyup="$.post('/api/post', {
+            type: 'change-emergency-contact',
+            which: 1,
+            name: 'name',
+            value: this.value
+          }, function(response){console.log(response);})"
+          name="econ1-name"
+        />
+      </div>
+      <div class="col-4 col">
+        <input
+          type="text"
+          value="<?=(isset($_SESSION['emergency-contacts'][1]['telephone']))?$_SESSION['emergency-contacts'][1]['telephone']:""?>"
+          class="connected-middle"
+          onkeyup="$.post('/api/post', {
+            type: 'change-emergency-contact',
+            which: 1,
+            name: 'telephone',
+            value: this.value
+          }, function(response){console.log(response);})"
+          name="econ1-telephone"
+        />
+      </div>
+      <div class="col-4 col">
+        <input
+          type="text"
+          value="<?=(isset($_SESSION['emergency-contacts'][1]['relationship']))?$_SESSION['emergency-contacts'][1]['relationship']:""?>"
+          class="connected-right"
+          onkeyup="$.post('/api/post', {
+            type: 'change-emergency-contact',
+            which: 1,
+            name: 'relationship',
+            value: this.value
+          }, function(response){console.log(response);})"
+          name="econ1-relationship"
+        />
+      </div>
+      <hr class="divider" />
+      <div class="col-4 col"><span class="label">NAME:</span></div>
+      <div class="col-4 col"><span class="label">TELEPHONE NUMBER:</span></div>
+      <div class="col-4 col"><span class="label">RELATION TO STUDENTS:</span></div>
+      <div class="col-4 col">
+        <input
+          type="text"
+          value="<?=(isset($_SESSION['emergency-contacts'][2]['name']))?$_SESSION['emergency-contacts'][2]['name']:""?>"
+          class="connected-left"
+          onkeyup="$.post('/api/post', {
+            type: 'change-emergency-contact',
+            which: 2,
+            name: 'name',
+            value: this.value
+          }, function(response){console.log(response);})"
+          name="econ1-name"
+        />
+      </div>
+      <div class="col-4 col">
+        <input
+          type="text"
+          value="<?=(isset($_SESSION['emergency-contacts'][2]['telephone']))?$_SESSION['emergency-contacts'][2]['telephone']:""?>"
+          class="connected-middle"
+          onkeyup="$.post('/api/post', {
+            type: 'change-emergency-contact',
+            which: 2,
+            name: 'telephone',
+            value: this.value
+          }, function(response){console.log(response);})"
+          name="econ1-telephone"
+        />
+      </div>
+      <div class="col-4 col">
+        <input
+          type="text"
+          value="<?=(isset($_SESSION['emergency-contacts'][2]['relationship']))?$_SESSION['emergency-contacts'][2]['relationship']:""?>"
+          class="connected-right"
+          onkeyup="$.post('/api/post', {
+            type: 'change-emergency-contact',
+            which: 2,
+            name: 'relationship',
+            value: this.value
+          }, function(response){console.log(response);})"
+          name="econ1-relationship"
+        />
+      </div>
+    </form>
+  </div>
+
+
   <div class="box row formation">
     <h3>Do all of the children being enrolled as part of this application live in the same house?</h3>
     <div class="col-6 col">
@@ -7,7 +108,7 @@
         <span>Yes</span>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-6 col">
       <div class="decide-box" data-decision="no" id="no">
         <span>No</span>
       </div>
