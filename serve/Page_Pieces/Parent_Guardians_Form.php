@@ -168,7 +168,7 @@
 
       <div class="col-6 col">
         <input
-          type="number"
+          type="text"
           class="connected-left"
           name="home-number"
           onkeyup="window.fn.save_handler(this);"
@@ -177,7 +177,7 @@
       </div>
       <div class="col-6 col">
         <input
-          type="number"
+          type="text"
           class="connected-right"
           name="work-number"
           onkeyup="window.fn.save_handler(this);"

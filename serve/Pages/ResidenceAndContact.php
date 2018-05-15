@@ -196,20 +196,21 @@
         </div>
       <?php endforeach; ?>
     </div>
-    <div class="box" style="margin-bottom: 30px;">
-      <button
-        onclick="window.location.href='#caregiver-agreement';"
-        type="button"
-        style="float: right;"
-        class="nice-button"
-      >NEXT</button>
-      <button
-        onclick="window.location.href='#fees';"
-        type="button"
-        style="float: right; margin-right: 15px;"
-        class="nice-button"
-      >BACK</button>
-      <div style="clear: both;"></div>
-    </div>
   </div>
 </form>
+
+<div class="box" style="margin-bottom: 30px;">
+  <button
+  onclick="window.location.href='#caregiver-agreement';"
+  type="button"
+  style="float: right;"
+  class="nice-button"
+  >NEXT</button>
+  <button
+  onclick="window.location.href='#fees';"
+  type="button"
+  style="float: right; margin-right: 15px;"
+  class="nice-button"
+  >BACK</button>
+  <div style="clear: both;"></div>
+</div>

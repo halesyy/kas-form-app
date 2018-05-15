@@ -85,7 +85,7 @@
       <div class="col-3 col">
         <input
           type="number"
-          value="<?=(isset($parent['data']['fee-split']))?(Int) $parent['data']['fee-split']:''?>"
+          value="<?=(isset($parent['data']['fee-split']))?(Int) $parent['data']['fee-split']:'100'?>"
           class="connected-middle NUM_ADD_100"
           onkeyup="$.post('/api/post', {
             type: 'change-fee-split-percentage',

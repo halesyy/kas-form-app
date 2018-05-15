@@ -421,7 +421,7 @@
                   <div class="row" style="margin-left: 0; margin-right: 0;">
                       <div class="col-4"><span class="label">MEDICARE NUMBER:</span></div>
                       <div class="col-4"><span class="label">MEDICARE EXPIRY:</span></div>
-                      <div class="col-4"><span class="label">MEDICARE EXPIRY:</span></div>
+                      <div class="col-4"><span class="label">MEDICARE POSITION:</span></div>
 
 
                       <div class="col-4 col">
