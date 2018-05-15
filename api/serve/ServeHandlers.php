@@ -7,7 +7,7 @@
 
           $Page = $Sunrise->Mini('Pages/Parent_Guardians', '..', []);
           $Details = [
-            'title' => 'Step 1: Parents / Guardians',
+            'title' => 'Step 1: Parent and Guardian Information',
             'description' => "<p>Please provide us with the details of the parents or the guardians of the children being enrolled.</p><p>Additional parent and guardian information can be added by clicking on the  “Add Parent/Guardian” button at bottom of this page.</p>",
             'page' => $Page
           ];
@@ -30,7 +30,7 @@
 
           $Page = $Sunrise->Mini('Pages/Students', '..', []);
           $Details = [
-            'title' => 'Step 2: Students',
+            'title' => 'Step 2: Student Information',
             'description' => "<p>Please provide us with the details of each of the children being enrolled as part of this application.</p><p>Additional children can be added by clicking on the  “Add Child” button at the bottom of this page.</p><p>Including all children under a single application will automatically enable family discount entitlements.</p>",
             'page' => $Page
           ];

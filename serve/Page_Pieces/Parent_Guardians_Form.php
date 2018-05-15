@@ -183,10 +183,12 @@
 
       <hr class="divider" />
 
-      <div class="col-4"><span class="label">SUBURB:</span></div>
-      <div class="col-6"><span class="label">HOME ADDRESS (FULL ADDRESS):</span></div>
+      <div class="col-3"><span class="label">SUBURB:</span></div>
+      <div class="col-3"><span class="label">HOME ADDRESS (FULL ADDRESS):</span></div>
+      <div class="col-3"><span class="label">POSTCODE:</span></div>
+      <div class="col-3"><span class="label">STATE:</span></div>
 
-      <div class="col-4 col">
+      <div class="col-3 col">
           <input
             type="text"
             name="suburb"
@@ -207,13 +209,31 @@
             <option value="taree" <?=(isset($data['suburb']) && $data['allow-sms'] == "taree")? "selected='selected'":"";?>>Taree</option>
           </select> -->
       </div>
-      <div class="col-8 col">
+      <div class="col-3 col">
           <input
             type="text"
-            class="connected-right required"
+            class="connected-middle required"
             name="address"
             onkeyup="window.fn.save_handler(this);"
             value="<?=(isset($data['address']))?$data['address']:"";?>"
+          />
+      </div>
+      <div class="col-3 col">
+          <input
+            type="text"
+            class="connected-middle required"
+            name="postcode"
+            onkeyup="window.fn.save_handler(this);"
+            value="<?=(isset($data['postcode']))?$data['postcode']:"";?>"
+          />
+      </div>
+      <div class="col-3 col">
+          <input
+            type="text"
+            class="connected-right required"
+            name="state"
+            onkeyup="window.fn.save_handler(this);"
+            value="<?=(isset($data['state']))?$data['state']:"";?>"
           />
       </div>
 
