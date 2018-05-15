@@ -263,7 +263,7 @@
         >
           <option value="none">-- Select --</option>
           <option value="Resident" <?=(isset($data['visa']) && $data['visa'] == 'Resident')?"selected='selected'":""?>>Australian Resident</option>
-          <option value="Temporary"  <?=(isset($data['visa']) && $data['visa'] == 'Temporary' )?"selected='selected'":""?>>Temporary</option>
+          <option value="Temporary"  <?=(isset($data['visa']) && $data['visa'] == 'Temporary' )?"selected='selected'":""?>>Temporary Visa</option>
           <option value="Permanent" <?=(isset($data['visa']) && $data['visa'] == 'Permanent')?"selected='selected'":""?>>Permanent</option>
         </select>
       </div>
@@ -419,11 +419,12 @@
                   </div>
 
                   <div class="row" style="margin-left: 0; margin-right: 0;">
-                      <div class="col-6"><span class="label">MEDICARE NUMBER:</span></div>
-                      <div class="col-6"><span class="label">MEDICARE EXPIRY:</span></div>
+                      <div class="col-4"><span class="label">MEDICARE NUMBER:</span></div>
+                      <div class="col-4"><span class="label">MEDICARE EXPIRY:</span></div>
+                      <div class="col-4"><span class="label">MEDICARE EXPIRY:</span></div>
 
 
-                      <div class="col-6 col">
+                      <div class="col-4 col">
                         <input
                           type="text"
                           class="connected-left"
@@ -432,13 +433,22 @@
                           value="<?=(isset($data['medicare-number']))?$data['medicare-number']:"";?>"
                         />
                       </div>
-                      <div class="col-6 col">
+                      <div class="col-4 col">
                           <input
                             type="text"
                             class="connected-right"
                             name="medicare-expiry"
                             onkeyup="window.fn.save_handler(this);"
                             value="<?=(isset($data['medicare-expiry']))?$data['medicare-expiry']:"";?>"
+                          />
+                      </div>
+                      <div class="col-4 col">
+                          <input
+                            type="text"
+                            class="connected-right"
+                            name="medicare-position"
+                            onkeyup="window.fn.save_handler(this);"
+                            value="<?=(isset($data['medicare-position']))?$data['medicare-position']:"";?>"
                           />
                       </div>
                   </div>

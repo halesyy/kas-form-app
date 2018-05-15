@@ -43,6 +43,13 @@
             <option value="mother" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "mother")? "selected='selected'":"";?>>Mother</option>
             <option value="father" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "father")? "selected='selected'":"";?>>Father</option>
             <option value="guardian" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "guardian")? "selected='selected'":"";?>>Guardian</option>
+            <option value="social-worker" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "social-worker")? "selected='selected'":"";?>>Social Worker</option>
+            <option value="step-parent" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "step-parent")? "selected='selected'":"";?>>Step Parent</option>
+            <option value="grand-parent" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "grand-parent")? "selected='selected'":"";?>>Grand Parent</option>
+            <option value="sibling" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "sibling")? "selected='selected'":"";?>>Sibling</option>
+            <option value="uncle" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "uncle")? "selected='selected'":"";?>>Uncle</option>
+            <option value="aunty" <?=(isset($data['relationship-to-student']) && $data['relationship-to-student'] == "aunty")? "selected='selected'":"";?>>Aunty</option>
+
           </select>
       </div>
       <div class="col-6 col">
@@ -131,7 +138,7 @@
 
       <div class="col-8 col">
         <input
-          type="number"
+          type="text"
           class="connected-left required"
           name="phone-number"
           onkeyup="window.fn.save_handler(this);"

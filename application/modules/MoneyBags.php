@@ -127,6 +127,7 @@
 
             // Synchronous variables.
             $this->terms_remaining = (4 -  floor((date('z') / (365 / 4)))   );
+            $this->terms_remaining = 4;
 
             if (is_array($studs)) {
 

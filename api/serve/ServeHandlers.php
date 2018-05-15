@@ -22,7 +22,7 @@
           if (isset($parent['data']['fee-split']))
           array_push($total, $parent['data']['fee-split']);
         }
-        $return = (round(array_sum($total)) == 100)? true: false;
+        $return = (round(array_sum($total)) == 100 || round(array_sum($total)) == (count($_SESSION['parents']) * 100) )? true: false;
         print json_encode(['success' => $return]);
       },
 
