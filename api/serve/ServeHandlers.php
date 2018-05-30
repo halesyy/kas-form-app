@@ -19,11 +19,17 @@
 
         $total = [];
         foreach ($_SESSION['parents'] as $id => $parent) {
+          // print_r($parent['data']);
           if (isset($parent['data']['fee-split']))
           array_push($total, $parent['data']['fee-split']);
+          else {
+            $_SESSION['parents'][$id]['data']['fee-split'] = 100;
+            array_push($total, 100);
+          }
         }
-        $return = (round(array_sum($total)) == 100 || round(array_sum($total)) == (count($_SESSION['parents']) * 100) )? true: false;
+        $return = (round(array_sum($total)) == 100 || round(array_sum($total)) == ((count($_SESSION['parents']) * 100)) )? true: false;
         print json_encode(['success' => $return]);
+
       },
 
       'students' => function($Sunrise, $api) {

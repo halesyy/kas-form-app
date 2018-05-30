@@ -381,7 +381,7 @@
 
 
 
-            
+
 
         <hr class="divider" />
         <h4 style="width: 100%;" class="gold">Medicare</h4>
@@ -425,7 +425,7 @@
 
 
 
-        
+
 
       <hr class="divider" />
       <h4 style="width: 100%;" class="gold">Medical Background</h4>
@@ -457,17 +457,44 @@
             </div>
 
             <div id="has-health-fund-info-<?=$id?>" style="width: 100%; margin-top: 10px; display: <?=(isset($data['has-health-fund']) && $data['has-health-fund'] == "true")?"block":"none"?>;">
-                  <div class="col-12"><span class="label">COMPANY AND MEMBER #:</span></div>
+                <div class="row" style="margin: 0;">
 
-                  <div class="col-12 col">
-                      <textarea
-                        name="has-health-fund-info"
-                        class="boxed-no-height"
-                        onkeyup="window.fn.save_handler(this);"
-                        placeholder="* Please supply company and member ID..."
-                      ><?=(isset($data['has-health-fund-info']))?$data['has-health-fund-info']:"";?></textarea>
+                  <div class="col-4"><span class="label">COMPANY NAME:</span></div>
+                  <div class="col-4"><span class="label">MEMBERSHIP NUMBER:</span></div>
+                  <div class="col-4"><span class="label">TYPE OF COVER:</span></div>
+
+
+                  <div class="col-4 col">
+                    <input
+                      type="text"
+                      name="private-company"
+                      class="connected-left"
+                      onkeyup="window.fn.save_handler(this);"
+                      value="<?=(isset($data['private-company']))?$data['private-company']:"";?>"
+                    />
                   </div>
-
+                  <div class="col-4 col">
+                    <input
+                      type="text"
+                      name="private-membership-number"
+                      class="connected-middle"
+                      onkeyup="window.fn.save_handler(this);"
+                      value="<?=(isset($data['private-membership-number']))?$data['private-membership-number']:"";?>"
+                    />
+                  </div>
+                  <div class="col-4 col">
+                    <select
+                      name="private-cover"
+                      onchange="window.fn.save_handler(this);"
+                      class="connected-right"
+                      type="select"
+                    >
+                      <option value="none">-- Select --</option>
+                      <option value="ambulance" <?=(isset($data['private-cover']) && $data['private-cover'] == 'ambulance')?"selected='selected'":""?>>Ambulance ONLY</option>
+                      <option value="ambulance-and-health"  <?=(isset($data['private-cover']) && $data['private-cover'] == 'ambulance-and-health' )?"selected='selected'":""?>>Ambulance and Health</option>
+                    </select>
+                  </div>
+                </div>
             </div>
 
 

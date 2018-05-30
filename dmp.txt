@@ -17,3 +17,15 @@ need to add:
     <h4 style="width: 100%;">Medical Background</h4>
 
     <div class="col-12"><span class="label">COMPANY AND MEMBER #:</span></div>
+
+
+    <select
+      name="immunised"
+      onchange="window.fn.save_handler(this);"
+      class="required"
+      type="select"
+    >
+      <option value="none">-- Select --</option>
+      <option value="yes" <?=(isset($data['immunised']) && $data['immunised'] == 'yes')?"selected='selected'":""?>>Yes</option>
+      <option value="no"  <?=(isset($data['immunised']) && $data['immunised'] == 'no' )?"selected='selected'":""?>>No</option>
+    </select>
