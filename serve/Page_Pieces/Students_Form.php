@@ -377,6 +377,56 @@
                 ><?=(isset($data['suspended-expelled-info']))?$data['suspended-expelled-info']:"";?></textarea>
             </div>
 
+
+
+
+
+            
+
+        <hr class="divider" />
+        <h4 style="width: 100%;" class="gold">Medicare</h4>
+
+        <div class="row" style="margin-left: 0; margin-right: 0;">
+          <div class="col-4"><span class="label">MEDICARE NUMBER:</span></div>
+          <div class="col-4"><span class="label">MEDICARE EXPIRY:</span></div>
+          <div class="col-4"><span class="label">MEDICARE POSITION:</span></div>
+
+
+          <div class="col-4 col">
+            <input
+            type="text"
+            class="connected-left"
+            name="medicare-number"
+            onkeyup="window.fn.save_handler(this);"
+            value="<?=(isset($data['medicare-number']))?$data['medicare-number']:"";?>"
+            />
+          </div>
+          <div class="col-4 col">
+            <input
+            type="text"
+            class="connected-right"
+            name="medicare-expiry"
+            onkeyup="window.fn.save_handler(this);"
+            value="<?=(isset($data['medicare-expiry']))?$data['medicare-expiry']:"";?>"
+            />
+          </div>
+          <div class="col-4 col">
+            <input
+            type="text"
+            class="connected-right"
+            name="medicare-position"
+            onkeyup="window.fn.save_handler(this);"
+            value="<?=(isset($data['medicare-position']))?$data['medicare-position']:"";?>"
+            />
+          </div>
+        </div>
+
+
+
+
+
+        
+
       <hr class="divider" />
       <h4 style="width: 100%;" class="gold">Medical Background</h4>
 
@@ -421,43 +471,7 @@
             </div>
 
 
-            <hr class="divider" />
-            <h4 style="width: 100%;" class="gold">Medicare</h4>
 
-            <div class="row" style="margin-left: 0; margin-right: 0;">
-              <div class="col-4"><span class="label">MEDICARE NUMBER:</span></div>
-              <div class="col-4"><span class="label">MEDICARE EXPIRY:</span></div>
-              <div class="col-4"><span class="label">MEDICARE POSITION:</span></div>
-
-
-              <div class="col-4 col">
-                <input
-                type="text"
-                class="connected-left"
-                name="medicare-number"
-                onkeyup="window.fn.save_handler(this);"
-                value="<?=(isset($data['medicare-number']))?$data['medicare-number']:"";?>"
-                />
-              </div>
-              <div class="col-4 col">
-                <input
-                type="text"
-                class="connected-right"
-                name="medicare-expiry"
-                onkeyup="window.fn.save_handler(this);"
-                value="<?=(isset($data['medicare-expiry']))?$data['medicare-expiry']:"";?>"
-                />
-              </div>
-              <div class="col-4 col">
-                <input
-                type="text"
-                class="connected-right"
-                name="medicare-position"
-                onkeyup="window.fn.save_handler(this);"
-                value="<?=(isset($data['medicare-position']))?$data['medicare-position']:"";?>"
-                />
-              </div>
-            </div>
         <hr class="divider" />
 
         <div class="col-6 col" style="padding-right: 7.5px;"> <!-- doctor -->
