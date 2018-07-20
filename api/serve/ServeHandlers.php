@@ -136,21 +136,25 @@
         #/api/get/fillout/{student/parent-guardians}
         if (!in_array(Router::Fourth(), array_keys($api->conversion_s))) $api->error('Reference not in converter as key.');
         else $type = Router::Fourth();
+        // Type = students, parents, getting the reference for the
+        // object creation.
 
         if (count($_SESSION[ $api->conversion_s[$type] ]) != 0) {
           $forms = []; $count = 1;
           foreach ($_SESSION[ $api->conversion_s[$type] ] as $index => $Object) {
             array_push($forms, [
               'id'   => $Object['id'],
+              'index' => $index,
               'body' => $Sunrise->Mini("Page_Pieces/{$api->conversion_f[$type]}", '..', [
                 'id' => $Object['id'],
+                'index' => $index,
                 'data' => $Object['data'],
                 'first' => ($count == 1)?true: false
               ])
             ]);
             $count++;
           }
-          $api->JSON([ 'forms' => $forms ]);
+          $api->JSON([ 'forms' => $forms]);
         }
 
         else {
@@ -164,7 +168,7 @@
         }
       },
 
-      'new' => functioN($Sunrise, $api) {
+      'new' => function($Sunrise, $api) {
         if (!in_array(Router::Fourth(), array_keys($api->conversion_s))) $api->error('Reference not in converter as key.');
         else $type = Router::Fourth();
 

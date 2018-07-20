@@ -4,15 +4,19 @@
       public $conversion_s = ['students' => 'students', 'parent-guardians' => 'parents'];
       public $conversion_f = ['students' => 'Students_Form', 'parent-guardians' => 'Parent_Guardians_Form'];
 
+      // Where the GOST algorithm is used to create a new ID unique
+      // to the rest of them for the session handling.
       public function create_new_object(Sunrise $Sunrise, $type) {
         $ID   = hash('gost', rand(0, 1000000));
+        array_push($_SESSION[ $this->conversion_s[$type] ], [
+          'id'   => $ID,
+          'data' => [
+            'address' => (isset($_SESSION['parents'][0]['data']['address']))?$_SESSION['parents'][0]['data']['address']:""
+          ]
+        ]);
         $Form = $Sunrise->Mini("Page_Pieces/{$this->conversion_f[$type]}", '..', [
           'id' => $ID,
           'first' => false
-        ]);
-        array_push($_SESSION[ $this->conversion_s[$type] ], [
-          'id'   => $ID,
-          'data' => []
         ]);
         return [
           'id'   => $ID,

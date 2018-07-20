@@ -135,11 +135,17 @@
 
       <div class="col-12"><span class="label">ADDRESS:</span></div>
 
+      <?php
+
+        // This one is a preset with data when creating a new object
+        // in the APIPERSONAL.php area. If you don't remember, that area
+        // is for functions that are called in the API area and require
+        // EXTRA functions plastered on top of it.
+      ?>
       <input
         type="text"
         name="address"
         onkeyup="window.fn.save_handler(this);"
-        value="<?=(isset($_SESSION['parents'][0]['data']['address']))?$_SESSION['parents'][0]['data']['address']:""?>"
         value="<?=(isset($data['address']))?$data['address']:"";?>"
       />
 
