@@ -374,15 +374,37 @@
 
       <div class="dedicated">
         <h1 style="font-size: 60px; text-align: center; padding: 5px; padding-bottom: 15px; border-bottom: solid silver 2px;" class="gold">Signatures</h1>
+
+        <ol>
+          <li>We/I hearby make an application for our/my child to be enrolled at KAS and understand that the completion
+      of the application does not guarantee a position at KAS.</li>
+          <li>We/I understand that our/my child is only admitted to KAS subject to his/her application being processed
+      and accepted by the Kempsey Adventist School Council. If accepted we/I understand that our child will be
+      welcome at the school as long as the Kempsey Adventist School Council is satisfied that he/she upholds the
+      standards of the moral and behavioural conduct expected of students.</li>
+          <li>We/I will support the Christian ethos of KAS in every way. Further, we/I will ensure that, in after-hours
+      meetings of school students under our jurisdiction or organised by us, the Christian principles and moral standards
+      of KAS will be upheld at all times.</li>
+          <li>We/I understand and agree that our child must abide by current KAS rules as interpreted by the school, and
+      the continued attendance at the school is at the absolute discretion of the Kempsey Adventist School Council and
+      School Administration.</li>
+          <li>We/I agree to be jointly and severally liable for the payment of all fees and charges levied by Kempsey
+      Adventist School (namely the Seventh-day Adventist Schools (NNSW) Limited trading as Kempsey Adventist
+      School) and agree that all amounts not paid by the due date may incur interest.</li>
+          <li>We/I have read and accepted the conditions of enrolment and that to the best of our/my knowledge, all the
+      information provided on this application is true and correct.</li>
+          <li>We/I understand that KAS has permission to take photographs and video of our/my child to be used for
+      marketing purposes unless a signed letter from the parent/guardian is submitted to KAS stating otherwise.</li>
+          <li>We/I understand that KAS will communicate with parent's/guardian's via multiple forms of communication
+      including phone, letter, email, facebook and sms.</li>
+        </ol>
+        
         <?php foreach ($_SESSION['parents'] as $parent): $data = $parent['data']; ?>
           <div style="padding-bottom: 20px; border-bottom: solid silver 3px;">
             <h2 class="gold"><?=$data['first-name']?> <?=$data['last-name']?></h2>
           </div>
         <?php endforeach; ?>
       </div>
-
-
-
 
       <script>
         window.print();
