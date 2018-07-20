@@ -295,13 +295,27 @@
         />
       </div>
       <div class="col-3 col">
-        <input
+        <select
+          name="occupational-group"
+          onchange="window.fn.save_handler(this);"
+          class="required"
+          type="select"
+        >
+          <option value="none">-- Select --</option>
+          <option value="1" <?=(isset($data['occupational-group']) && $data['occupational-group'] == '1')?"selected='selected'":""?>>1 - Senior Management, Government Admin</option>
+          <option value="2"  <?=(isset($data['occupational-group']) && $data['occupational-group'] == '2' )?"selected='selected'":""?>>2 - Managers, Sports, Media</option>
+          <option value="3"  <?=(isset($data['occupational-group']) && $data['occupational-group'] == '3' )?"selected='selected'":""?>>3 - Tradesman/woman, clerks, office, sales</option>
+          <option value="4"  <?=(isset($data['occupational-group']) && $data['occupational-group'] == '4' )?"selected='selected'":""?>>4 - Machine operators, hospitality, assistance, labourers, other</option>
+
+        </select>
+
+        <!-- <input
           type="number"
           name="occupational-group"
           class="connected-right required"
           onkeyup="window.fn.save_handler(this);"
           value="<?=(isset($data['occupational-group']))?$data['occupational-group']:"";?>"
-        />
+        /> -->
       </div>
 
       <div class="information" style="width: 100%; margin-top: 3px;">
