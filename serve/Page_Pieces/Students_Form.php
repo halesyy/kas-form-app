@@ -133,6 +133,17 @@
       </div>
 
 
+      <div class="col-12"><span class="label">ADDRESS:</span></div>
+
+      <input
+        type="text"
+        name="address"
+        onkeyup="window.fn.save_handler(this);"
+        value="<?=(isset($_SESSION['parents'][0]['data']['address']))?$_SESSION['parents'][0]['data']['address']:""?>"
+        value="<?=(isset($data['address']))?$data['address']:"";?>"
+      />
+
+
       <div id="pre-kindy-enrolment-<?=$id?>" style="display: <?=(isset($data['year-level']) && $data['year-level'] == -1)?'block':'none';?>;">
 
         <hr class="divider" />
