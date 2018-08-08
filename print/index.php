@@ -139,7 +139,7 @@
                 <div style="clear: both;"></div>
                 <div class="col-12" style="margin-top: 10px; margin-bottom: 10px;">
                   <strong>Expelled / Suspended:</strong> <br/>
-                  <?=$data['suspended-expelled-info']?>
+                  <?=$data['suspended-expelled']?>
                 </div>
               <?php endif; ?>
 
@@ -184,7 +184,7 @@
                       <strong>Company <?="&"?> Member #</strong>
                     </div>
                     <div class="col-9">
-                      <?=$data['has-health-fund-info']?>
+                      <?=$data['has-health-fund']?>
                     </div>
                   </div>
                   <div style="clear: both;"></div>
@@ -276,7 +276,7 @@
 
               <h3 style="margin: 0; margin-bottom: 10px;" class="blue">PARENT</h3>
 
-              <div class="col-3"><strong>Email</strong></div><div class="col-3"><?=$data['email']?></div>
+              <div class="col-3"><strong>Email</strong></div><div class="col-3" style="overflow: none;"><?=$data['email']?></div>
               <div class="col-3"><strong>Relationship to Student</strong></div><div class="col-3"><?=ucwords($data['relationship-to-student'])?></div>
               <div class="col-3"><strong>Relationship Status</strong></div><div class="col-9"><?=ucwords($data['relationship-status'])?></div>
               <div class="col-3"><strong>Phone Number</strong></div><div class="col-3"><?=$data['phone-number']?></div>
@@ -398,7 +398,7 @@
           <li>We/I understand that KAS will communicate with parent's/guardian's via multiple forms of communication
       including phone, letter, email, facebook and sms.</li>
         </ol>
-        
+
         <?php foreach ($_SESSION['parents'] as $parent): $data = $parent['data']; ?>
           <div style="padding-bottom: 20px; border-bottom: solid silver 3px;">
             <h2 class="gold"><?=$data['first-name']?> <?=$data['last-name']?></h2>
