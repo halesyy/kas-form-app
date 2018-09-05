@@ -1,4 +1,9 @@
 <?php
+  /*
+   = Functions which are accessible from the $api variable
+   = in the Get.php and Post.php area for recycleability.
+   */
+
   class APIPERSONAL {
 
       public $conversion_s = ['students' => 'students', 'parent-guardians' => 'parents'];

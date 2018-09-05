@@ -1,3 +1,4 @@
+<?php // This is the SPA (single-page-application) introduction, allowing itself to instansiate and start getting its roots in the HTML5 API. ?>
 <!DOCTYPE html>
 <html>
   <head>

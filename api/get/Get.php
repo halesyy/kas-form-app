@@ -132,8 +132,9 @@
 
   $Serve_Pieces = [
 
+      // /api/get/fillout{ student/parent-guardians }
+      // Providing form to be filled out.
       'fillout' => function($Sunrise, $api) {
-        #/api/get/fillout/{student/parent-guardians}
         if (!in_array(Router::Fourth(), array_keys($api->conversion_s))) $api->error('Reference not in converter as key.');
         else $type = Router::Fourth();
         // Type = students, parents, getting the reference for the
@@ -145,7 +146,7 @@
             array_push($forms, [
               'id'   => $Object['id'],
               'index' => $index,
-              'body' => $Sunrise->Mini("Page_Pieces/{$api->conversion_f[$type]}", '..', [
+              'body' => $Sunrise->Mini("FormComponents/{$api->conversion_f[$type]}", '..', [
                 'id' => $Object['id'],
                 'index' => $index,
                 'data' => $Object['data'],

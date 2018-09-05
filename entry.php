@@ -25,6 +25,23 @@
 
   //************************************************************************************
 
+    /*
+    | note to the person that gets to maintain my artwork:
+    | this write of the application does not feature what I intended,
+    | if I was able to, I'd write a global module that would take care of the
+    | input sanitization, which could then be stored as a cache to be used
+    | in the output sanitization.
+    | meaning: if you record all of the inputs through a FLOW class, you are
+    | able to sanitize the input data using that, with types, and declarations.
+    | I made the mistake with the last coding system that I used that system,
+    | but I was declaring the data types a lot.
+    | the module idea i'd pose is something that lets you append to it, and you
+    | would then have more customization to the Students form, that's just
+    | one example.
+    */
+
+  //************************************************************************************
+
   /*
   | @NOTE: Quick run through the application.
   | Our application is  going to be segmented into two "big" sections  instead
